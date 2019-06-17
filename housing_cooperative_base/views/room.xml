@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2019 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_room_form" model="ir.ui.view">
+        <field name="name">view_room_form</field>
+        <field name="model">hc.room</field>
+        <field name="arch" type="xml">
+            <form string="room_form">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="building_id" options="{'no_create': True}"/>
+                        <field name="cluster_id" options="{'no_create': True}"/>
+                    </group>
+                    <group>
+                        <field name="rent"/>
+                        <field name="charges"/>
+                    </group>
+                    <notebook>
+                        <page name="leases" string="Leases">
+                            <group>
+                                <field name="lease_ids"  nolabel="1">
+                                    <tree>
+                                        <field name="tenant_id"/>
+                                        <field name="start"/>
+                                        <field name="end"/>
+                                        <field name="state"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_room_tree" model="ir.ui.view">
+        <field name="name">view_room_tree</field>
+        <field name="model">hc.room</field>
+        <field name="arch" type="xml">
+            <tree string="room_tree">
+                <field name="name"/>
+                <field name="building_id"/>
+                <field name="cluster_id"/>
+                <field name="state"/>
+        </tree>
+        </field>
+    </record>
+
+    <record id="room_view_action" model="ir.actions.act_window">
+        <field name="name">Rooms</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hc.room</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

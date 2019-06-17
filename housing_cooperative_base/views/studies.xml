@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2019 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_studies_form" model="ir.ui.view">
+        <field name="name">view_studies_form</field>
+        <field name="model">hc.studies</field>
+        <field name="arch" type="xml">
+            <form string="studies_form">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_studies_tree" model="ir.ui.view">
+        <field name="name">view_studies_tree</field>
+        <field name="model">hc.studies</field>
+        <field name="arch" type="xml">
+            <tree string="studies_tree">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="studies_view_action" model="ir.actions.act_window">
+        <field name="name">Studies</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hc.studies</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

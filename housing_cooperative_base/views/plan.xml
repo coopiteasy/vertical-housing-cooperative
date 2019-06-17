@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2019 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_plan_form" model="ir.ui.view">
+        <field name="name">view_plan_form</field>
+        <field name="model">hc.plan</field>
+        <field name="arch" type="xml">
+            <form string="plan_form">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_plan_tree" model="ir.ui.view">
+        <field name="name">view_plan_tree</field>
+        <field name="model">hc.plan</field>
+        <field name="arch" type="xml">
+            <tree string="plan_tree">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="plan_view_action" model="ir.actions.act_window">
+        <field name="name">Plans</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hc.plan</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

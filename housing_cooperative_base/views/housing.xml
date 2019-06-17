@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2019 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_housing_form" model="ir.ui.view">
+        <field name="name">view_housing_form</field>
+        <field name="model">hc.housing</field>
+        <field name="arch" type="xml">
+            <form string="housing_form">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="name"/>
+                            <field name="keys"/>
+                        </group>
+                        <group>
+                            <field name="building_id" options="{'no_create': True}"/>
+                            <field name="cluster_id" options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="nb_rooms"/>
+                            <field name="surface"/>
+                            <field name="suggested_social_share"/>
+                            <field name="social_share"/>
+                        </group>
+                        <group>
+                            <field name="housing_plan_id" options="{'no_create': True}"/>
+                            <field name="rent"/>
+                            <field name="charges"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="leases" string="Leases">
+                            <group>
+                                <field name="lease_ids"  nolabel="1">
+                                    <tree>
+                                        <field name="tenant_id"/>
+                                        <field name="start"/>
+                                        <field name="end"/>
+                                        <field name="state"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <page name="leases" string="Leases">
+                            <group>
+                                <field name="lease_ids"  nolabel="1">
+                                    <tree>
+                                        <field name="tenant_id"/>
+                                        <field name="start"/>
+                                        <field name="end"/>
+                                        <field name="state"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <page name="tenants" string="Tenants">
+                            <group>
+                                <field name="tenant_ids" nolabel="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_housing_tree" model="ir.ui.view">
+        <field name="name">view_housing_tree</field>
+        <field name="model">hc.housing</field>
+        <field name="arch" type="xml">
+            <tree string="housing_tree">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="housing_view_action" model="ir.actions.act_window">
+        <field name="name">Housings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hc.housing</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

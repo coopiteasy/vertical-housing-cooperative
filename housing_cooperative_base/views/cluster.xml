@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2019 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_cluster_form" model="ir.ui.view">
+        <field name="name">view_cluster_form</field>
+        <field name="model">hc.cluster</field>
+        <field name="arch" type="xml">
+            <form string="cluster_form">
+                <sheet>
+                    <group>
+                        <field name="code"/>
+                        <field name="name"/>
+                        <field name="building_id" options="{'no_create': True}"/>
+                        <field name="keys"/>
+                    </group>
+                    <notebook>
+                        <page name="housings" string="Housings">
+                            <group>
+                                <field name="housing_ids" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page name="rooms" string="Rooms">
+                            <group>
+                                <field name="room_ids" nolabel="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="view_cluster_tree" model="ir.ui.view">
+        <field name="name">view_cluster_tree</field>
+        <field name="model">hc.cluster</field>
+        <field name="arch" type="xml">
+            <tree string="cluster_tree">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="building_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="cluster_view_action" model="ir.actions.act_window">
+        <field name="name">Clusters</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hc.cluster</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
