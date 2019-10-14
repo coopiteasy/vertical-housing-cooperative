@@ -19,12 +19,12 @@
                     <notebook>
                         <page name="housings" string="Housings">
                             <group>
-                                <field name="housing_ids" nolabel="1"/>
+                                <field name="housing_ids" nolabel="1" widget="many2many"/>
                             </group>
                         </page>
                         <page name="rooms" string="Rooms">
                             <group>
-                                <field name="room_ids" nolabel="1"/>
+                                <field name="room_ids" nolabel="1" widget="many2many"/>
                             </group>
                         </page>
                     </notebook>
