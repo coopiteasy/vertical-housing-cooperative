@@ -13,6 +13,9 @@ class Building(models.Model):
     name = fields.Char(
         string='Name',
         required=True)
+    active = fields.Boolean(
+        string='Active?',
+        default=True)
     street = fields.Char(
         string='Street',
         required=True)
@@ -59,7 +62,7 @@ class Building(models.Model):
         help='Monthly charges')
 
     social_share = fields.Float(
-        string='Social Share', 
+        string='Social Share',
         required=False)
     regime = fields.Selection(
         string='Share Regime',
