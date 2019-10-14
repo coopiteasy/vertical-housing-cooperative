@@ -162,26 +162,25 @@ class Lease(models.Model):
                     'recurring_invoices': True,
                     'lease_id': self.id,
                     'journal_id': self._default_journal().id,
-            })
-        )
+                }))
         rent = self.env.ref('housing_cooperative_base.product_product_rent')
         charges = self.env.ref('housing_cooperative_base.product_product_charges')  # noqa
         (self.env['account.analytic.invoice.line']
-             .create({
+            .create({
                 'name': rent.name,
                 'product_id': rent.id,
                 'uom_id': rent.uom_id.id,
                 'analytic_account_id': contract.id,
                 'price_unit': self.rent,
-        }))
+            }))
         (self.env['account.analytic.invoice.line']
-             .create({
+            .create({
                 'name': charges.name,
                 'product_id': charges.id,
                 'uom_id': charges.uom_id.id,
                 'analytic_account_id': contract.id,
                 'price_unit': self.charges,
-        }))
+            }))
         self.contract_id = contract
 
     @api.multi

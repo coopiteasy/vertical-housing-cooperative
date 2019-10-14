@@ -76,7 +76,6 @@ class Housing(models.Model):
         inverse_name='housing_id',
         string='Leases')
 
-
     @api.multi
     @api.depends('surface', 'nb_rooms',
                  'building_id.social_share', 'building_id.regime')
@@ -84,11 +83,11 @@ class Housing(models.Model):
         for housing in self:
             if housing.building_id.regime == 'square_meters':
                 housing.suggested_social_share = (
-                        housing.building_id.social_share * housing.nb_rooms
+                    housing.building_id.social_share * housing.nb_rooms
                 )
             elif housing.building_id.regime == 'nb_rooms':
                 housing.suggested_social_share = (
-                        housing.building_id.social_share * housing.surface
+                    housing.building_id.social_share * housing.surface
                 )
             else:
                 raise ValidationError('Unknown building regime')

@@ -22,8 +22,8 @@
                         <field name="street"/>
                         <field name="street_number"/>
                         <field name="zip_code"/>
-                        <field name="state_id" options="{'no_create': True}"/>
                         <field name="country_id" options="{'no_create': True}"/>
+                        <field name="state_id" options="{'no_create': True}"/>
                         <field name="is_rented"/>
                     </group>
                     <group attrs="{'invisible': [('is_rented', '=', False)]}">

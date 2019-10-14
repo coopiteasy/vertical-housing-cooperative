@@ -49,4 +49,3 @@ class Room(models.Model):
                 room.state = 'busy'
             else:
                 room.state = 'available'
-

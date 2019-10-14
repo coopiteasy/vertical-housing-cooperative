@@ -69,7 +69,8 @@ class ResPartner(models.Model):
     )
 
     @api.multi
-    @api.depends('lease_ids', 'lease_ids.start', 'lease_ids.end', 'lease_ids.state')
+    @api.depends('lease_ids', 'lease_ids.start', 
+        'lease_ids.end', 'lease_ids.state')
     def _compute_lease_dates(self):
         for partner in self:
             leases = partner.lease_ids

@@ -25,13 +25,14 @@ class Building(models.Model):
     zip_code = fields.Char(
         string='Zip Code',
         required=True)
-    state_id = fields.Many2one(
-        comodel_name='res.country.state',
-        string='Country State',
-        required=False)
     country_id = fields.Many2one(
         comodel_name='res.country',
         string='Country',
+        required=True)
+    state_id = fields.Many2one(
+        domain="[('country_id', '=', country_id)]",
+        comodel_name='res.country.state',
+        string='Country State',
         required=False)
 
     is_rented = fields.Boolean(
