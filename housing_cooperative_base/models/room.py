@@ -21,6 +21,7 @@ class Room(models.Model):
     cluster_id = fields.Many2one(
         comodel_name='hc.cluster',
         string='Cluster',
+        domain="[('building_id', '=', building_id)]",
         required=False)
     lease_ids = fields.Many2many(
         comodel_name='hc.lease',
