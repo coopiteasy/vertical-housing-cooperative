@@ -36,9 +36,9 @@
                         </group>
                     </group>
                     <notebook>
-                        <page name="rooms" string="Rooms" nolabel="1">
+                        <page name="rooms" string="Rooms">
                             <group>
-                                <field name="room_ids" options="{'no_create': True}" widget="many2many"/>
+                                <field name="room_ids" nolabel="1" options="{'no_create': True}" widget="many2many"/>
                             </group>
                         </page>
                         <page name="leases" string="Leases">
@@ -70,6 +70,9 @@
         <field name="arch" type="xml">
             <tree string="housing_tree">
                 <field name="name"/>
+                <field name="building_id"/>
+                <field name="cluster_id"/>
+                <field name="state"/>
             </tree>
         </field>
     </record>
