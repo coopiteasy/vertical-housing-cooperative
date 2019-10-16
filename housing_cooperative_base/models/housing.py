@@ -50,6 +50,11 @@ class Housing(models.Model):
         string='Cluster',
         domain="[('building_id', '=', building_id)]",
         required=False)
+    room_ids = fields.One2many(
+        comodel_name='hc.room',
+        inverse_name='housing_id',
+        string='Common Rooms',
+        required=False)
     housing_plan_id = fields.Many2one(
         comodel_name='hc.plan',
         string='Housing Plan',

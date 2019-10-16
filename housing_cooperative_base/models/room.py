@@ -18,6 +18,11 @@ class Room(models.Model):
         comodel_name='hc.building',
         string='Building',
         required=True)
+    housing_id = fields.Many2one(
+        comodel_name='hc.housing',
+        string='Housing',
+        domain="[('building_id', '=', building_id)]",
+        required=False)
     cluster_id = fields.Many2one(
         comodel_name='hc.cluster',
         string='Cluster',
@@ -50,3 +55,39 @@ class Room(models.Model):
                 room.state = 'busy'
             else:
                 room.state = 'available'
+
+    @api.onchange('cluster_id')
+    def onchange_cluster_id(self):
+        if self.housing_id and self.cluster_id:
+            self.housing_id = None
+            return {
+                'warning': {
+                    'title': 'Removing the link to the housing.',
+                    'message': (
+                        'A room can be linked to either '
+                        'a cluster or a housing.'
+                    ),
+                }}
+
+    @api.onchange('housing_id')
+    def onchange_housing_id(self):
+        if self.cluster_id and self.housing_id:
+            self.cluster_id = None
+            return {
+                'warning': {
+                    'title': 'Removing the link to the cluster.',
+                    'message': (
+                        'A room can be linked to either '
+                        'a cluster or a housing.'
+                    ),
+                }}
+
+    @api.constrains('cluster_id')
+    @api.constrains('housing_id')
+    def _constrain_unique(self):
+        for room in self:
+            if room.cluster_id and room.housing_id:
+                raise ValidationError(
+                    'A room can not be linked '
+                    'to a housing and a cluster at the same time'
+                )

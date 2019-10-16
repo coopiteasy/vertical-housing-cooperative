@@ -14,9 +14,14 @@
                 </header>
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="building_id" options="{'no_create': True}"/>
-                        <field name="cluster_id" options="{'no_create': True}"/>
+                        <group>
+                            <field name="name"/>
+                            <field name="building_id" options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="cluster_id" options="{'no_create': True}"/>
+                            <field name="housing_id" options="{'no_create': True}"/>
+                        </group>
                     </group>
                     <group>
                         <field name="rent"/>
@@ -49,6 +54,7 @@
                 <field name="name"/>
                 <field name="building_id"/>
                 <field name="cluster_id"/>
+                <field name="housing_id"/>
                 <field name="state"/>
         </tree>
         </field>
