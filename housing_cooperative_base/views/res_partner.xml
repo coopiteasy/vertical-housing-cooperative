@@ -28,6 +28,7 @@
             <field name="birthdate_date" position="after">
                 <field name="age"/>
                 <field name="citizenship_id"/>
+                <field name="permit"/>
             </field>
 
             <field name="gender" position="after">
