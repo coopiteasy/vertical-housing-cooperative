@@ -30,6 +30,10 @@
                 <field name="citizenship_id"/>
             </field>
 
+            <field name="gender" position="after">
+                <field name="study"/>
+            </field>
+
             <field name="vat" position="after">
                 <field name="residence"/>
                 <field name="first_lease_start"/>

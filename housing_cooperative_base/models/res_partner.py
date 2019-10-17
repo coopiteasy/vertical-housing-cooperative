@@ -32,6 +32,10 @@ class ResPartner(models.Model):
         comodel_name='res.country',
         string='Citizenship',
         ondelete='restrict')
+    study = fields.Many2one(
+        comodel_name='hc.studies',
+        string='Study',
+        ondelete='restrict')
     residence = fields.Selection(
         string='Residence',
         selection=[('main', 'Main Residence'),
