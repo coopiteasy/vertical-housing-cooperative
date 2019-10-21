@@ -36,14 +36,14 @@
                         </group>
                     </group>
                     <notebook>
-                        <page name="rooms" string="Rooms">
+                        <page name="rooms" string="Rooms" context="{'default_housing_id': id}">
                             <group>
                                 <field name="room_ids" nolabel="1" options="{'no_create': True}" widget="many2many"/>
                             </group>
                         </page>
                         <page name="leases" string="Leases">
                             <group>
-                                <field name="lease_ids" nolabel="1">
+                                <field name="lease_ids" nolabel="1" context="{'default_housing_id': id}">
                                     <tree>
                                         <field name="tenant_id"/>
                                         <field name="start"/>

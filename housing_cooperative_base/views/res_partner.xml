@@ -45,7 +45,7 @@
             <xpath expr="//field[@name='child_ids']/.." position="before">
                 <page name="leases" string="Leases" autofocus="autofocus">
                     <group>
-                        <field name="lease_ids" nolabel="1">
+                        <field name="lease_ids" nolabel="1" context="{'default_tenant_id': id}">
                             <tree>
                                 <field name="housing_id"/>
                                 <field name="start"/>
