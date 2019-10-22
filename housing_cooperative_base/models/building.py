@@ -22,6 +22,9 @@ class Building(models.Model):
     street_number = fields.Char(
         string='Street Number',
         required=True)
+    municipality = fields.Char(
+        string='Municipality',
+        required=True)
     zip_code = fields.Char(
         string='Zip Code',
         required=True)
@@ -70,6 +73,34 @@ class Building(models.Model):
         selection=[('square_meters', 'Square Meters'),
                    ('nb_rooms', 'Number of Room'), ],
         default='square_meters',
+        required=False)
+
+    nb_rooms = fields.Integer(
+        string='Number of Rooms',
+        required=False)
+    surface_activities = fields.Integer(
+        string='Surface Activities',
+        required=False,
+        help='m²')
+    parking_spaces = fields.Integer(
+        string='Parking Spaces',
+        required=False)
+    heating_type = fields.Char(
+        string='Type of Heating',
+        required=False)
+    maintenance_contract = fields.Html(
+        string='Maintenance Contract',
+        required=False)
+    residents_association = fields.Html(
+        string='Residents Association',
+        required=False)
+    concierge = fields.Many2one(
+        comodel_name='res.partner',
+        string='Concierge',
+        required=False)
+    architect = fields.Many2one(
+        comodel_name='res.partner',
+        string='Architect',
         required=False)
 
     housing_ids = fields.One2many(

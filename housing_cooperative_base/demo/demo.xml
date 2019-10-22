@@ -12,6 +12,7 @@
             <field name="street">Rue Fontaine d'Amour</field>
             <field name="street_number">21</field>
             <field name="zip_code">1030</field>
+            <field name="municipality">Le village</field>
             <field name="state_id" ref="base.state_it_ge"/>
             <field name="country_id" ref="base.ch"/>
             <field name="is_rented" eval="True"/>

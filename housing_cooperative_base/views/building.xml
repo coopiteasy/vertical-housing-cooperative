@@ -18,25 +18,40 @@
                         </button>
                     </div>
                     <group>
-                        <field name="name"/>
-                        <field name="street"/>
-                        <field name="street_number"/>
-                        <field name="zip_code"/>
-                        <field name="country_id" options="{'no_create': True}"/>
-                        <field name="state_id" options="{'no_create': True}"/>
-                        <field name="is_rented"/>
-                    </group>
-                    <group attrs="{'invisible': [('is_rented', '=', False)]}">
-                        <field name="landlord_id"/>
-                        <field name="lease_start"/>
-                        <field name="expected_lease_end"/>
-                        <field name="effective_lease_end"/>
-                        <field name="rent"/>
-                        <field name="charges"/>
+                        <group  name="location">
+                            <field name="name"/>
+                            <field name="street"/>
+                            <field name="street_number"/>
+                            <field name="municipality"/>
+                            <field name="zip_code"/>
+                            <field name="country_id" options="{'no_create': True}"/>
+                            <field name="state_id" options="{'no_create': True}"/>
+                            <field name="is_rented"/>
+                        </group>
+                        <group  name="lease" attrs="{'invisible': [('is_rented', '=', False)]}">
+                            <field name="landlord_id"/>
+                            <field name="social_share"/>
+                            <field name="regime"/>
+                            <field name="lease_start"/>
+                            <field name="expected_lease_end"/>
+                            <field name="effective_lease_end"/>
+                            <field name="rent"/>
+                            <field name="charges"/>
+                        </group>
                     </group>
                     <group>
-                        <field name="social_share"/>
-                        <field name="regime"/>
+                        <group name="features">
+                            <field name="nb_rooms"/>
+                            <field name="surface_activities"/>
+                            <field name="parking_spaces"/>
+                            <field name="heating_type"/>
+                            <field name="maintenance_contract"/>
+                        </group>
+                        <group name="people">
+                            <field name="residents_association"/>
+                            <field name="concierge"/>
+                            <field name="architect"/>    
+                        </group>
                     </group>
 
                     <notebook>
