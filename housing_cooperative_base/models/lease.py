@@ -61,7 +61,8 @@ class Lease(models.Model):
         selection=[('draft', 'Draft'),
                    ('ongoing', 'Ongoing'),
                    ('done', 'Done')],
-        required=False, )
+        default='draft',
+        required=False)
     suggested_rent = fields.Float(
         string='Suggested Rent',
         compute='_compute_suggested_rent')
