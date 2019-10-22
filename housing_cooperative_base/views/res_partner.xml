@@ -33,6 +33,7 @@
 
             <field name="gender" position="after">
                 <field name="study"/>
+                <field name="liability_insurance"/>
             </field>
 
             <field name="vat" position="after">

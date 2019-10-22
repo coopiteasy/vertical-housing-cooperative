@@ -40,6 +40,8 @@ class ResPartner(models.Model):
         comodel_name='hc.studies',
         string='Study',
         ondelete='restrict')
+    liability_insurance = fields.Boolean(
+        string='Liability Insurance')
     residence = fields.Selection(
         string='Residence',
         selection=[('main', 'Main Residence'),
