@@ -7,8 +7,6 @@ from odoo.tests import common
 from odoo.exceptions import ValidationError
 import logging
 
-_logger = logging.getLogger(__name__)
-
 
 class HousingCooperativeTests(common.TransactionCase):
 
@@ -20,10 +18,11 @@ class HousingCooperativeTests(common.TransactionCase):
         self.room1 = self.env.ref('housing_cooperative_base.demo_room_1')
         self.room2 = self.env.ref('housing_cooperative_base.demo_room_2')
         self.room6 = self.env.ref('housing_cooperative_base.demo_room_6')
+        self.cellar2 = self.env.ref('housing_cooperative_base.demo_cellar_2')
         self.lease2 = self.env.ref('housing_cooperative_base.demo_lease_2')
 
     def test_suggested_rent(self):
-        rent = self.housing2.rent + self.room2.rent + self.room6.rent
+        rent = self.housing2.rent + self.room2.rent + self.room6.rent + self.cellar2.rent
         self.assertEqual(self.lease2.suggested_rent, rent)
 
     def test_create_contract(self):

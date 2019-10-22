@@ -34,6 +34,7 @@
         'views/plan.xml',
         'views/res_partner.xml',
         'views/room.xml',
+        'views/cellar.xml',
         'views/studies.xml',
         'views/menu.xml',
         'demo/demo.xml',  # fixme

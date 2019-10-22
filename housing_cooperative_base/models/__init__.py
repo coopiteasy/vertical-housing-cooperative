@@ -4,4 +4,5 @@ from . import lease
 from . import housing
 from . import res_partner
 from . import room
+from . import cellar
 from . import account_analytic_account

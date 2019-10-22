@@ -34,6 +34,11 @@
                                 <field name="room_ids" nolabel="1" context="{'default_cluster_id': id, 'default_building_id': building_id}" widget="many2many" domain="[('building_id', '=', building_id)]"/>
                             </group>
                         </page>
+                        <page name="cellars" string="Cellars">
+                            <group>
+                                <field name="cellar_ids" nolabel="1" context="{'default_cluster_id': id}" widget="many2many"/>
+                            </group>
+                        </page>
                     </notebook>
                 </sheet>
             </form>

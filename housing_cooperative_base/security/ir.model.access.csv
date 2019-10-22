@@ -9,6 +9,8 @@ access_hc_housing_user,access_hc_housing,model_hc_housing,group_hc_user,1,0,0,0
 access_hc_housing_manager,access_hc_housing,model_hc_housing,group_hc_manager,1,1,1,0
 access_hc_room_user,access_hc_room,model_hc_room,group_hc_user,1,0,0,0
 access_hc_room_manager,access_hc_room,model_hc_room,group_hc_manager,1,1,1,0
+access_hc_cellar_user,access_hc_cellar,model_hc_cellar,group_hc_user,1,0,0,0
+access_hc_cellar_manager,access_hc_cellar,model_hc_cellar,group_hc_manager,1,1,1,0
 access_hc_studies_user,access_hc_studies,model_hc_studies,group_hc_user,1,0,0,0
 access_hc_studies_manager,access_hc_studies,model_hc_studies,group_hc_manager,1,1,1,0
 access_hc_permit_user,access_hc_permit,model_hc_permit,group_hc_user,1,0,0,0

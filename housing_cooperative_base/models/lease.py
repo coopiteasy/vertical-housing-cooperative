@@ -27,7 +27,10 @@ class Lease(models.Model):
         required=False)
     room_ids = fields.Many2many(
         comodel_name='hc.room',
-        string='Extra Rooms')
+        string='Common Rooms')
+    cellar_ids = fields.Many2many(
+        comodel_name='hc.cellar',
+        string='Cellars')
     start = fields.Date(
         string='Start',
         required=True)
@@ -61,7 +64,7 @@ class Lease(models.Model):
         selection=[('draft', 'Draft'),
                    ('ongoing', 'Ongoing'),
                    ('done', 'Done'),
-                   ('canceled', 'canceled')],
+                   ('canceled', 'Canceled')],
         default='draft',
         required=False)
     suggested_rent = fields.Float(
@@ -98,13 +101,15 @@ class Lease(models.Model):
             lease.name = '%s/%s' % (tenant, date)
 
     @api.multi
-    @api.depends('housing_id', 'room_ids')
+    @api.depends('housing_id', 'room_ids', 'cellar_ids')
     def _compute_suggested_rent(self):
         for lease in self:
             rent = lease.housing_rent or 0
             rent += sum(lease.room_ids.mapped('rent'))
+            rent += sum(lease.cellar_ids.mapped('rent'))
             charges = lease.housing_charges or 0
             charges += sum(lease.room_ids.mapped('charges'))
+            charges += sum(lease.cellar_ids.mapped('charges'))
 
             lease.suggested_rent = rent
             lease.suggested_charges = charges

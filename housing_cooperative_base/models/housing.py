@@ -67,6 +67,11 @@ class Housing(models.Model):
         inverse_name='housing_id',
         string='Common Rooms',
         required=False)
+    cellar_ids = fields.One2many(
+        comodel_name='hc.cellar',
+        inverse_name='housing_id',
+        string='Cellars',
+        required=False)
     housing_plan_id = fields.Many2one(
         comodel_name='hc.plan',
         string='Housing Plan',

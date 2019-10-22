@@ -66,9 +66,21 @@
                                 </field>
                             </group>
                         </page>
-                        <page name="extra_rooms" string="Extra Rooms">
+                        <page name="common_rooms" string="Common Rooms">
                             <group>
                                 <field name="room_ids" nolabel="1">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="rent"/>
+                                        <field name="charges"/>
+                                    </tree>
+
+                                </field>
+                            </group>
+                        </page>
+                        <page name="cellars" string="Cellars">
+                            <group>
+                                <field name="cellar_ids" nolabel="1">
                                     <tree>
                                         <field name="name"/>
                                         <field name="rent"/>
