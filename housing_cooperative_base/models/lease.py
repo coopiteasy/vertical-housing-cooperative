@@ -60,7 +60,8 @@ class Lease(models.Model):
         string='State',
         selection=[('draft', 'Draft'),
                    ('ongoing', 'Ongoing'),
-                   ('done', 'Done')],
+                   ('done', 'Done'),
+                   ('canceled', 'canceled')],
         default='draft',
         required=False)
     suggested_rent = fields.Float(
