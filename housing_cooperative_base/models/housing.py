@@ -3,7 +3,7 @@
 #   Robin Keunen <robin@coopiteasy.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
 
@@ -34,7 +34,8 @@ class Housing(models.Model):
 
     nb_rooms = fields.Integer(
         string='Number of Rooms',
-        required=False)
+        required=False,
+        help='Counting all rooms in this housing')
     surface = fields.Integer(
         string='Surface',
         required=False,
@@ -48,7 +49,6 @@ class Housing(models.Model):
     cluster_id = fields.Many2one(
         comodel_name='hc.cluster',
         string='Cluster',
-        domain="[('building_id', '=', building_id)]",
         required=False)
     room_ids = fields.One2many(
         comodel_name='hc.room',
@@ -105,3 +105,13 @@ class Housing(models.Model):
     def _compute_tenant_ids(self):
         for housing in self:
             housing.tenant_ids = housing.lease_ids.mapped('tenant_id').ids
+
+    @api.constrains('room_ids')
+    def _constrain_room_in_same_building(self):
+        for housing in self:
+            for room in housing.room_ids:
+                if room.building_id != housing.building_id:
+                    raise ValidationError(_(
+                        'Room "%s" can\'t be linked '
+                        'to a housing from a different building.' % room.name
+                    ))

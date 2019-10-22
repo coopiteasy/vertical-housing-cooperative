@@ -5,13 +5,19 @@
 
 from odoo.tests import common
 from odoo.exceptions import ValidationError
+import logging
+
+_logger = logging.getLogger(__name__)
 
 
 class HousingCooperativeTests(common.TransactionCase):
 
     def setUp(self):
         super(HousingCooperativeTests, self).setUp()
+        self.housing1 = self.env.ref('housing_cooperative_base.demo_housing_1')
         self.housing2 = self.env.ref('housing_cooperative_base.demo_housing_2')
+        self.cluster1 = self.env.ref('housing_cooperative_base.demo_cluster_1')
+        self.room1 = self.env.ref('housing_cooperative_base.demo_room_1')
         self.room2 = self.env.ref('housing_cooperative_base.demo_room_2')
         self.room6 = self.env.ref('housing_cooperative_base.demo_room_6')
         self.lease2 = self.env.ref('housing_cooperative_base.demo_lease_2')
@@ -26,3 +32,7 @@ class HousingCooperativeTests(common.TransactionCase):
 
         with self.assertRaises(ValidationError):
             self.lease2.create_contract()
+
+    def test_adding_room_of_cluster_to_housing_error(self):
+        with self.assertRaises(ValidationError):
+            self.room1.housing_id = self.housing1

@@ -3,7 +3,7 @@
 #   Robin Keunen <robin@coopiteasy.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 
 
 class Cluster(models.Model):
@@ -31,3 +31,13 @@ class Cluster(models.Model):
         inverse_name='cluster_id',
         string='Common Rooms',
         required=False)
+
+    @api.constrains('room_ids')
+    def _constrain_room_in_same_building(self):
+        for cluster in self:
+            for room in cluster.room_ids:
+                if room.building_id != cluster.building_id:
+                    raise ValidationError(_(
+                        'Room "%s" can\'t be linked '
+                        'to a cluster from a different building.' % room.name
+                    ))

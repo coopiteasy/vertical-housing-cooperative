@@ -38,7 +38,7 @@
                     <notebook>
                         <page name="rooms" string="Rooms" context="{'default_housing_id': id}">
                             <group>
-                                <field name="room_ids" nolabel="1" options="{'no_create': True}" widget="many2many"/>
+                                <field name="room_ids" nolabel="1" widget="many2many" domain="[('building_id', '=', building_id)]" context="{'default_housing_id': id, 'default_building_id': building_id}"/>
                             </group>
                         </page>
                         <page name="leases" string="Leases">
