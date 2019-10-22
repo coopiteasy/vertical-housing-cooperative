@@ -6,14 +6,14 @@
 <odoo>
     <menuitem id="menu_housing_cooperative_root" name="Housing Cooperative" groups="group_hc_user"/>
 
-    <menuitem id="menu_housing_cooperative_hc" name="Housing Cooperative" parent="menu_housing_cooperative_root" sequence="10"/>
+    <menuitem id="menu_housing_cooperative_hc" name="Housing Cooperative" parent="menu_housing_cooperative_root" groups="group_hc_user" sequence="10"/>
     <menuitem id="menu_hc_building_view" name="Buildings" parent="menu_housing_cooperative_hc" action="building_view_action" sequence="1010"/>
     <menuitem id="menu_hc_housing_view" name="Housings" parent="menu_housing_cooperative_hc" action="housing_view_action" sequence="1020"/>
     <menuitem id="menu_hc_cluster_view" name="Clusters" parent="menu_housing_cooperative_hc" action="cluster_view_action" sequence="1030"/>
     <menuitem id="menu_hc_room_view" name="Rooms" parent="menu_housing_cooperative_hc" action="room_view_action" sequence="1040"/>
 
-    <menuitem id="menu_housing_cooperative_leases" name="Leases" parent="menu_housing_cooperative_root" action="lease_view_action" sequence="20"/>
-    <menuitem id="menu_housing_cooperative_contacts" name="Contacts" parent="menu_housing_cooperative_root" action="contacts.action_contacts" sequence="30"/>
+    <menuitem id="menu_housing_cooperative_leases" name="Leases" parent="menu_housing_cooperative_root" groups="group_hc_user" action="lease_view_action" sequence="20"/>
+    <menuitem id="menu_housing_cooperative_contacts" name="Contacts" parent="menu_housing_cooperative_root" groups="group_hc_user" action="contacts.action_contacts" sequence="30"/>
 
     <menuitem id="menu_housing_cooperative_configuration" name="Configuration" parent="menu_housing_cooperative_root" groups="group_hc_manager" sequence="40"/>
     <menuitem id="menu_hc_plan_view" name="Plans" parent="menu_housing_cooperative_configuration" action="plan_view_action" sequence="3010"/>
