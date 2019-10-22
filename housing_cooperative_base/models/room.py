@@ -14,6 +14,9 @@ class Room(models.Model):
     name = fields.Char(
         string='Name',
         required=True)
+    active = fields.Boolean(
+        string='Active?',
+        default=True)
     building_id = fields.Many2one(
         comodel_name='hc.building',
         string='Building',

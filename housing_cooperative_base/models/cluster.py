@@ -11,6 +11,9 @@ class Cluster(models.Model):
     _description = 'Cluster'
 
     name = fields.Char()
+    active = fields.Boolean(
+        string='Active?',
+        default=True)
     building_id = fields.Many2one(
         comodel_name='hc.building',
         string='Building',

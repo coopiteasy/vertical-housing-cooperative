@@ -21,6 +21,9 @@ class Housing(models.Model):
     name = fields.Char(
         string='Name',
         required=False)
+    active = fields.Boolean(
+        string='Active?',
+        default=True)
     code = fields.Char(
         string='code',
         required=True)
