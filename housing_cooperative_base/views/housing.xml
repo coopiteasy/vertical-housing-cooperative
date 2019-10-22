@@ -24,7 +24,10 @@
                         <group>
                             <field name="code"/>
                             <field name="name"/>
+                            <field name="floor"/>
                             <field name="keys"/>
+                            <field name="nb_keys"/>
+                            <field name="industrial_services"/>
                         </group>
                         <group>
                             <field name="building_id" options="{'no_create': True}"/>

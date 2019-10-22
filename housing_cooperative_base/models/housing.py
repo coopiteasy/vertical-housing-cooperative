@@ -31,8 +31,17 @@ class Housing(models.Model):
         comodel_name='hc.building',
         string='Building',
         required=True)
+    floor = fields.Integer(
+        string='Floor number',
+        required=False)
     keys = fields.Char(
         string='Keys',
+        required=False)
+    nb_keys = fields.Integer(
+        string='Number of Keys',
+        required=False)
+    industrial_services = fields.Html(
+        string='Industrial Services',
         required=False)
 
     nb_rooms = fields.Integer(
