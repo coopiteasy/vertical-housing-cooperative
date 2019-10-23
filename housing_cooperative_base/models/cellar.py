@@ -55,9 +55,10 @@ class Cellar(models.Model):
         comodel_name='hc.cluster',
         string='Cluster',
         required=False)
-    lease_ids = fields.Many2many(
+    housing_lease_ids = fields.Many2many(
         comodel_name='hc.lease',
-        string='Leases')
+        string='Leases',
+        related='housing_id.lease_ids')
     rent = fields.Float(
         string='Rent',
         required=False)
@@ -73,12 +74,12 @@ class Cellar(models.Model):
         store=True)
 
     @api.multi
-    @api.depends('cluster_id', 'lease_ids')
+    @api.depends('cluster_id', 'housing_lease_ids')
     def _compute_state(self):
         for cellar in self:
             if cellar.cluster_id:
                 cellar.state = 'busy'
-            elif 'ongoing' in cellar.lease_ids.mapped('state'):
+            elif 'ongoing' in cellar.housing_lease_ids.mapped('state'):
                 cellar.state = 'busy'
             else:
                 cellar.state = 'available'

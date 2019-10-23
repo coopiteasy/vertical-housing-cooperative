@@ -31,9 +31,10 @@ class Room(models.Model):
         string='Cluster',
         domain="[('building_id', '=', building_id)]",
         required=False)
-    lease_ids = fields.Many2many(
+    housing_lease_ids = fields.Many2many(
         comodel_name='hc.lease',
-        string='Leases')
+        string='Leases',
+        related='housing_id.lease_ids')
     rent = fields.Float(
         string='Rent',
         required=False)
@@ -49,12 +50,12 @@ class Room(models.Model):
         store=True)
 
     @api.multi
-    @api.depends('cluster_id', 'lease_ids')
+    @api.depends('cluster_id', 'housing_lease_ids')
     def _compute_state(self):
         for room in self:
             if room.cluster_id:
                 room.state = 'busy'
-            elif 'ongoing' in room.lease_ids.mapped('state'):
+            elif 'ongoing' in room.housing_lease_ids.mapped('state'):
                 room.state = 'busy'
             else:
                 room.state = 'available'

@@ -25,12 +25,14 @@ class Lease(models.Model):
         string='Housing',
         domain=[('state', '=', 'available')],
         required=False)
-    room_ids = fields.Many2many(
+    housing_room_ids = fields.One2many(
         comodel_name='hc.room',
-        string='Common Rooms')
-    cellar_ids = fields.Many2many(
+        string='Common Rooms',
+        related='housing_id.room_ids')
+    housing_cellar_ids = fields.One2many(
         comodel_name='hc.cellar',
-        string='Cellars')
+        string='Common cellars',
+        related='housing_id.cellar_ids')
     start = fields.Date(
         string='Start',
         required=True)
@@ -101,15 +103,15 @@ class Lease(models.Model):
             lease.name = '%s/%s' % (tenant, date)
 
     @api.multi
-    @api.depends('housing_id', 'room_ids', 'cellar_ids')
+    @api.depends('housing_id', 'housing_room_ids', 'housing_cellar_ids')
     def _compute_suggested_rent(self):
         for lease in self:
             rent = lease.housing_rent or 0
-            rent += sum(lease.room_ids.mapped('rent'))
-            rent += sum(lease.cellar_ids.mapped('rent'))
+            rent += sum(lease.housing_room_ids.mapped('rent'))
+            rent += sum(lease.housing_cellar_ids.mapped('rent'))
             charges = lease.housing_charges or 0
-            charges += sum(lease.room_ids.mapped('charges'))
-            charges += sum(lease.cellar_ids.mapped('charges'))
+            charges += sum(lease.housing_room_ids.mapped('charges'))
+            charges += sum(lease.housing_cellar_ids.mapped('charges'))
 
             lease.suggested_rent = rent
             lease.suggested_charges = charges

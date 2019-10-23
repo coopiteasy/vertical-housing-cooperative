@@ -85,6 +85,7 @@
         <record id="demo_room_2" model="hc.room">
             <field name="name">Room 2</field>
             <field name="building_id" ref="demo_building_1"/>
+            <field name="housing_id" ref="demo_housing_2"/>
             <field name="rent">75</field>
             <field name="charges">15</field>
         </record>
@@ -109,6 +110,7 @@
         <record id="demo_room_6" model="hc.room">
             <field name="name">Room 6</field>
             <field name="building_id" ref="demo_building_1"/>
+            <field name="housing_id" ref="demo_housing_2"/>
             <field name="rent">80</field>
             <field name="charges">10</field>
         </record>
@@ -141,8 +143,6 @@
         <record id="demo_lease_2" model="hc.lease">
             <field name="tenant_id" ref="base.res_partner_address_16"/>
             <field name="housing_id" ref="demo_housing_2"/>
-            <field name="room_ids" eval="[(6, 0, [ref('demo_room_2'), ref('demo_room_6')])]"/>
-            <field name="cellar_ids" eval="[(6, 0, [ref('demo_cellar_2')])]"/>
             <field name="start">2018-09-20</field>
             <field name="expected_end">2021-09-20</field>
             <field name="rent">500</field>

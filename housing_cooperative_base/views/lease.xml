@@ -68,7 +68,7 @@
                         </page>
                         <page name="common_rooms" string="Common Rooms">
                             <group>
-                                <field name="room_ids" nolabel="1">
+                                <field name="housing_room_ids" nolabel="1">
                                     <tree>
                                         <field name="name"/>
                                         <field name="rent"/>
@@ -80,7 +80,7 @@
                         </page>
                         <page name="cellars" string="Cellars">
                             <group>
-                                <field name="cellar_ids" nolabel="1">
+                                <field name="housing_cellar_ids" nolabel="1">
                                     <tree>
                                         <field name="name"/>
                                         <field name="rent"/>
