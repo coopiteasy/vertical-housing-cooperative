@@ -1,1 +1,1 @@
-from  . import test_housing_cooperative
+from . import test_housing_cooperative
