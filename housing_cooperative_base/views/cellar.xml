@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2019 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_cellar_form" model="ir.ui.view">
+        <field name="name">view_cellar_form</field>
+        <field name="model">hc.cellar</field>
+        <field name="arch" type="xml">
+            <form string="cellar_form">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object"
+                            class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button"
+                                options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="floor"/>
+                            <field name="surface"/>
+                        </group>
+                        <group>
+                            <field name="cluster_id" options="{'no_create': True}"/>
+                            <field name="housing_id" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="rent"/>
+                            <field name="charges"/>
+                        </group>
+                        <group  name="location">
+                            <field name="street"/>
+                            <field name="street_number"/>
+                            <field name="municipality"/>
+                            <field name="zip_code"/>
+                            <field name="country_id" options="{'no_create': True}"/>
+                            <field name="state_id" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="leases" string="Leases">
+                            <group>
+<!--                                <field name="lease_ids"  nolabel="1">-->
+<!--                                    <tree>-->
+<!--                                        <field name="tenant_id"/>-->
+<!--                                        <field name="start"/>-->
+<!--                                        <field name="end"/>-->
+<!--                                        <field name="state"/>-->
+<!--                                    </tree>-->
+<!--                                </field>-->
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_cellar_tree" model="ir.ui.view">
+        <field name="name">view_cellar_tree</field>
+        <field name="model">hc.cellar</field>
+        <field name="arch" type="xml">
+            <tree string="cellar_tree">
+                <field name="name"/>
+                <field name="cluster_id"/>
+                <field name="housing_id"/>
+                <field name="state"/>
+        </tree>
+        </field>
+    </record>
+
+    <record id="cellar_view_action" model="ir.actions.act_window">
+        <field name="name">Cellars</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hc.cellar</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

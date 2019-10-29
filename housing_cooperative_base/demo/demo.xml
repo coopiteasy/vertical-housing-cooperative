@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2019 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+
+<odoo>
+    <data noupdate="0">  <!-- fixme -->
+
+        <record id="demo_building_1" model="hc.building">
+            <field name="name">Building 1</field>
+            <field name="street">Rue Fontaine d'Amour</field>
+            <field name="street_number">21</field>
+            <field name="zip_code">1030</field>
+            <field name="municipality">Le village</field>
+            <field name="state_id" ref="base.state_it_ge"/>
+            <field name="country_id" ref="base.ch"/>
+            <field name="is_rented" eval="True"/>
+            <field name="landlord_id" ref=""/>
+            <field name="lease_start" eval="(DateTime.today() - timedelta(days=100)).strftime('%Y-%m-%d')"/>
+            <field name="expected_lease_end" eval="(DateTime.today() + timedelta(days=465)).strftime('%Y-%m-%d')"/>
+            <field name="rent">10000</field>
+            <field name="charges">1200</field>
+        </record>
+
+        <record id="demo_cluster_1" model="hc.cluster">
+            <field name="code">CLU0</field>
+            <field name="name">Cluster Familial</field>
+            <field name="building_id" ref="demo_building_1"/>
+            <field name="keys">KEYCLU01, KEYCLU02</field>
+        </record>
+
+        <record id="demo_plan_1" model="hc.plan">
+            <field name="name">Low Income</field>
+        </record>
+        
+        <record id="demo_housing_1" model="hc.housing">
+            <field name="code">HOU1</field>
+            <field name="name">Housing 1</field>
+            <field name="building_id" ref="demo_building_1"/>
+            <field name="keys">KEYHOU1</field>
+            <field name="nb_rooms">4</field>
+            <field name="surface">84</field>
+            <field name="social_share">2000</field>
+            <field name="rent">450</field>
+            <field name="charges">80</field>
+            <field name="state">busy</field>
+        </record>
+        
+        <record id="demo_housing_2" model="hc.housing">
+            <field name="code">HOU2</field>
+            <field name="name">Housing 2</field>
+            <field name="building_id" ref="demo_building_1"/>
+            <field name="keys">KEYHOU2</field>
+            <field name="nb_rooms">3</field>
+            <field name="surface">64</field>
+            <field name="cluster_id" ref="demo_cluster_1"/>
+            <field name="rent">350</field>
+            <field name="charges">70</field>
+            <field name="state">busy</field>
+        </record>
+        
+        <record id="demo_housing_3" model="hc.housing">
+            <field name="code">HOU3</field>
+            <field name="name">Housing 3</field>
+            <field name="building_id" ref="demo_building_1"/>
+            <field name="keys">KEYHOU3</field>
+            <field name="nb_rooms">5</field>
+            <field name="surface">100</field>
+            <field name="social_share">2000</field>
+            <field name="cluster_id" ref="demo_cluster_1"/>
+            <field name="rent">550</field>
+            <field name="charges">180</field>
+            <field name="state">available</field>
+            <field name="housing_plan_id" ref="demo_plan_1"/>
+        </record>
+        
+        <record id="demo_room_1" model="hc.room">
+            <field name="name">Room 1</field>
+            <field name="building_id" ref="demo_building_1"/>
+            <field name="cluster_id" ref="demo_cluster_1"/>
+            <field name="rent">75</field>
+            <field name="charges">15</field>
+        </record>
+        <record id="demo_room_2" model="hc.room">
+            <field name="name">Room 2</field>
+            <field name="building_id" ref="demo_building_1"/>
+            <field name="rent">75</field>
+            <field name="charges">15</field>
+        </record>
+        <record id="demo_room_3" model="hc.room">
+            <field name="name">Room 3</field>
+            <field name="building_id" ref="demo_building_1"/>
+            <field name="rent">75</field>
+            <field name="charges">15</field>
+        </record>
+        <record id="demo_room_4" model="hc.room">
+            <field name="name">Room 4</field>
+            <field name="building_id" ref="demo_building_1"/>
+            <field name="rent">55</field>
+            <field name="charges">5</field>
+        </record>
+        <record id="demo_room_5" model="hc.room">
+            <field name="name">Room 5</field>
+            <field name="building_id" ref="demo_building_1"/>
+            <field name="rent">75</field>
+            <field name="charges">15</field>
+        </record>
+        <record id="demo_room_6" model="hc.room">
+            <field name="name">Room 6</field>
+            <field name="building_id" ref="demo_building_1"/>
+            <field name="rent">80</field>
+            <field name="charges">10</field>
+        </record>
+
+        <record id="demo_cellar_1" model="hc.cellar">
+            <field name="name">Cellar 1</field>
+<!--            <field name="building_id" ref="demo_building_1"/>-->
+            <field name="cluster_id" ref="demo_cluster_1"/>
+            <field name="rent">20</field>
+            <field name="charges">10</field>
+        </record>
+        <record id="demo_cellar_2" model="hc.cellar">
+            <field name="name">Cellar 2</field>
+<!--            <field name="building_id" ref="demo_building_1"/>-->
+            <field name="housing_id" ref="demo_housing_2"/>
+            <field name="rent">20</field>
+            <field name="charges">10</field>
+        </record>
+
+        <record id="demo_lease_1" model="hc.lease">
+            <field name="tenant_id" ref="base.res_partner_address_15"/>
+            <field name="housing_id" ref="demo_housing_1"/>
+            <field name="start">2017-09-21</field>
+            <field name="expected_end">2020-09-21</field>
+            <field name="rent">2000</field>
+            <field name="charges">200</field>
+            <field name="deposit">4000</field>
+            <field name="state">ongoing</field>
+        </record>
+        <record id="demo_lease_2" model="hc.lease">
+            <field name="tenant_id" ref="base.res_partner_address_16"/>
+            <field name="housing_id" ref="demo_housing_2"/>
+            <field name="room_ids" eval="[(6, 0, [ref('demo_room_2'), ref('demo_room_6')])]"/>
+            <field name="cellar_ids" eval="[(6, 0, [ref('demo_cellar_2')])]"/>
+            <field name="start">2018-09-20</field>
+            <field name="expected_end">2021-09-20</field>
+            <field name="rent">500</field>
+            <field name="charges">100</field>
+            <field name="deposit">1000</field>
+            <field name="state">ongoing</field>
+        </record>
+        <record id="demo_lease_3" model="hc.lease">
+            <field name="tenant_id" ref="base.res_partner_address_17"/>
+            <field name="housing_id" ref="demo_housing_1"/>
+            <field name="start">2014-10-20</field>
+            <field name="expected_end">2018-12-20</field>
+            <field name="effective_end">2018-09-01</field>
+            <field name="rent">1800</field>
+            <field name="charges">210</field>
+            <field name="deposit">2500</field>
+            <field name="state">done</field>
+        </record>
+    </data>
+</odoo>

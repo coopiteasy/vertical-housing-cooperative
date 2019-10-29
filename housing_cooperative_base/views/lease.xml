@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2019 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_hc_lease_form" model="ir.ui.view">
+        <field name="name">view_hc_lease_form</field>
+        <field name="model">hc.lease</field>
+        <field name="arch" type="xml">
+            <form string="lease_form">
+                <header>
+                    <button name="create_contract"
+                            string="Create contract"
+                            type="object"
+                            attrs="{'invisible': [('contract_id', '!=', False)]}"
+                            class="oe_highlight"/>
+                    <button name="create_invoice"
+                            string="Create Invoice"
+                            type="object"
+                            attrs="{'invisible': [('contract_id', '=', False)]}"
+                            class="oe_highlight"/>
+
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_get_attachment_tree_view" class="oe_stat_button" icon="fa-book" type="object">
+                            <field name="attachment_number" widget="statinfo" string="Documents"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="tenant_id"/>
+                            <field name="start"/>
+                            <field name="expected_end"/>
+                            <field name="effective_end"/>
+                        </group>
+                        <group>
+                            <field name="rent"/>
+                            <field name="charges"/>
+                            <field name="deposit"/>
+                        </group>
+                        <group>
+                            <field name="housing_id"/>
+                            <field name="housing_rent"/>
+                            <field name="housing_charges"/>
+                        </group>
+                        <group>
+                            <field name="suggested_rent"/>
+                            <field name="suggested_charges"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="Invoices" string="Invoices">
+                            <group>
+                                <field name="contract_id" context="{'form_view_ref': 'contract.account_analytic_account_sale_form'}"/>
+                                <field name="invoice_ids">
+                                    <tree>
+                                        <field name="partner_id"/>
+                                        <field name="date"/>
+                                        <field name="date_due"/>
+                                        <field name="amount_total"/>
+                                        <field name="state"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <page name="common_rooms" string="Common Rooms">
+                            <group>
+                                <field name="room_ids" nolabel="1">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="rent"/>
+                                        <field name="charges"/>
+                                    </tree>
+
+                                </field>
+                            </group>
+                        </page>
+                        <page name="cellars" string="Cellars">
+                            <group>
+                                <field name="cellar_ids" nolabel="1">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="rent"/>
+                                        <field name="charges"/>
+                                    </tree>
+
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="lease_view_tree" model="ir.ui.view">
+        <field name="name">lease_view_tree</field>
+        <field name="model">hc.lease</field>
+        <field name="arch" type="xml">
+            <tree string="lease_tree">
+                <field name="housing_id"/>
+                <field name="start"/>
+                <field name="end"/>
+                <field name="tenant_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="lease_view_action" model="ir.actions.act_window">
+        <field name="name">Leases</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hc.lease</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

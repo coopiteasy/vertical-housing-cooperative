@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2019 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+    <record id="product_product_rent" model="product.product">
+        <field name="name">Rent</field>
+        <field name="categ_id" ref="product.product_category_1"/>
+        <field name="list_price">0.0</field>
+        <field name="standard_price">0.0</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">Monthly rent #START# to #END#</field>
+        <field name="default_code">RENT001</field>
+    </record>
+    <record id="product_product_charges" model="product.product">
+        <field name="name">Charges</field>
+        <field name="categ_id" ref="product.product_category_1"/>
+        <field name="list_price">0.0</field>
+        <field name="standard_price">0.0</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">Monthly charges #START# to #END#</field>
+        <field name="default_code">CHAR001</field>
+    </record>
+    <record id="product_product_deposit" model="product.product">
+        <field name="name">Deposit</field>
+        <field name="categ_id" ref="product.product_category_1"/>
+        <field name="list_price">0.0</field>
+        <field name="standard_price">0.0</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">Deposit</field>
+        <field name="default_code">DEPO001</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2019 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="res_partner_view_form" model="ir.ui.view">
+        <field name="name">res_partner_view_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button name="action_set_address_from_lease"
+                            string="Set Address from Lease"
+                            type="object"
+                            class="oe_highlight"/>
+                </header>
+            </xpath>
+
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_get_attachment_tree_view" class="oe_stat_button" icon="fa-book" type="object">
+                    <field name="attachment_number" widget="statinfo" string="Documents"/>
+                </button>
+            </xpath>
+
+            <field name="birthdate_date" position="after">
+                <field name="age"/>
+                <field name="citizenship_id"/>
+                <field name="permit"/>
+            </field>
+
+            <field name="gender" position="after">
+                <field name="study"/>
+                <field name="liability_insurance"/>
+            </field>
+
+            <field name="vat" position="after">
+                <field name="residence"/>
+                <field name="first_lease_start"/>
+                <field name="current_lease_start"/>
+                <field name="lease_end"/>
+            </field>
+
+            <xpath expr="//field[@name='child_ids']/.." position="before">
+                <page name="leases" string="Leases" autofocus="autofocus">
+                    <group>
+                        <field name="lease_ids" nolabel="1" context="{'default_tenant_id': id}">
+                            <tree>
+                                <field name="housing_id"/>
+                                <field name="start"/>
+                                <field name="end"/>
+                                <field name="state"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
