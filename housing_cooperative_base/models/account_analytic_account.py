@@ -7,12 +7,10 @@ from odoo import api, fields, models
 
 
 class AccountAnalyticAccount(models.Model):
-    _inherit = 'account.analytic.account'
-    _description = 'AccountAnalyticAccount'
+    _inherit = "account.analytic.account"
+    _description = "AccountAnalyticAccount"
 
-    lease_id = fields.Many2one(
-        comodel_name='hc.lease',
-        string='Lease')
+    lease_id = fields.Many2one(comodel_name="hc.lease", string="Lease")
 
     @api.multi
     def _create_invoice(self, invoice=False):
@@ -22,8 +20,6 @@ class AccountAnalyticAccount(models.Model):
 
 
 class AccountInvoice(models.Model):
-    _inherit = 'account.invoice'
+    _inherit = "account.invoice"
 
-    lease_id = fields.Many2one(
-        comodel_name='hc.lease',
-        string='Lease')
+    lease_id = fields.Many2one(comodel_name="hc.lease", string="Lease")

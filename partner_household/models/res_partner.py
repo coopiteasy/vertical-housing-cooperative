@@ -7,12 +7,10 @@ from odoo import api, fields, models
 
 
 class ResPartner(models.Model):
-    _inherit = 'res.partner'
-    _description = 'ResPartner'
+    _inherit = "res.partner"
+    _description = "ResPartner"
 
-    is_household = fields.Boolean(
-        string='Household',
-        default=False)
+    is_household = fields.Boolean(string="Household", default=False)
 
     # company_type = fields.Selection(
     #     selection=[

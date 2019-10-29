@@ -4,21 +4,15 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': 'Partner Household',
-    'version': '12.0.1.0.0',
-    'summary': 'Adds household partner type',
-    'category': 'Customer Relationship Management',
-    'author': 'Coop IT Easy SCRL',
-    'website': 'https://coopiteasy.be',
-    'license': 'AGPL-3',
-    'depends': [
-        'base',
-    ],
-    'data': [
-        'views/res_partner.xml',
-        'demo/demo.xml',  # fixme
-    ],
-    'demo': [
-    ],
-    'installable': True,
+    "name": "Partner Household",
+    "version": "12.0.1.0.0",
+    "summary": "Adds household partner type",
+    "category": "Customer Relationship Management",
+    "author": "Coop IT Easy SCRL",
+    "website": "https://coopiteasy.be",
+    "license": "AGPL-3",
+    "depends": ["base"],
+    "data": ["views/res_partner.xml", "demo/demo.xml"],  # fixme
+    "demo": [],
+    "installable": True,
 }
