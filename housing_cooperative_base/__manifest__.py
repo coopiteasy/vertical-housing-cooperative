@@ -20,7 +20,7 @@
         'partner_contact_gender',
         'partner_firstname',
         'partner_household',
-        'partner_secondary_address',
+        # 'partner_secondary_address',
     ],
 
     'data': [

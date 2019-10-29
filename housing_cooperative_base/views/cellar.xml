@@ -48,14 +48,14 @@
                     <notebook>
                         <page name="leases" string="Leases">
                             <group>
-                                <field name="lease_ids"  nolabel="1">
-                                    <tree>
-                                        <field name="tenant_id"/>
-                                        <field name="start"/>
-                                        <field name="end"/>
-                                        <field name="state"/>
-                                    </tree>
-                                </field>
+<!--                                <field name="lease_ids"  nolabel="1">-->
+<!--                                    <tree>-->
+<!--                                        <field name="tenant_id"/>-->
+<!--                                        <field name="start"/>-->
+<!--                                        <field name="end"/>-->
+<!--                                        <field name="state"/>-->
+<!--                                    </tree>-->
+<!--                                </field>-->
                             </group>
                         </page>
                     </notebook>
