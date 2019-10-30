@@ -10,9 +10,8 @@ from odoo.exceptions import ValidationError
 class Cellar(models.Model):
     _name = "hc.cellar"
     _description = "Cellar"
+    _inherit = "hc.premise"
 
-    name = fields.Char(string="Name", required=True)
-    active = fields.Boolean(string="Active?", default=True)
     floor = fields.Integer(string="Floor number", required=False)
     surface = fields.Integer(string="Surface", required=False, help="m²")
 
@@ -29,43 +28,3 @@ class Cellar(models.Model):
         string="Country State",
         required=False,
     )
-
-    housing_id = fields.Many2one(
-        comodel_name="hc.housing", string="Housing", required=False
-    )
-    cluster_id = fields.Many2one(
-        comodel_name="hc.cluster", string="Cluster", required=False
-    )
-    lease_ids = fields.Many2many(comodel_name="hc.lease", string="Leases")
-    rent = fields.Float(string="Rent", required=False)
-    charges = fields.Float(string="Charges", required=False)
-    state = fields.Selection(
-        string="State",
-        selection=[
-            ("available", "Available"),
-            ("busy", "Busy"),
-            ("unavailable", "Unavailable"),
-        ],
-        compute="_compute_state",
-        store=True,
-    )
-
-    @api.multi
-    @api.depends("cluster_id", "lease_ids")
-    def _compute_state(self):
-        for cellar in self:
-            if cellar.cluster_id:
-                cellar.state = "busy"
-            elif "ongoing" in cellar.lease_ids.mapped("state"):
-                cellar.state = "busy"
-            else:
-                cellar.state = "available"
-
-    @api.constrains("cluster_id", "housing_id")
-    def _constrain_unique(self):
-        for cellar in self:
-            if cellar.cluster_id and cellar.housing_id:
-                raise ValidationError(
-                    "A cellar can not be linked "
-                    "to a housing and a cluster at the same time"
-                )

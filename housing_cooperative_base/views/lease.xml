@@ -37,22 +37,27 @@
                             <field name="effective_end"/>
                         </group>
                         <group>
+                            <field name="suggested_rent"/>
+                            <field name="suggested_charges"/>
                             <field name="rent"/>
                             <field name="charges"/>
                             <field name="deposit"/>
                         </group>
-                        <group>
-                            <field name="housing_id"/>
-                            <field name="housing_rent"/>
-                            <field name="housing_charges"/>
-                        </group>
-                        <group>
-                            <field name="suggested_rent"/>
-                            <field name="suggested_charges"/>
-                        </group>
                     </group>
                     <notebook>
-                        <page name="Invoices" string="Invoices">
+                        <page name="premises" string="Premises">
+                            <group>
+                                <field name="premise_ids" nolabel="1">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="state"/>
+                                        <field name="rent"/>
+                                        <field name="charges"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <page name="invoices" string="Invoices">
                             <group>
                                 <field name="contract_id" context="{'form_view_ref': 'contract.account_analytic_account_sale_form'}"/>
                                 <field name="invoice_ids">
@@ -63,30 +68,6 @@
                                         <field name="amount_total"/>
                                         <field name="state"/>
                                     </tree>
-                                </field>
-                            </group>
-                        </page>
-                        <page name="common_rooms" string="Common Rooms">
-                            <group>
-                                <field name="room_ids" nolabel="1">
-                                    <tree>
-                                        <field name="name"/>
-                                        <field name="rent"/>
-                                        <field name="charges"/>
-                                    </tree>
-
-                                </field>
-                            </group>
-                        </page>
-                        <page name="cellars" string="Cellars">
-                            <group>
-                                <field name="cellar_ids" nolabel="1">
-                                    <tree>
-                                        <field name="name"/>
-                                        <field name="rent"/>
-                                        <field name="charges"/>
-                                    </tree>
-
                                 </field>
                             </group>
                         </page>
@@ -101,7 +82,7 @@
         <field name="model">hc.lease</field>
         <field name="arch" type="xml">
             <tree string="lease_tree">
-                <field name="housing_id"/>
+                <field name="name"/>
                 <field name="start"/>
                 <field name="end"/>
                 <field name="tenant_id"/>

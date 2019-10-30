@@ -16,24 +16,22 @@ class Lease(models.Model):
     tenant_id = fields.Many2one(
         comodel_name="res.partner", string="Tenant", required=True
     )
-    housing_id = fields.Many2one(
-        comodel_name="hc.housing",
-        string="Housing",
-        domain=[("state", "=", "available")],
+    premise_ids = fields.Many2many(
+        comodel_name="hc.premise",
+        string="Premise",
+        # domain=[("state", "=", "available")],
         required=False,
     )
-    room_ids = fields.Many2many(comodel_name="hc.room", string="Common Rooms")
-    cellar_ids = fields.Many2many(comodel_name="hc.cellar", string="Cellars")
     start = fields.Date(string="Start", required=True)
     expected_end = fields.Date(string="Expected End", required=True)
     effective_end = fields.Date(string="Effective End", required=False)
     end = fields.Date(string="End", compute="_compute_lease_end", store=True)
-    housing_rent = fields.Float(
-        string="Housing Rent", related="housing_id.rent"
-    )
-    housing_charges = fields.Float(
-        string="Housing Charges", related="housing_id.charges"
-    )
+    # housing_rent = fields.Float(
+    #     string="Housing Rent", related="housing_id.rent"
+    # )
+    # housing_charges = fields.Float(
+    #     string="Housing Charges", related="housing_id.charges"
+    # )
     rent = fields.Float(string="Rent", required=False)
     charges = fields.Float(string="Charges", required=False)
     deposit = fields.Float(string="Deposit", required=False)
@@ -84,16 +82,14 @@ class Lease(models.Model):
             lease.name = "%s/%s" % (tenant, date)
 
     @api.multi
-    @api.depends("housing_id", "room_ids", "cellar_ids")
+    @api.depends("premise_ids")
     def _compute_suggested_rent(self):
         for lease in self:
-            rent = lease.housing_rent or 0
-            rent += sum(lease.room_ids.mapped("rent"))
-            rent += sum(lease.cellar_ids.mapped("rent"))
-            charges = lease.housing_charges or 0
-            charges += sum(lease.room_ids.mapped("charges"))
-            charges += sum(lease.cellar_ids.mapped("charges"))
-
+            rent = 0
+            charges = 0
+            for premise in lease.premise_ids:
+                rent += premise.rent
+                charges += premise.charges
             lease.suggested_rent = rent
             lease.suggested_charges = charges
 

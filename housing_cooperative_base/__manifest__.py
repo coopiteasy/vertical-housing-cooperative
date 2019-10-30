@@ -25,6 +25,7 @@
     "data": [
         "security/security.xml",
         "security/ir.model.access.csv",
+        "views/premise.xml",
         "views/building.xml",
         "views/cluster.xml",
         "views/housing.xml",

@@ -54,7 +54,7 @@
             <field name="keys">KEYHOU2</field>
             <field name="nb_rooms">3</field>
             <field name="surface">64</field>
-            <field name="cluster_id" ref="demo_cluster_1"/>
+            <!-- <field name="cluster_id" ref="demo_cluster_1"/> -->
             <field name="rent">350</field>
             <field name="charges">70</field>
             <field name="state">busy</field>
@@ -68,7 +68,7 @@
             <field name="nb_rooms">5</field>
             <field name="surface">100</field>
             <field name="social_share">2000</field>
-            <field name="cluster_id" ref="demo_cluster_1"/>
+            <!-- <field name="cluster_id" ref="demo_cluster_1"/> -->
             <field name="rent">550</field>
             <field name="charges">180</field>
             <field name="state">available</field>
@@ -78,7 +78,7 @@
         <record id="demo_room_1" model="hc.room">
             <field name="name">Room 1</field>
             <field name="building_id" ref="demo_building_1"/>
-            <field name="cluster_id" ref="demo_cluster_1"/>
+            <!-- <field name="cluster_id" ref="demo_cluster_1"/> -->
             <field name="rent">75</field>
             <field name="charges">15</field>
         </record>
@@ -115,22 +115,19 @@
 
         <record id="demo_cellar_1" model="hc.cellar">
             <field name="name">Cellar 1</field>
-<!--            <field name="building_id" ref="demo_building_1"/>-->
-            <field name="cluster_id" ref="demo_cluster_1"/>
+            <!-- <field name="cluster_id" ref="demo_cluster_1"/> -->
             <field name="rent">20</field>
             <field name="charges">10</field>
         </record>
         <record id="demo_cellar_2" model="hc.cellar">
             <field name="name">Cellar 2</field>
-<!--            <field name="building_id" ref="demo_building_1"/>-->
-            <field name="housing_id" ref="demo_housing_2"/>
             <field name="rent">20</field>
             <field name="charges">10</field>
         </record>
 
         <record id="demo_lease_1" model="hc.lease">
             <field name="tenant_id" ref="base.res_partner_address_15"/>
-            <field name="housing_id" ref="demo_housing_1"/>
+            <!-- <field name="premise_ids" eval="[(6, 0, [ref('demo_housing_1')])]"/> -->
             <field name="start">2017-09-21</field>
             <field name="expected_end">2020-09-21</field>
             <field name="rent">2000</field>
@@ -140,9 +137,7 @@
         </record>
         <record id="demo_lease_2" model="hc.lease">
             <field name="tenant_id" ref="base.res_partner_address_16"/>
-            <field name="housing_id" ref="demo_housing_2"/>
-            <field name="room_ids" eval="[(6, 0, [ref('demo_room_2'), ref('demo_room_6')])]"/>
-            <field name="cellar_ids" eval="[(6, 0, [ref('demo_cellar_2')])]"/>
+            <!-- <field name="premise_ids" eval="[(6, 0, [ref('demo_housing_2'), ref('demo_room_2'), ref('demo_room_6'), ref('demo_cellar_2')])]"/> -->
             <field name="start">2018-09-20</field>
             <field name="expected_end">2021-09-20</field>
             <field name="rent">500</field>
@@ -152,7 +147,7 @@
         </record>
         <record id="demo_lease_3" model="hc.lease">
             <field name="tenant_id" ref="base.res_partner_address_17"/>
-            <field name="housing_id" ref="demo_housing_1"/>
+            <!-- <field name="premise_ids" eval="[(6, 0, [ref('demo_housing_1')])]"/> -->
             <field name="start">2014-10-20</field>
             <field name="expected_end">2018-12-20</field>
             <field name="effective_end">2018-09-01</field>
