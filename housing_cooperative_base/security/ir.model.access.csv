@@ -5,6 +5,8 @@ access_hc_cluster_user,access_hc_cluster,model_hc_cluster,group_hc_user,1,0,0,0
 access_hc_cluster_manager,access_hc_cluster,model_hc_cluster,group_hc_manager,1,1,1,0
 access_hc_plan_user,access_hc_plan,model_hc_plan,group_hc_user,1,0,0,0
 access_hc_plan_manager,access_hc_plan,model_hc_plan,group_hc_manager,1,1,1,0
+access_hc_premise_user,access_hc_premise,model_hc_premise,group_hc_user,1,0,0,0
+access_hc_premise_manager,access_hc_premise,model_hc_premise,group_hc_manager,1,1,1,0
 access_hc_housing_user,access_hc_housing,model_hc_housing,group_hc_user,1,0,0,0
 access_hc_housing_manager,access_hc_housing,model_hc_housing,group_hc_manager,1,1,1,0
 access_hc_room_user,access_hc_room,model_hc_room,group_hc_user,1,0,0,0
