@@ -9,9 +9,6 @@
         <field name="model">hc.housing</field>
         <field name="inherit_id" ref="housing_cooperative_base.view_premise_form"/>
         <field name="arch" type="xml">
-            <field name="name" position="after">
-                <field name="code"/>
-            </field>
             <group name="rent" position="after">
                 <group>
                     <field name="building_id" options="{'no_create': True}"/>

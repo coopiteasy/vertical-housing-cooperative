@@ -23,6 +23,7 @@
                     <group>
                         <group name="name">
                             <field name="name"/>
+                            <field name="code"/>
                         </group>
                         <group name="rent">
                             <field name="rent"/>

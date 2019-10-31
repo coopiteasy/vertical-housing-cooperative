@@ -13,6 +13,7 @@ class Premise(models.Model):
 
     name = fields.Char(string="Name", required=True)
     active = fields.Boolean(string="Active?", default=True)
+    code = fields.Char(string="Code", required=False)
     lease_ids = fields.Many2many(comodel_name="hc.lease", string="Leases")
     rent = fields.Float(string="Rent", required=False)
     charges = fields.Float(string="Charges", required=False)
@@ -29,5 +30,6 @@ class Premise(models.Model):
 
     @api.multi
     # @api.depends("lease_ids")
+    # TODO: implement state logic based on lease and date
     def _compute_state(self):
         return "available"
