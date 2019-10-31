@@ -127,7 +127,7 @@
 
         <record id="demo_lease_1" model="hc.lease">
             <field name="tenant_id" ref="base.res_partner_address_15"/>
-            <!-- <field name="premise_ids" eval="[(6, 0, [ref('demo_housing_1')])]"/> -->
+            <field name="premise_ids" eval="[(6, 0, [ref('demo_housing_1')])]"/>
             <field name="start">2017-09-21</field>
             <field name="expected_end">2020-09-21</field>
             <field name="rent">2000</field>
@@ -137,7 +137,7 @@
         </record>
         <record id="demo_lease_2" model="hc.lease">
             <field name="tenant_id" ref="base.res_partner_address_16"/>
-            <!-- <field name="premise_ids" eval="[(6, 0, [ref('demo_housing_2'), ref('demo_room_2'), ref('demo_room_6'), ref('demo_cellar_2')])]"/> -->
+            <field name="premise_ids" eval="[(6, 0, [ref('demo_housing_2'), ref('demo_room_2'), ref('demo_room_6'), ref('demo_cellar_2')])]"/>
             <field name="start">2018-09-20</field>
             <field name="expected_end">2021-09-20</field>
             <field name="rent">500</field>
@@ -147,7 +147,7 @@
         </record>
         <record id="demo_lease_3" model="hc.lease">
             <field name="tenant_id" ref="base.res_partner_address_17"/>
-            <!-- <field name="premise_ids" eval="[(6, 0, [ref('demo_housing_1')])]"/> -->
+            <field name="premise_ids" eval="[(6, 0, [ref('demo_housing_1')])]"/>
             <field name="start">2014-10-20</field>
             <field name="expected_end">2018-12-20</field>
             <field name="effective_end">2018-09-01</field>
