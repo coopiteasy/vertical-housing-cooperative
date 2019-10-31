@@ -8,8 +8,10 @@
         <field name="name">view_cellar_form</field>
         <field name="model">hc.cellar</field>
         <field name="inherit_id" ref="housing_cooperative_base.view_premise_form"/>
+        <field name="mode">primary</field>
         <field name="arch" type="xml">
             <group name="rent" position="after">
+                <field name="premise_id" class="oe_inline" readonly="1" invisible="1" attrs="{'required': [('id', '!=', False)]}"/>
                 <group name="spatial">
                     <field name="floor"/>
                     <field name="surface"/>

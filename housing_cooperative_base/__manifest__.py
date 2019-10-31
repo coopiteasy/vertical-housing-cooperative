@@ -37,7 +37,7 @@
         "views/cellar.xml",
         "views/studies.xml",
         "views/menu.xml",
-        "demo/demo.xml",  # fixme
+        # "demo/demo.xml",  # fixme
         "data/data.xml",
     ],
     "demo": [],

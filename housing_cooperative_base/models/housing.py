@@ -17,7 +17,15 @@ class HousingPlan(models.Model):
 class Housing(models.Model):
     _name = "hc.housing"
     _description = "Housing"
-    _inherit = "hc.premise"
+    _inherits = {"hc.premise": "premise_id"}
+
+    premise_id = fields.Many2one(
+        "hc.premise",
+        auto_join=True,
+        index=True,
+        required=True,
+        ondelete="cascade",
+    )
 
     code = fields.Char(string="Code", required=True)
     building_id = fields.Many2one(

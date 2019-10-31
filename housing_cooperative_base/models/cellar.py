@@ -10,7 +10,15 @@ from odoo.exceptions import ValidationError
 class Cellar(models.Model):
     _name = "hc.cellar"
     _description = "Cellar"
-    _inherit = "hc.premise"
+    _inherits = {"hc.premise": "premise_id"}
+
+    premise_id = fields.Many2one(
+        "hc.premise",
+        auto_join=True,
+        index=True,
+        required=True,
+        ondelete="cascade",
+    )
 
     floor = fields.Integer(string="Floor number", required=False)
     surface = fields.Integer(string="Surface", required=False, help="m²")
