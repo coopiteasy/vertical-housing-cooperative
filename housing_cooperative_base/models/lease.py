@@ -19,19 +19,13 @@ class Lease(models.Model):
     premise_ids = fields.Many2many(
         comodel_name="hc.premise",
         string="Premise",
-        # domain=[("state", "=", "available")],
+        # domain=[("state", "=", "available")], # TODO: implement availabilit model
         required=False,
     )
     start = fields.Date(string="Start", required=True)
     expected_end = fields.Date(string="Expected End", required=True)
     effective_end = fields.Date(string="Effective End", required=False)
     end = fields.Date(string="End", compute="_compute_lease_end", store=True)
-    # housing_rent = fields.Float(
-    #     string="Housing Rent", related="housing_id.rent"
-    # )
-    # housing_charges = fields.Float(
-    #     string="Housing Charges", related="housing_id.charges"
-    # )
     rent = fields.Float(string="Rent", required=False)
     charges = fields.Float(string="Charges", required=False)
     deposit = fields.Float(string="Deposit", required=False)

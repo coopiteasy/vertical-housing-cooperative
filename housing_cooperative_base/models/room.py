@@ -24,6 +24,7 @@ class Room(models.Model):
         comodel_name="hc.building", string="Building", required=True
     )
 
+    # TODO: (maybe) implement this type of constraint on lease level, or remove
     # @api.constrains("cluster_id", "housing_id")
     # def _constrain_unique(self):
     #     for room in self:
