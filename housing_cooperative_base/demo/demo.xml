@@ -44,7 +44,6 @@
             <field name="social_share">2000</field>
             <field name="rent">450</field>
             <field name="charges">80</field>
-            <field name="state">busy</field>
         </record>
         
         <record id="demo_housing_2" model="hc.housing">
@@ -57,7 +56,6 @@
             <!-- <field name="cluster_id" ref="demo_cluster_1"/> -->
             <field name="rent">350</field>
             <field name="charges">70</field>
-            <field name="state">busy</field>
         </record>
         
         <record id="demo_housing_3" model="hc.housing">
@@ -71,7 +69,6 @@
             <!-- <field name="cluster_id" ref="demo_cluster_1"/> -->
             <field name="rent">550</field>
             <field name="charges">180</field>
-            <field name="state">available</field>
             <field name="housing_plan_id" ref="demo_plan_1"/>
         </record>
         

@@ -25,11 +25,18 @@ class Premise(models.Model):
             ("unavailable", "Unavailable"),
         ],
         compute="_compute_state",
+        default="available",
         store=True,
     )
 
     @api.multi
-    # @api.depends("lease_ids")
-    # TODO: implement state logic based on lease and date
+    @api.depends("lease_ids")
+    # Todo: also depends on current date. Use cron or depends?
+    # Todo: implement 'unavailable'
     def _compute_state(self):
-        return "available"
+        today = fields.Date.today()
+        for premise in self:
+            for lease in lease_ids:
+                if lease.start <= today and lease.end >= today:
+                    premise.state = "busy"
+                    break
