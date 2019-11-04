@@ -7,20 +7,31 @@ from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
+class LeaseLine(models.Model):
+    _name = "hc.lease.line"
+    _description = "Lease Line"
+    lease_id = fields.Many2one("hc.lease")  # Todo: required=True
+    premise_id = fields.Many2one(
+        comodel_name="hc.premise",
+        string="Premise",
+        delegate=True,
+        required=True,
+    )
+
+
 class Lease(models.Model):
     _name = "hc.lease"
     _description = "Lease"
     _order = "start desc"
 
     name = fields.Char(string="Name", compute="_compute_name", store=True)
+    lease_line_ids = fields.One2many(
+        comodel_name="hc.lease.line",
+        inverse_name="lease_id",
+        string="Premises",
+    )
     tenant_id = fields.Many2one(
         comodel_name="res.partner", string="Tenant", required=True
-    )
-    premise_ids = fields.Many2many(
-        comodel_name="hc.premise",
-        string="Premise",
-        # domain=[("state", "=", "available")], # TODO: implement availabilit model
-        required=False,
     )
     start = fields.Date(string="Start", required=True)
     expected_end = fields.Date(string="Expected End", required=True)
@@ -76,12 +87,12 @@ class Lease(models.Model):
             lease.name = "%s/%s" % (tenant, date)
 
     @api.multi
-    @api.depends("premise_ids")
+    @api.depends("lease_line_ids")
     def _compute_suggested_rent(self):
         for lease in self:
             rent = 0
             charges = 0
-            for premise in lease.premise_ids:
+            for premise in lease.lease_line_ids:
                 rent += premise.rent
                 charges += premise.charges
             lease.suggested_rent = rent

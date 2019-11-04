@@ -19,3 +19,5 @@ access_hc_permit_user,access_hc_permit,model_hc_permit,group_hc_user,1,0,0,0
 access_hc_permit_manager,access_hc_permit,model_hc_permit,group_hc_manager,1,1,1,0
 access_hc_lease_user,access_hc_lease,model_hc_lease,group_hc_user,1,1,1,1
 access_hc_lease_manager,access_hc_lease,model_hc_lease,group_hc_manager,1,1,1,1
+access_hc_lease_line_user,access_hc_lease_line,model_hc_lease_line,group_hc_user,1,1,1,1
+access_hc_lease_line_manager,access_hc_lease_line,model_hc_lease_line,group_hc_manager,1,1,1,1
