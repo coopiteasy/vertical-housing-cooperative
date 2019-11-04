@@ -33,8 +33,9 @@
                     <notebook>
                         <page name="leases" string="Leases">
                             <group>
-                                <field name="lease_ids" nolabel="1" widget="many2many">
+                                <field name="lease_line_ids" nolabel="1" editable="false">
                                     <tree>
+                                        <field name="lease_id"/>
                                         <field name="tenant_id"/>
                                         <field name="start"/>
                                         <field name="end"/>

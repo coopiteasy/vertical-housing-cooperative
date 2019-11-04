@@ -10,13 +10,23 @@ from odoo.exceptions import ValidationError
 class LeaseLine(models.Model):
     _name = "hc.lease.line"
     _description = "Lease Line"
-    lease_id = fields.Many2one("hc.lease")  # Todo: required=True
-    premise_id = fields.Many2one(
-        comodel_name="hc.premise",
-        string="Premise",
-        delegate=True,
-        required=True,
+
+    lease_id = fields.Many2one(
+        comodel_name="hc.lease", string="Lease", required=True
     )
+    premise_id = fields.Many2one(
+        comodel_name="hc.premise", string="Premise", required=True
+    )
+
+    tenant_id = fields.Many2one(related="lease_id.tenant_id")
+    start = fields.Date(related="lease_id.start")
+    end = fields.Date(related="lease_id.end")
+    state = fields.Selection(related="lease_id.state")
+
+    name = fields.Char(related="premise_id.name")
+    state = fields.Selection(related="premise_id.state")
+    rent = fields.Float(related="premise_id.rent")
+    charges = fields.Float(related="premise_id.charges")
 
 
 class Lease(models.Model):

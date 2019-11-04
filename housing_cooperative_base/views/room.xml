@@ -11,8 +11,8 @@
         <field name="mode">primary</field>
         <field name="arch" type="xml">
             <group name="rent" position="after">
-                <group>
-                    <field name="premise_id" class="oe_inline" readonly="1" invisible="1" attrs="{'required': [('id', '!=', False)]}"/>
+                <field name="premise_id" class="oe_inline" readonly="1" invisible="1" attrs="{'required': [('id', '!=', False)]}"/>
+                    <group>
                     <field name="building_id" options="{'no_create': True}"/>
                 </group>    
             </group>

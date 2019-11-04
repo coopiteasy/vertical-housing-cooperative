@@ -14,29 +14,36 @@ class Premise(models.Model):
     name = fields.Char(string="Name", required=True)
     active = fields.Boolean(string="Active?", default=True)
     code = fields.Char(string="Code", required=False)
-    lease_ids = fields.Many2many(comodel_name="hc.lease", string="Leases")
+    lease_line_ids = fields.One2many(
+        comodel_name="hc.lease.line",
+        inverse_name="premise_id",
+        string="Lease Lines",
+    )
     rent = fields.Float(string="Rent", required=False)
     charges = fields.Float(string="Charges", required=False)
     state = fields.Selection(
         string="State",
-        selection=[
-            ("available", "Available"),
-            ("busy", "Busy"),
-            ("unavailable", "Unavailable"),
-        ],
+        selection=[("available", "Available"), ("busy", "Busy")],
         compute="_compute_state",
-        default="available",
         store=True,
     )
 
     @api.multi
-    @api.depends("lease_ids")
-    # Todo: also depends on current date. Use cron or depends?
-    # Todo: implement 'unavailable'
+    @api.depends("lease_line_ids", "name")
     def _compute_state(self):
         today = fields.Date.today()
         for premise in self:
-            for lease in lease_ids:
-                if lease.start <= today and lease.end >= today:
-                    premise.state = "busy"
-                    break
+            active_lease_line_ids = premise.lease_line_ids.filtered(
+                lambda lease_line_id: lease_line_id.lease_id.start
+                <= today
+                <= lease_line_id.lease_id.end
+            )
+            premise.state = "busy" if active_lease_line_ids else "available"
+
+            # Todo: understand why this is not computed if it only depends on lease_line_ids
+            # print(premise)
+            # print(premise.name)
+            # print(premise.lease_line_ids)
+            # print(active_lease_line_ids)
+            # print(any(active_lease_line_ids))
+            # print(premise.state)
