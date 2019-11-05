@@ -10,9 +10,9 @@
         <field name="arch" type="xml">
             <form string="lease_form">
                 <header>
-                    <button name="create_contract"
+                    <button name="action_rental_state_report"
                             string="Create contract"
-                            type="object"
+                            type="action"
                             attrs="{'invisible': [('contract_id', '!=', False)]}"
                             class="oe_highlight"/>
                     <button name="create_invoice"
@@ -20,7 +20,9 @@
                             type="object"
                             attrs="{'invisible': [('contract_id', '=', False)]}"
                             class="oe_highlight"/>
-
+                    <button name="%(action_rental_state_report)d" 
+                            string="Rental state report"
+                            type="action" />
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
@@ -47,9 +49,9 @@
                     <notebook>
                         <page name="premises" string="Premises">
                             <group>
-                                <field name="lease_line_ids" nolabel="1" editable="false">
-                                    <tree>
-                                        <field name="name"/>
+                                <field name="lease_line_ids" nolabel="1">
+                                    <tree editable="bottom">
+                                        <field name="premise_id"/>
                                         <field name="state"/>
                                         <field name="rent"/>
                                         <field name="charges"/>
