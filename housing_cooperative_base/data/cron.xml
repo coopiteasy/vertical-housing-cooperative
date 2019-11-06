@@ -7,9 +7,9 @@
             <field name="interval_number">1</field>
             <field name="interval_type">days</field>
             <field name="numbercall">-1</field>
-            <field name="doall" eval="False"/>
-            <field name="model" eval="'hc.premise'"/>
-            <field name="function" eval="'_compute_state'"/>
+            <field name="doall">False</field>
+            <field name="model">hc.premise</field>
+            <field name="function">cron_compute_state</field>
             <field name="args" eval="'()'"/>
         </record>
     </data>

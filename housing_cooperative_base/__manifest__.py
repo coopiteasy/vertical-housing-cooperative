@@ -36,6 +36,8 @@
         "views/room.xml",
         "views/cellar.xml",
         "views/studies.xml",
+        "reports/rental_state_report.xml",
+        "wizard/rental_state_report_wizard_view.xml",
         "views/menu.xml",
         "demo/demo.xml",  # fixme
         "data/data.xml",

@@ -40,10 +40,7 @@ class Premise(models.Model):
             )
             premise.state = "busy" if active_lease_line_ids else "available"
 
-            # Todo: understand why this is not computed if it only depends on lease_line_ids
-            # print(premise)
-            # print(premise.name)
-            # print(premise.lease_line_ids)
-            # print(active_lease_line_ids)
-            # print(any(active_lease_line_ids))
-            # print(premise.state)
+    @api.model
+    def cron_compute_state(self):
+        premises = self.search([])
+        premises._compute_state()

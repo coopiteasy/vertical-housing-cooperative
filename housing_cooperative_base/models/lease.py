@@ -23,7 +23,6 @@ class LeaseLine(models.Model):
     end = fields.Date(related="lease_id.end")
     state = fields.Selection(related="lease_id.state")
 
-    name = fields.Char(related="premise_id.name")
     state = fields.Selection(related="premise_id.state")
     rent = fields.Float(related="premise_id.rent")
     charges = fields.Float(related="premise_id.charges")

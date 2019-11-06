@@ -135,6 +135,13 @@
         <record id="demo_lease_line_1" model="hc.lease.line">
             <field name="lease_id" ref="demo_lease_1"/>
             <field name="premise_id" eval="1"/> <!-- Note: hard coded id for this delegated inheritance -->
+            <!-- Try:  -->
+            <!--
+            <field
+                name="premise_id"
+                model="hc.housing" 
+                eval="obj(ref('demo_housing_1')).premise_id.id"/>  
+            -->
         </record>
         <record id="demo_lease_2" model="hc.lease">
             <field name="tenant_id" ref="base.res_partner_address_16"/>

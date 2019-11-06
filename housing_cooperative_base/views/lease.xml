@@ -10,9 +10,9 @@
         <field name="arch" type="xml">
             <form string="lease_form">
                 <header>
-                    <button name="action_rental_state_report"
+                    <button name="create_contract"
                             string="Create contract"
-                            type="action"
+                            type="object"
                             attrs="{'invisible': [('contract_id', '!=', False)]}"
                             class="oe_highlight"/>
                     <button name="create_invoice"
@@ -20,9 +20,7 @@
                             type="object"
                             attrs="{'invisible': [('contract_id', '=', False)]}"
                             class="oe_highlight"/>
-                    <button name="%(action_rental_state_report)d" 
-                            string="Rental state report"
-                            type="action" />
+               
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
