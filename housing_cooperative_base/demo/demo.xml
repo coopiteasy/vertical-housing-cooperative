@@ -123,7 +123,7 @@
         </record>
 
         <record id="demo_lease_1" model="hc.lease">
-            <field name="tenant_id" ref="base.res_partner_address_15"/>
+            <field name="tenant_id" ref="res_partner_cooperator_1_demo"/>
             <field name="start">2017-09-21</field>
             <field name="expected_end">2020-09-21</field>
             <field name="rent">2000</field>
@@ -144,7 +144,7 @@
             -->
         </record>
         <record id="demo_lease_2" model="hc.lease">
-            <field name="tenant_id" ref="base.res_partner_address_16"/>
+            <field name="tenant_id" ref="res_partner_cooperator_5_demo"/>
             <field name="start">2018-09-20</field>
             <field name="expected_end">2021-09-20</field>
             <field name="rent">500</field>
@@ -171,7 +171,7 @@
         </record>
         
         <record id="demo_lease_3" model="hc.lease">
-            <field name="tenant_id" ref="base.res_partner_address_17"/>
+            <field name="tenant_id" ref="res_partner_cooperator_6_demo"/>
             <field name="start">2014-10-20</field>
             <field name="expected_end">2018-12-20</field>
             <field name="effective_end">2018-09-01</field>

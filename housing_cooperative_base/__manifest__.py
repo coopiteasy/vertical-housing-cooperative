@@ -40,6 +40,7 @@
         "reports/rental_state_report.xml",
         "wizard/rental_state_report_wizard_view.xml",
         "views/menu.xml",
+        "demo/users.xml",
         "demo/demo.xml",  # fixme
         "data/data.xml",
     ],

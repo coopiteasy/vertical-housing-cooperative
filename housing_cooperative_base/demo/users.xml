@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2019 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+    <record id="res_partner_cooperator_1_demo" model="res.partner">
+        <field name="name">Virginie Leloup</field>
+        <field name="customer" eval="True"/>
+        <field name="is_company" eval="False"/>
+        <field name="email">virginie@demo.net</field>
+        <field name="street">Avenue des Dessus-de-Livres, 2</field>
+        <field name="city">Namur (Loyers)</field>
+        <field name="zip">5101</field>
+        <field name="country_id" ref="base.be"/>
+    </record>
+
+    <record id="bank_account_virginie_demo" model="res.partner.bank">
+            <field name="acc_number">FR7611808009101234567890147</field>
+            <field name="bank_name">Bank</field>
+            <field name="partner_id" ref="res_partner_cooperator_1_demo"/>
+    </record>
+
+    <record id="res_partner_cooperator_2_demo" model="res.partner">
+        <field name="name">Houssine Intégrale</field>
+        <field name="customer" eval="True"/>
+        <field name="is_company" eval="False"/>
+        <field name="email">houssine@demo.net</field>
+        <field name="street">Avenue des Dessous-de-Livres, 3</field>
+        <field name="city">Namur (Loyers)</field>
+        <field name="zip">5101</field>
+        <field name="country_id" ref="base.be"/>
+    </record>
+
+    <record id="bank_account_houssine_demo" model="res.partner.bank">
+        <field name="acc_number">FR7630001007941234567890185</field>
+        <field name="bank_name">Bank</field>
+        <field name="partner_id" ref="res_partner_cooperator_2_demo"/>
+    </record>
+
+    <record id="res_partner_cooperator_3_demo" model="res.partner">
+        <field name="name">Vincent Bixolon</field>
+        <field name="customer" eval="True"/>
+        <field name="is_company" eval="False"/>
+        <field name="email">vincent@demo.net</field>
+        <field name="street">Rue de la colocation, 23</field>
+        <field name="city">Namur (Loyers)</field>
+        <field name="zip">5101</field>
+        <field name="country_id" ref="base.be"/>
+    </record>
+
+    <record id="bank_account_vincent_demo" model="res.partner.bank">
+            <field name="acc_number">BE71096123456769</field>
+            <field name="bank_name">Bank</field>
+            <field name="partner_id" ref="res_partner_cooperator_3_demo"/>
+    </record>
+
+    <record id="res_partner_cooperator_4_demo" model="res.partner">
+        <field name="name">Rémy Commit</field>
+        <field name="customer" eval="True"/>
+        <field name="is_company" eval="False"/>
+        <field name="email">remy@demo.net</field>
+        <field name="street">Rue Guido Van Rossum, 2</field>
+        <field name="city">Evere</field>
+        <field name="zip">5101</field>
+        <field name="country_id" ref="base.be"/>
+    </record>
+
+    <record id="bank_account_remy_demo" model="res.partner.bank">
+            <field name="acc_number">BE38759123459864</field>
+            <field name="bank_name">Bank</field>
+            <field name="partner_id" ref="res_partner_cooperator_4_demo"/>
+    </record>
+
+    <record id="res_partner_cooperator_5_demo" model="res.partner">
+        <field name="name">Manuel du Blues</field>
+        <field name="customer" eval="True"/>
+        <field name="is_company" eval="False"/>
+        <field name="email">manuel@demo.net</field>
+        <field name="street">Avenue de la Cartography, 9</field>
+        <field name="city">Gent</field>
+        <field name="zip">9000</field>
+        <field name="country_id" ref="base.be"/>
+    </record>
+
+    <record id="bank_account_manuel_demo" model="res.partner.bank">
+            <field name="acc_number">CH9300762011623852957</field>
+            <field name="bank_name">Swiss Bank</field>
+            <field name="partner_id" ref="res_partner_cooperator_5_demo"/>
+    </record>
+
+    <record id="res_partner_cooperator_6_demo" model="res.partner">
+        <field name="name">Robin Vangedichten</field>
+        <field name="customer" eval="True"/>
+        <field name="is_company" eval="False"/>
+        <field name="email">robin@demo.net</field>
+        <field name="street">Rue des Amants, 1001</field>
+        <field name="city">Liège</field>
+        <field name="zip">4000</field>
+        <field name="country_id" ref="base.be"/>
+    </record>
+
+    <record id="bank_account_robin_demo" model="res.partner.bank">
+            <field name="acc_number">BE12345678904321</field>
+            <field name="bank_name">Bank</field>
+            <field name="partner_id" ref="res_partner_cooperator_6_demo"/>
+    </record>
+
+    
+    
+    
+</odoo>
