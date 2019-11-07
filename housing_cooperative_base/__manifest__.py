@@ -36,6 +36,7 @@
         "views/room.xml",
         "views/cellar.xml",
         "views/studies.xml",
+        "views/account_analytic_account.xml",
         "reports/rental_state_report.xml",
         "wizard/rental_state_report_wizard_view.xml",
         "views/menu.xml",
