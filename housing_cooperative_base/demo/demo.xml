@@ -135,14 +135,7 @@
         </record>
         <record id="demo_lease_line_1" model="hc.lease.line">
             <field name="lease_id" ref="demo_lease_1"/>
-            <field name="premise_id" eval="1"/> <!-- Note: hard coded id for this delegated inheritance -->
-            <!-- Try:  -->
-            <!--
-            <field
-                name="premise_id"
-                model="hc.housing" 
-                eval="obj(ref('demo_housing_1')).premise_id.id"/>  
-            -->
+            <field name="premise_id" model="hc.housing" eval="obj(ref('demo_housing_1')).premise_id.id"/>
         </record>
         <record id="demo_lease_2" model="hc.lease">
             <field name="tenant_id" ref="res_partner_cooperator_5_demo"/>
@@ -156,19 +149,19 @@
         </record>
         <record id="demo_lease_line_2" model="hc.lease.line">
             <field name="lease_id" ref="demo_lease_2"/>
-            <field name="premise_id" eval="2"/> <!-- Note: hard coded id for this delegated inheritance -->
+            <field name="premise_id" model="hc.housing" eval="obj(ref('demo_housing_2')).premise_id.id"/>
         </record>
         <record id="demo_lease_line_3" model="hc.lease.line">
             <field name="lease_id" ref="demo_lease_2"/>
-            <field name="premise_id" eval="5"/> <!-- Note: hard coded id for this delegated inheritance -->
+            <field name="premise_id" model="hc.room" eval="obj(ref('demo_room_2')).premise_id.id"/>
         </record>
         <record id="demo_lease_line_4" model="hc.lease.line">
             <field name="lease_id" ref="demo_lease_2"/>
-            <field name="premise_id" eval="9"/> <!-- Note: hard coded id for this delegated inheritance -->
+            <field name="premise_id" model="hc.room" eval="obj(ref('demo_room_6')).premise_id.id"/>
         </record>
         <record id="demo_lease_line_5" model="hc.lease.line">
             <field name="lease_id" ref="demo_lease_2"/>
-            <field name="premise_id" eval="11"/> <!-- Note: hard coded id for this delegated inheritance -->
+            <field name="premise_id" model="hc.cellar" eval="obj(ref('demo_cellar_2')).premise_id.id"/>
         </record>
         
         <record id="demo_lease_3" model="hc.lease">
@@ -184,7 +177,7 @@
         </record>
         <record id="demo_lease_line_6" model="hc.lease.line">
             <field name="lease_id" ref="demo_lease_3"/>
-            <field name="premise_id" eval="1"/> <!-- Note: hard coded id for this delegated inheritance -->
+            <field name="premise_id" model="hc.housing" eval="obj(ref('demo_housing_1')).premise_id.id"/>
         </record>
         
         
