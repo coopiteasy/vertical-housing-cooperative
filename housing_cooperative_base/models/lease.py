@@ -54,10 +54,9 @@ class Lease(models.Model):
             ("draft", "Draft"),
             ("ongoing", "Ongoing"),
             ("done", "Done"),
-            ("canceled", "Canceled"),
         ],
-        default="draft",
-        required=False,
+        compute="_compute_state",
+        store=True,
     )
     suggested_rent = fields.Float(
         string="Suggested Rent", compute="_compute_suggested_rent"
@@ -118,6 +117,19 @@ class Lease(models.Model):
                 lease.end = lease.effective_end
             else:
                 lease.end = lease.expected_end
+
+    @api.multi
+    @api.depends("start", "end")
+    def _compute_state(self):
+        today = fields.Date.today()
+        if today < self.start:
+            self.state = "draft"
+        elif self.start <= today <= self.end:
+            self.state = "ongoing"
+        elif self.end < today:
+            self.state = "done"
+        else:
+            False
 
     @api.multi
     def _get_attachment_number(self):

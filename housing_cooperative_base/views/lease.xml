@@ -43,6 +43,9 @@
                             <field name="charges"/>
                             <field name="deposit"/>
                         </group>
+                        <group>
+                            <field name="contains_arcade"/>
+                        </group>
                     </group>
                     <notebook>
                         <page name="premises" string="Premises">

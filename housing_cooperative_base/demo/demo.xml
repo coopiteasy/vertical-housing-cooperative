@@ -130,7 +130,6 @@
             <field name="rent">2000</field>
             <field name="charges">200</field>
             <field name="deposit">4000</field>
-            <field name="state">ongoing</field>
             <field name="contract_id"/>
         </record>
         <record id="demo_lease_line_1" model="hc.lease.line">
@@ -144,7 +143,6 @@
             <field name="rent">500</field>
             <field name="charges">100</field>
             <field name="deposit">1000</field>
-            <field name="state">ongoing</field>
             <field name="contract_id"/>
         </record>
         <record id="demo_lease_line_2" model="hc.lease.line">
@@ -172,7 +170,6 @@
             <field name="rent">1800</field>
             <field name="charges">210</field>
             <field name="deposit">2500</field>
-            <field name="state">done</field>
             <field name="contract_id"/>
         </record>
         <record id="demo_lease_line_6" model="hc.lease.line">
