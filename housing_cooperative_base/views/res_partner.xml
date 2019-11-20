@@ -12,8 +12,8 @@
 
             <xpath expr="//sheet" position="before">
                 <header>
-                    <button name="action_set_address_from_lease"
-                            string="Set Address from Lease"
+                    <button name="action_set_address_from_current_lease"
+                            string="Set Address from Current Lease"
                             type="object"
                             class="oe_highlight"/>
                 </header>
