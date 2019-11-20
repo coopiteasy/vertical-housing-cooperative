@@ -37,8 +37,9 @@ class Housing(models.Model):
     industrial_services = fields.Html(
         string="Industrial Services", required=False
     )
+    is_arcade = fields.Boolean(string="Is Arcade", required=False)
 
-    nb_rooms = fields.Integer(
+    nb_rooms = fields.Float(
         string="Number of Rooms",
         required=False,
         help="Counting all rooms in this housing",

@@ -18,6 +18,7 @@
                     <field name="keys"/>
                     <field name="nb_keys"/>
                     <field name="industrial_services"/>
+                    <field name="is_arcade"/>
                 </group>
                 <group>
                     <field name="housing_plan_id" options="{'no_create': True}"/>

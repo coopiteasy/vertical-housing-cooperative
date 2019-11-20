@@ -78,7 +78,7 @@
         <field name="customer" eval="True"/>
         <field name="is_company" eval="False"/>
         <field name="email">manuel@demo.net</field>
-        <field name="street">Avenue de la Cartography, 9</field>
+        <field name="street">Avenue de la Cartographie, 9</field>
         <field name="city">Gent</field>
         <field name="zip">9000</field>
         <field name="country_id" ref="base.be"/>

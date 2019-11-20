@@ -28,6 +28,7 @@
                         <group name="rent">
                             <field name="rent"/>
                             <field name="charges"/>
+                            <field name="charges_note"/>
                         </group>
                     </group>
                     <notebook>

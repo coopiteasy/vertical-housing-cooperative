@@ -21,7 +21,6 @@ class LeaseLine(models.Model):
     tenant_id = fields.Many2one(related="lease_id.tenant_id")
     start = fields.Date(related="lease_id.start")
     end = fields.Date(related="lease_id.end")
-    state = fields.Selection(related="lease_id.state")
 
     state = fields.Selection(related="premise_id.state")
     rent = fields.Float(related="premise_id.rent")
@@ -85,6 +84,10 @@ class Lease(models.Model):
         inverse_name="res_id",
         string="Attachments",
         domain=[("res_model", "=", "hc.lease")],
+    )
+
+    contains_arcade = fields.Boolean(
+        compute="_compute_contains_arcade", store=True
     )
 
     @api.multi
@@ -207,3 +210,17 @@ class Lease(models.Model):
         )
         domain = [("type", "=", "sale"), ("company_id", "=", company_id)]
         return self.env["account.journal"].search(domain, limit=1)
+
+    @api.multi
+    @api.depends("lease_line_ids")
+    def _compute_contains_arcade(self):
+        for lease in self:
+            premise_ids = lease.lease_line_ids.mapped("premise_id").ids
+            lease.contains_arcade = bool(
+                self.env["hc.housing"].search(
+                    [
+                        ("is_arcade", "=", True),
+                        ("premise_id", "in", premise_ids),
+                    ]
+                )
+            )

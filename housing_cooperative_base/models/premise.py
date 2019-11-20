@@ -21,6 +21,7 @@ class Premise(models.Model):
     )
     rent = fields.Float(string="Rent", required=False)
     charges = fields.Float(string="Charges", required=False)
+    charges_note = fields.Char(string="Note on Charges", required=False)
     state = fields.Selection(
         string="State",
         selection=[("available", "Available"), ("busy", "Busy")],

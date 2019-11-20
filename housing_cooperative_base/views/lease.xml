@@ -99,4 +99,17 @@
         <field name="res_model">hc.lease</field>
         <field name="view_mode">tree,form</field>
     </record>
+
+    <record id="lease_view_search" model="ir.ui.view">
+        <field name="name">Lease Filters</field>
+        <field name="model">hc.lease</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="contains_arcade"/>
+                <filter name="filter_contains_arcade"
+                    string="Contains Archade"
+                    domain="[('contains_arcade','=',True)]"/>
+            </search>
+        </field>
+    </record>
 </odoo>

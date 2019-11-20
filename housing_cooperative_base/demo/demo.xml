@@ -36,9 +36,10 @@
         
         <record id="demo_housing_1" model="hc.housing">
             <field name="code">HOU1</field>
-            <field name="name">Housing 1</field>
+            <field name="name">Housing 1 - Arcade</field>
             <field name="building_id" ref="demo_building_1"/>
             <field name="keys">KEYHOU1</field>
+            <field name="is_arcade" eval="True"/>
             <field name="nb_rooms">4</field>
             <field name="surface">84</field>
             <field name="social_share">2000</field>

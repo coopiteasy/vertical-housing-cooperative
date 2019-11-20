@@ -54,7 +54,11 @@ class Building(models.Model):
         required=False,
     )
 
-    nb_rooms = fields.Integer(string="Number of Rooms", required=False)
+    nb_rooms = fields.Float(
+        string="Number of Rooms",
+        required=False,
+        help="Counting all rooms in this housing",
+    )
     surface_activities = fields.Integer(
         string="Surface Activities", required=False, help="m²"
     )
