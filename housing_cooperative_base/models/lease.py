@@ -65,7 +65,7 @@ class Lease(models.Model):
         string="Suggested Charges", compute="_compute_suggested_rent"
     )
     contract_id = fields.Many2one(
-        comodel_name="account.analytic.account",
+        comodel_name="contract.contract",
         string="Contract",
         required=False,
     )
@@ -165,16 +165,13 @@ class Lease(models.Model):
         if self.contract_id:
             raise ValidationError("A contract already exists.")
 
-        contract = self.env["account.analytic.account"].create(
+        contract = self.env["contract.contract"].create(
             {
+                # check fields
                 "name": self.name,
                 "partner_id": self.tenant_id.id,
                 "contract_type": "sale",
-                "recurring_rule_type": "monthly",
-                "recurring_invoicing_type": "post-paid",
-                "date_start": self.start,
                 "date_end": self.end,
-                "recurring_invoices": True,
                 "lease_id": self.id,
                 "journal_id": self._default_journal().id,
             }
@@ -182,28 +179,33 @@ class Lease(models.Model):
         rent = self.env.ref("housing_cooperative_base.product_product_rent")
         charges = self.env.ref(
             "housing_cooperative_base.product_product_charges"
-        )  # noqa
-        (
-            self.env["account.analytic.invoice.line"].create(
-                {
-                    "name": rent.name,
-                    "product_id": rent.id,
-                    "uom_id": rent.uom_id.id,
-                    "analytic_account_id": contract.id,
-                    "price_unit": self.rent,
-                }
-            )
         )
-        (
-            self.env["account.analytic.invoice.line"].create(
-                {
-                    "name": charges.name,
-                    "product_id": charges.id,
-                    "uom_id": charges.uom_id.id,
-                    "analytic_account_id": contract.id,
-                    "price_unit": self.charges,
-                }
-            )
+
+        self.env["contract.line"].create(
+            {
+                "name": rent.name,
+                "date_start": self.start,
+                "recurring_next_date": self.start,
+                "recurring_rule_type": "monthly",
+                "recurring_invoicing_type": "post-paid",
+                "product_id": rent.id,
+                "uom_id": rent.uom_id.id,
+                "contract_id": contract.id,
+                "price_unit": self.rent,
+            }
+        )
+        self.env["contract.line"].create(
+            {
+                "name": charges.name,
+                "date_start": self.start,
+                "recurring_next_date": self.start,
+                "recurring_rule_type": "monthly",
+                "recurring_invoicing_type": "post-paid",
+                "product_id": charges.id,
+                "uom_id": charges.uom_id.id,
+                "contract_id": contract.id,
+                "price_unit": self.charges,
+            }
         )
         self.contract_id = contract
 
@@ -212,8 +214,7 @@ class Lease(models.Model):
         self.ensure_one()
         if not self.contract_id:
             raise ValidationError("Create a contract first.")
-        self.contract_id.recurring_create_invoice()  # noqa
-        # self.contract_id._create_invoice()  # noqa
+        self.contract_id.recurring_create_invoice()
 
     @api.model
     def _default_journal(self):
