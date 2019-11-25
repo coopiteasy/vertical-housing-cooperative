@@ -171,7 +171,6 @@ class Lease(models.Model):
                 "name": self.name,
                 "partner_id": self.tenant_id.id,
                 "contract_type": "sale",
-                "date_end": self.end,
                 "lease_id": self.id,
                 "journal_id": self._default_journal().id,
             }
@@ -185,9 +184,10 @@ class Lease(models.Model):
             {
                 "name": rent.name,
                 "date_start": self.start,
+                "date_end": self.end,
                 "recurring_next_date": self.start,
                 "recurring_rule_type": "monthly",
-                "recurring_invoicing_type": "post-paid",
+                "recurring_invoicing_type": "pre-paid",
                 "product_id": rent.id,
                 "uom_id": rent.uom_id.id,
                 "contract_id": contract.id,
@@ -198,9 +198,10 @@ class Lease(models.Model):
             {
                 "name": charges.name,
                 "date_start": self.start,
+                "date_end": self.end,
                 "recurring_next_date": self.start,
                 "recurring_rule_type": "monthly",
-                "recurring_invoicing_type": "post-paid",
+                "recurring_invoicing_type": "pre-paid",
                 "product_id": charges.id,
                 "uom_id": charges.uom_id.id,
                 "contract_id": contract.id,

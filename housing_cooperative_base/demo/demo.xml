@@ -176,6 +176,21 @@
             <field name="lease_id" ref="demo_lease_3"/>
             <field name="premise_id" model="hc.housing" eval="obj(ref('demo_housing_1')).premise_id.id"/>
         </record>
+
+         <record id="demo_sequence" model="ir.sequence">
+            <field name="name">Invoice Sequences - Demo</field>
+            <field name="implementation">no_gap</field>
+            <field name="number next" eval="1"/>
+            <field name="number increment" eval="1"/>
+            <field name="padding" eval="4"/>
+        </record>
+        <record id="demo_account_journal" model="account.journal">
+            <field name="name">Customer invoices - Demo</field>
+            <field name="code">INV</field>
+            <field name="type">sale</field>
+            <field name="sequence_id" ref="demo_sequence"/>
+            <field name="company_id" model="res.company" eval="1"/>
+        </record>
         
         
     </data>

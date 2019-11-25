@@ -14,7 +14,7 @@ class Contract(models.Model):
     @api.multi
     def recurring_create_invoice(self):
         res = super(Contract, self).recurring_create_invoice()
-        res.write({"lease_id": self.lease_id})
+        res.write({"lease_id": self.lease_id.id})
         return res
 
 
