@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <odoo>
-    <record id="rental_state_wizard_view" model="ir.ui.view">
-        <field name="name">Rental State Report Wizard</field>
-        <field name="model">hc.rental.state.report.wizard</field>
+    <record id="rental_state_year_wizard_view" model="ir.ui.view">
+        <field name="name">Rental State Year Report Wizard</field>
+        <field name="model">hc.rental.state.year.report.wizard</field>
         <field name="arch" type="xml">
             <form>
                 <group>
@@ -25,10 +25,10 @@
         </field>
     </record>
 
-    <record id="rental_state_wizard_view_action" model="ir.actions.act_window">
-        <field name="name">Rental State Wizard</field>
+    <record id="rental_state_year_wizard_view_action" model="ir.actions.act_window">
+        <field name="name">Rental State Year Wizard</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">hc.rental.state.report.wizard</field>
+        <field name="res_model">hc.rental.state.year.report.wizard</field>
         <field name="view_mode">form</field>
     </record>
 </odoo>

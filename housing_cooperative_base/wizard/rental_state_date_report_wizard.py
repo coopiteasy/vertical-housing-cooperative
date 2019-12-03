@@ -9,8 +9,8 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class RentalStateReportWizard(models.TransientModel):
-    _name = "hc.rental.state.report.wizard"
+class RentalStateDateReportWizard(models.TransientModel):
+    _name = "hc.rental.state.date.report.wizard"
     _description = "Create Rental State Report"
 
     name = fields.Char(compute="_compute_name", store=True)
@@ -30,7 +30,7 @@ class RentalStateReportWizard(models.TransientModel):
     @api.depends("date")
     def _compute_name(self):
         for wizard in self:
-            wizard.name = "rental_state_report_%s" % wizard.date
+            wizard.name = "rental_state_date_report_%s" % wizard.date
 
     @api.multi
     @api.depends("date")  # Todo: building
@@ -61,7 +61,7 @@ class RentalStateReportWizard(models.TransientModel):
         _logger.info("Creating %s" % self.name)
 
         action = self.env.ref(
-            "housing_cooperative_base.rental_state_report"
+            "housing_cooperative_base.rental_state_date_report"
         ).report_action(self)
 
         return action

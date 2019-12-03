@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="rental_state_date_wizard_view" model="ir.ui.view">
+        <field name="name">Rental State Date Report Wizard</field>
+        <field name="model">hc.rental.state.date.report.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="date"/>
+                </group>
+                <group>
+<!--                    <field name="building_ids"/>-->
+                    <field name="lease_line_ids"/>
+                </group>
+                <footer>
+                    <button type="object"
+                    name="create_report"
+                    string="Create report"
+                    class="oe_highlight"/>
+                    <button special="cancel"
+                    string="Cancel"
+                    class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="rental_state_date_wizard_view_action" model="ir.actions.act_window">
+        <field name="name">Rental State Date Wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hc.rental.state.date.report.wizard</field>
+        <field name="view_mode">form</field>
+    </record>
+</odoo>
