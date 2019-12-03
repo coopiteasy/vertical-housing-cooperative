@@ -65,9 +65,7 @@ class Lease(models.Model):
         string="Suggested Charges", compute="_compute_suggested_rent"
     )
     contract_id = fields.Many2one(
-        comodel_name="contract.contract",
-        string="Contract",
-        required=False,
+        comodel_name="contract.contract", string="Contract", required=False
     )
     invoice_ids = fields.One2many(
         comodel_name="account.invoice",

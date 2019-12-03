@@ -27,6 +27,18 @@
             </group>
         </field>
     </record>
+    
+    <record id="view_cellar_tree" model="ir.ui.view">
+        <field name="name">view_cellar_tree</field>
+        <field name="model">hc.cellar</field>
+        <field name="inherit_id" ref="housing_cooperative_base.view_premise_tree"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="premise_id" class="oe_inline" readonly="1" invisible="1" attrs="{'required': [('id', '!=', False)]}"/>
+            </field>
+        </field>
+    </record>
 
     <record id="cellar_view_action" model="ir.actions.act_window">
         <field name="name">Cellars</field>

@@ -20,10 +20,6 @@ class Room(models.Model):
         ondelete="cascade",
     )
 
-    building_id = fields.Many2one(
-        comodel_name="hc.building", string="Building", required=True
-    )
-
     # TODO: (maybe) implement this type of constraint on lease level, or remove
     # @api.constrains("cluster_id", "housing_id")
     # def _constrain_unique(self):

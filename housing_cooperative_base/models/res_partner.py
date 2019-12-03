@@ -151,7 +151,7 @@ class ResPartner(models.Model):
                     raise ValidationError(
                         _("This lease contains multiple housings.")
                     )
-                building = housing.building_id
+                building = housing.premise_id.building_id
                 if partner.residence == "secondary":
                     partner.has_secondary_address = True
                     partner.street_secondary = building.street

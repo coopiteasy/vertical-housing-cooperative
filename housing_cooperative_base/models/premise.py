@@ -14,6 +14,9 @@ class Premise(models.Model):
     name = fields.Char(string="Name", required=True)
     active = fields.Boolean(string="Active?", default=True)
     code = fields.Char(string="Code", required=False)
+    building_id = fields.Many2one(
+        comodel_name="hc.building", string="Building", required=True
+    )
     lease_line_ids = fields.One2many(
         comodel_name="hc.lease.line",
         inverse_name="premise_id",

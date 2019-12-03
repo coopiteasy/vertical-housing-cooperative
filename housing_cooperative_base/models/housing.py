@@ -28,9 +28,6 @@ class Housing(models.Model):
     )
 
     code = fields.Char(string="Code", required=True)
-    building_id = fields.Many2one(
-        comodel_name="hc.building", string="Building", required=True
-    )
     floor = fields.Integer(string="Floor number", required=False)
     keys = fields.Char(string="Keys", required=False)
     nb_keys = fields.Integer(string="Number of Keys", required=False)
@@ -61,18 +58,22 @@ class Housing(models.Model):
 
     @api.multi
     @api.depends(
-        "surface", "nb_rooms", "building_id.social_share", "building_id.regime"
+        "surface",
+        "nb_rooms",
+        "premise_id.building_id.social_share",
+        "premise_id.building_id.regime",
     )
     def _compute_suggested_social_share(self):
         for housing in self:
-            if housing.building_id:
-                if housing.building_id.regime == "square_meters":
+            building = housing.premise_id.building_id
+            if building:
+                if building.regime == "square_meters":
                     housing.suggested_social_share = (
-                        housing.building_id.social_share * housing.surface
+                        building.social_share * housing.surface
                     )
-                elif housing.building_id.regime == "nb_rooms":
+                elif building.regime == "nb_rooms":
                     housing.suggested_social_share = (
-                        housing.building_id.social_share * housing.nb_rooms
+                        building.social_share * housing.nb_rooms
                     )
                 else:
                     raise ValidationError("Unknown building regime")

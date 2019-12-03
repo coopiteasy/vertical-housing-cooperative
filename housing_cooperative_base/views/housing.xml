@@ -13,7 +13,6 @@
             <group name="rent" position="after">
                 <field name="premise_id" class="oe_inline" readonly="1" invisible="1" attrs="{'required': [('id', '!=', False)]}"/>
                 <group>
-                    <field name="building_id" options="{'no_create': True}"/>
                     <field name="floor"/>
                     <field name="keys"/>
                     <field name="nb_keys"/>
@@ -28,6 +27,18 @@
                     <field name="social_share"/>
                 </group>
             </group>
+        </field>
+    </record>
+
+    <record id="view_housing_tree" model="ir.ui.view">
+        <field name="name">view_housing_tree</field>
+        <field name="model">hc.housing</field>
+        <field name="inherit_id" ref="housing_cooperative_base.view_premise_tree"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="premise_id" class="oe_inline" readonly="1" invisible="1" attrs="{'required': [('id', '!=', False)]}"/>
+            </field>
         </field>
     </record>
 

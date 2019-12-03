@@ -113,12 +113,14 @@
 
         <record id="demo_cellar_1" model="hc.cellar">
             <field name="name">Cellar 1</field>
+            <field name="building_id" ref="demo_building_1"/>
             <!-- <field name="cluster_id" ref="demo_cluster_1"/> -->
             <field name="rent">20</field>
             <field name="charges">10</field>
         </record>
         <record id="demo_cellar_2" model="hc.cellar">
             <field name="name">Cellar 2</field>
+            <field name="building_id" ref="demo_building_1"/>
             <field name="rent">20</field>
             <field name="charges">10</field>
         </record>

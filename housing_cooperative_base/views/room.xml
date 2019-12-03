@@ -10,11 +10,8 @@
         <field name="inherit_id" ref="housing_cooperative_base.view_premise_form"/>
         <field name="mode">primary</field>
         <field name="arch" type="xml">
-            <group name="rent" position="after">
+            <group name="name" position="after">
                 <field name="premise_id" class="oe_inline" readonly="1" invisible="1" attrs="{'required': [('id', '!=', False)]}"/>
-                    <group>
-                    <field name="building_id" options="{'no_create': True}"/>
-                </group>    
             </group>
         </field>
     </record>
@@ -23,9 +20,10 @@
         <field name="name">view_room_tree</field>
         <field name="model">hc.room</field>
         <field name="inherit_id" ref="housing_cooperative_base.view_premise_tree"/>
+        <field name="mode">primary</field>
         <field name="arch" type="xml">
             <field name="name" position="after">
-                <field name="building_id"/>
+                <field name="premise_id" class="oe_inline" readonly="1" invisible="1" attrs="{'required': [('id', '!=', False)]}"/>
             </field>
         </field>
     </record>
