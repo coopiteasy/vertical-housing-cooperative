@@ -9,47 +9,49 @@
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.external_layout">
                     <div class="page">
-                        <h2>Report title</h2>
-                        <p>This object's name is <span t-field="o.start"/></p>
-                        <h2>Report table</h2>
+                        <h2>Rental state</h2>
+                        <p>Rental state on <strong><span t-field="o.date"/></strong>.</p>
+                        <p>Document created on <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"/>.</p>
                         <table class="table table-condensed">
+                            <t t-set="sum_rent" t-value="0"/>
                             <thead>
                                 <tr>
-                                    <th><strong>Tenant</strong></th>
-                                    <th class="text-right"><strong>Lease</strong></th>
-                                    <th class="text-right"><strong>Premise</strong></th>
-                                    <th class="text-right"><strong>start</strong></th>
-                                    <th class="text-right"><strong>end</strong></th>
-                                    <th class="text-right"><strong>rent</strong></th>
-                                    <th class="text-right"><strong>charges</strong></th>
+                                    <th class="text-right">Premise</th>
+                                    <th class="text-right">Tenant</th>
+                                    <th class="text-right">Start</th>
+                                    <th class="text-right">End</th>
+                                    <th class="text-right">Monthly rent</th>
+                                    <th class="text-right">Annual rent</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr t-foreach="o.lease_line_ids" t-as="l">
-                                    <td>
-                                        <span t-field="l.tenant_id"/>
-                                    </td>
+                                    <td class="text-right"> <span t-field="l.premise_id"/> </td>
+                                    <td class="text-right"> <span t-field="l.tenant_id"/> </td>
+                                    <td class="text-right"> <span t-field="l.start"/> </td>
+                                    <td class="text-right"> <span t-field="l.end"/> </td>
                                     <td class="text-right">
-                                        <span t-field="l.lease_id"/>
-                                    </td>
-                                    <td class="text-right">
-                                        <span t-field="l.premise_id"/>
-                                    </td>
-                                    <td class="text-right">
-                                        <span t-field="l.start"/>
-                                    </td>
-                                    <td class="text-right">
-                                        <span t-field="l.end"/>
-                                    </td>
-                                    <td class="text-right">
-                                        <span t-field="l.rent"/>
-                                        <span>CHF</span>
+                                        <span t-field="l.rent"/> <span>CHF</span>
 <!--                                        <span t-field="l.rent" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>-->
                                     </td>
                                     <td class="text-right">
-                                        <span t-field="l.charges"/>
-                                        <span>CHF</span>
-<!--                                        <span t-field="l.charges" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>-->
+                                        <span t-esc="l.rent * 12"/> <span>CHF</span>
+<!--                                        <span t-esc="l.rent * 12" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>-->
+                                    </td>
+                                    <t t-set="sum_rent" t-value="sum_rent + l.rent"/>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="text-right">
+                                        <strong><span t-esc="sum_rent"/> <span>CHF</span></strong>
+<!--                                    <span t-esc="sum_rent" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>-->
+                                    </td>
+                                    <td class="text-right">
+                                        <strong><span t-esc="sum_rent * 12"/> <span>CHF</span></strong>
+<!--                                    <span t-esc="sum_rent * 12" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>-->
                                     </td>
                                 </tr>
                             </tbody>

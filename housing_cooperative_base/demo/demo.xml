@@ -182,8 +182,6 @@
          <record id="demo_sequence" model="ir.sequence">
             <field name="name">Invoice Sequences - Demo</field>
             <field name="implementation">no_gap</field>
-            <field name="number next" eval="1"/>
-            <field name="number increment" eval="1"/>
             <field name="padding" eval="4"/>
         </record>
         <record id="demo_account_journal" model="account.journal">

@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 
-from odoo import api, exceptions, fields, models
+from odoo import api, fields, models
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -14,26 +14,26 @@ class RentalStateReportWizard(models.TransientModel):
     _description = "Create Rental State Report"
 
     name = fields.Char(compute="_compute_name", store=True)
-    building_ids = fields.Many2many(
-        comodel_name="hc.building", string="Buildings"
+    # building_ids = fields.Many2many(
+    #     comodel_name="hc.building", string="Buildings"
+    # )
+    date = fields.Date(
+        string="Date", required=True, default=fields.Date.today()
     )
-    start = fields.Date(string="Start", required=True)
-    end = fields.Date(string="End", required=True)
     lease_line_ids = fields.Many2many(
-        comodel_name="hc.lease.line", compute="_compute_lease_line_ids"
+        string="Leases on this date",
+        comodel_name="hc.lease.line",
+        compute="_compute_lease_line_ids",
     )
 
     @api.multi
-    @api.depends("start", "end")
+    @api.depends("date")
     def _compute_name(self):
         for wizard in self:
-            wizard.name = "rental_state_report_%s_%s" % (
-                wizard.start,
-                wizard.end,
-            )
+            wizard.name = "rental_state_report_%s" % wizard.date
 
     @api.multi
-    @api.depends("building_ids", "start", "end")
+    @api.depends("date")  # Todo: building
     def _compute_lease_line_ids(self):
         self.ensure_one()
 
@@ -48,7 +48,7 @@ class RentalStateReportWizard(models.TransientModel):
         # if self.building_ids:
         #     lease_line_ids = lease_line_ids.filtered(
         #         lambda lease_line_id: lease_line_id.premise_id.building_id
-        # # Todo: .building_id of premise not accessible yet
+        # # Todo: .building_id of premise not accessible yet. Consider to sort on building.
         #         in self.building_ids
         #     )
 

@@ -6,12 +6,11 @@
         <field name="arch" type="xml">
             <form>
                 <group>
-                    <field name="start"/>
-                    <field name="end"/>
+                    <field name="date"/>
                 </group>
                 <group>
-                    <field name="building_ids"/>
-                    <field name="lease_line_ids" invisible="1" />
+<!--                    <field name="building_ids"/>-->
+                    <field name="lease_line_ids"/>
                 </group>
                 <footer>
                     <button type="object"
