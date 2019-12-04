@@ -11,7 +11,7 @@ _logger = logging.getLogger(__name__)
 
 class RentalStateYearReportWizard(models.TransientModel):
     _name = "hc.rental.state.year.report.wizard"
-    _description = "Create Rental State Report"
+    _description = "Create Rental State Year Report"
 
     name = fields.Char(compute="_compute_name", store=True)
     # building_ids = fields.Many2many(
@@ -21,7 +21,7 @@ class RentalStateYearReportWizard(models.TransientModel):
         string="Date", required=True, default=fields.Date.today()
     )
     lease_line_ids = fields.Many2many(
-        string="Leases on this date",
+        string="Leases",
         comodel_name="hc.lease.line",
         compute="_compute_lease_line_ids",
     )

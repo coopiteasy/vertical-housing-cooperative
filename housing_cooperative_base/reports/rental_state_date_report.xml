@@ -2,7 +2,7 @@
 <odoo>
     <report
         id="rental_state_date_report"
-        model="hc.rental.state.date.report.wizard"
+        model="hc.rental.state.date.report.wizard.building"
         string="Rental state"
         report_type="qweb-html"
         name="housing_cooperative_base.report_rental_state_date_template"
