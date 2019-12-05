@@ -9,11 +9,11 @@
             <t t-call="web.external_layout">
                 <div class="page">
                     <h2>Rental state</h2>
-<!--                    <p>Rental state on <strong><span t-esc="data.get('date')"/></strong>.</p>-->
-<!--                    <p>Rental state on <strong><span t-esc="data.["date"]"/></strong>.</p>-->
-<!--                    <t t-esc="data"/>-->
-<!--                    Todo: show date-->
-                    <p>Document created on <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>.</p>
+                    <t t-set="doc" t-value="docs[0]"/>
+                    <t t-set="doc_data" t-value="doc.get_data()"/>
+                    <t t-set="date" t-value="doc_data['date']"/>
+                    <p>Rental state on <strong><span t-esc="date"/></strong>.</p>
+                    <p><small>Generated on <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>.</small></p>
                     <t t-set="sum_rent" t-value="0"/>
                     <t t-foreach="docs" t-as="o">
                     <h3><span t-field="o.building_id"/></h3>

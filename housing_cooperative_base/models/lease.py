@@ -10,7 +10,7 @@ from odoo.exceptions import ValidationError
 class LeaseLine(models.Model):
     _name = "hc.lease.line"
     _description = "Lease Line"
-    _order = "premise_id, start desc"
+    _order = "building_id, premise_id, start desc"
 
     lease_id = fields.Many2one(
         comodel_name="hc.lease", string="Lease", required=True

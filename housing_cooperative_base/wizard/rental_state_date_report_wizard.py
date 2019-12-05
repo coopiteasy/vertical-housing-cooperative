@@ -24,6 +24,13 @@ class RentalStateDateReportWizardBuilding(models.TransientModel):
     )
 
     @api.multi
+    def get_data(self):
+        data = {
+            "date": self.rental_state_date_report_wizard_id.date.strftime("%Y-%m-%d")  # Use isoformat?
+        }
+        return data
+
+    @api.multi
     def create_report(self):
         action = self.env.ref(
             "housing_cooperative_base.rental_state_date_report"
@@ -104,9 +111,4 @@ class RentalStateDateReportWizard(models.TransientModel):
                 }
             )
 
-        # data = {"date": self.date.strftime("%Y-%m-%d")}  # isoformat
-        # Todo: pass and show date
-
-        return (
-            self.rental_state_date_report_wizard_building_ids.create_report()
-        )
+        return self.rental_state_date_report_wizard_building_ids.create_report()
