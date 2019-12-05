@@ -39,10 +39,10 @@
         "views/contract.xml",
         "reports/rental_state_date_template.xml",
         "reports/rental_state_date_report.xml",
-        # "reports/rental_state_year_template.xml",
-        # "reports/rental_state_year_report.xml",
+        "reports/rental_state_year_template.xml",
+        "reports/rental_state_year_report.xml",
         "wizard/rental_state_date_report_wizard_view.xml",
-        # "wizard/rental_state_year_report_wizard_view.xml",
+        "wizard/rental_state_year_report_wizard_view.xml",
         "views/menu.xml",
         "demo/users.xml",
         "demo/demo.xml",  # fixme

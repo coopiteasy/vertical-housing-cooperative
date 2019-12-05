@@ -6,10 +6,14 @@
         <field name="arch" type="xml">
             <form>
                 <group>
-                    <field name="date"/>
+                    <group>
+                        <field name="year"/>
+                    </group>
+                    <group>
+                        <field name="building_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                    </group>
                 </group>
                 <group>
-<!--                    <field name="building_ids"/>-->
                     <field name="lease_line_ids"/>
                 </group>
                 <footer>
