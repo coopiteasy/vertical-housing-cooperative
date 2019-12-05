@@ -120,14 +120,17 @@ class Lease(models.Model):
     @api.depends("start", "end")
     def _compute_state(self):
         today = fields.Date.today()
-        if today < self.start:
-            self.state = "draft"
-        elif self.start <= today <= self.end:
-            self.state = "ongoing"
-        elif self.end < today:
-            self.state = "done"
+        if self.start and self.end:
+            if today < self.start:
+                self.state = "draft"
+            elif self.start <= today <= self.end:
+                self.state = "ongoing"
+            elif self.end < today:
+                self.state = "done"
+            else:
+                False
         else:
-            False
+            self.state = "draft"
 
     @api.multi
     def _get_attachment_number(self):
