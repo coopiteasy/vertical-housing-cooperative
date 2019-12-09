@@ -43,6 +43,7 @@
         "views/menu.xml",
         "demo/users.xml",
         "demo/demo.xml",  # fixme
+        "data/cron.xml",
         "data/data.xml",
     ],
     "demo": [],
