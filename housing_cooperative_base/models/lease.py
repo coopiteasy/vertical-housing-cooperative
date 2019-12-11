@@ -70,10 +70,15 @@ class Lease(models.Model):
     contract_id = fields.Many2one(
         comodel_name="contract.contract", string="Contract", required=False
     )
-    invoice_ids = fields.One2many(
+    invoice_ids = fields.One2many(  # This also includes the deposit invoice
         comodel_name="account.invoice",
         inverse_name="lease_id",
         string="Invoices",
+    )
+    deposit_invoice_id = fields.Many2one(
+        comodel_name="account.invoice",
+        inverse_name="lease_id",
+        string="Deposit invoice",
     )
 
     attachment_number = fields.Integer(
@@ -171,7 +176,6 @@ class Lease(models.Model):
 
         contract = self.env["contract.contract"].create(
             {
-                # check fields
                 "name": self.name,
                 "partner_id": self.tenant_id.id,
                 "contract_type": "sale",
@@ -219,7 +223,59 @@ class Lease(models.Model):
         self.ensure_one()
         if not self.contract_id:
             raise ValidationError("Create a contract first.")
-        self.contract_id.recurring_create_invoice()
+        invoice = self.contract_id.recurring_create_invoice()
+
+        return {
+            "type": "ir.actions.act_window",
+            "res_model": "account.invoice",
+            "view_id": self.env.ref("account.invoice_form").id,  # prefered over account.invoice_supplier_form
+            "view_mode": "form",
+            "res_id": invoice.id,
+            "target": "current",
+        }
+
+    @api.multi
+    def create_deposit_invoice(self):
+        self.ensure_one()
+        if self.deposit_invoice_id:
+            raise ValidationError("A deposit invoice already exists.")
+
+        invoice = self.env["account.invoice"].create(
+            {
+                "name": "Deposit",
+                "partner_id": self.tenant_id.id,
+                "date_invoice": fields.Date.today(),
+                "lease_id": self.id,
+                "journal_id": self._default_journal().id,
+            }
+        )
+        deposit = self.env.ref(
+            "housing_cooperative_base.product_product_deposit"
+        )
+
+        self.env["account.invoice.line"].create(
+            {
+                "name": deposit.name,
+                "product_id": deposit.id,
+                "uom_id": deposit.uom_id.id,
+                "invoice_id": invoice.id,
+                "price_unit": self.deposit,
+                "account_id": self._default_journal().default_credit_account_id.id,
+                # Note: account can also be set by default function, if the journal is passed in the context:
+                # .with_context(journal_id=self._default_journal().id).create()
+            }
+        )
+
+        self.deposit_invoice_id = invoice
+
+        return {
+            "type": "ir.actions.act_window",
+            "res_model": "account.invoice",
+            "view_id": self.env.ref("account.invoice_form").id,  # prefered over account.invoice_supplier_form
+            "view_mode": "form",
+            "res_id": invoice.id,
+            "target": "current",
+        }
 
     @api.model
     def _default_journal(self):
