@@ -21,6 +21,7 @@
         "partner_firstname",
         "partner_household",
         # 'partner_secondary_address',
+        "account_credit_control",
     ],
     "data": [
         "security/security.xml",
