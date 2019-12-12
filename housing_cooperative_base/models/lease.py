@@ -3,7 +3,7 @@
 #   Robin Keunen <robin@coopiteasy.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
 
@@ -172,7 +172,7 @@ class Lease(models.Model):
     def create_contract(self):
         self.ensure_one()
         if self.contract_id:
-            raise ValidationError("A contract already exists.")
+            raise ValidationError(_("A contract already exists."))
 
         contract = self.env["contract.contract"].create(
             {
@@ -222,7 +222,7 @@ class Lease(models.Model):
     def create_invoice(self):
         self.ensure_one()
         if not self.contract_id:
-            raise ValidationError("Create a contract first.")
+            raise ValidationError(_("Create a contract first."))
         invoice = self.contract_id.recurring_create_invoice()
 
         return {
@@ -240,7 +240,7 @@ class Lease(models.Model):
     def create_deposit_invoice(self):
         self.ensure_one()
         if self.deposit_invoice_id:
-            raise ValidationError("A deposit invoice already exists.")
+            raise ValidationError(_("A deposit invoice already exists."))
 
         invoice = self.env["account.invoice"].create(
             {
