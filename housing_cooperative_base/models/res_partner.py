@@ -92,6 +92,8 @@ class ResPartner(models.Model):
                 partner.current_lease_id = current_leases[0]
                 partner.current_lease_start = current_leases[0].start
                 partner.lease_end = current_leases[0].end
+            else:
+                partner.first_lease_start = False
 
     @api.multi
     @api.depends("birthdate_date")

@@ -5,6 +5,10 @@
 
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
+import logging
+
+
+_logger = logging.getLogger(__name__)
 
 
 class Premise(models.Model):
@@ -46,5 +50,6 @@ class Premise(models.Model):
 
     @api.model
     def cron_compute_state(self):
+        _logger.info("Executing: computing states of premises")
         premises = self.search([])
         premises._compute_state()

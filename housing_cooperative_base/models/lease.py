@@ -107,13 +107,12 @@ class Lease(models.Model):
     @api.depends("lease_line_ids")
     def _compute_suggested_rent(self):
         for lease in self:
-            rent = 0
-            charges = 0
-            for premise in lease.lease_line_ids:
-                rent += premise.rent
-                charges += premise.charges
-            lease.suggested_rent = rent
-            lease.suggested_charges = charges
+            lease.suggested_rent = sum(
+                line.rent for line in lease.lease_line_ids
+            )
+            lease.suggested_charges = sum(
+                line.charges for line in lease.lease_line_ids
+            )
 
     @api.multi
     @api.depends("expected_end", "effective_end")
@@ -127,18 +126,19 @@ class Lease(models.Model):
     @api.multi
     @api.depends("start", "end")
     def _compute_state(self):
-        today = fields.Date.today()
-        if self.start and self.end:
-            if today < self.start:
-                self.state = "draft"
-            elif self.start <= today <= self.end:
-                self.state = "ongoing"
-            elif self.end < today:
-                self.state = "done"
+        for lease in self:
+            today = fields.Date.today()
+            if lease.start and lease.end:
+                if today < lease.start:
+                    lease.state = "draft"
+                elif lease.start <= today <= lease.end:
+                    lease.state = "ongoing"
+                elif lease.end < today:
+                    lease.state = "done"
+                else:
+                    False
             else:
-                False
-        else:
-            self.state = "draft"
+                lease.state = "draft"
 
     @api.multi
     def _get_attachment_number(self):
@@ -228,7 +228,9 @@ class Lease(models.Model):
         return {
             "type": "ir.actions.act_window",
             "res_model": "account.invoice",
-            "view_id": self.env.ref("account.invoice_form").id,  # prefered over account.invoice_supplier_form
+            "view_id": self.env.ref(
+                "account.invoice_form"
+            ).id,  # prefered over account.invoice_supplier_form
             "view_mode": "form",
             "res_id": invoice.id,
             "target": "current",
@@ -271,7 +273,9 @@ class Lease(models.Model):
         return {
             "type": "ir.actions.act_window",
             "res_model": "account.invoice",
-            "view_id": self.env.ref("account.invoice_form").id,  # prefered over account.invoice_supplier_form
+            "view_id": self.env.ref(
+                "account.invoice_form"
+            ).id,  # prefered over account.invoice_supplier_form
             "view_mode": "form",
             "res_id": invoice.id,
             "target": "current",
