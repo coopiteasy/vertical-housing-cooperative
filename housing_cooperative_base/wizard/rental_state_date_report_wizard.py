@@ -26,7 +26,9 @@ class RentalStateDateReportWizardBuilding(models.TransientModel):
     @api.multi
     def get_data(self):
         data = {
-            "date": self.rental_state_date_report_wizard_id.date.strftime("%Y-%m-%d")  # Use isoformat?
+            "date": self.rental_state_date_report_wizard_id.date.strftime(
+                "%Y-%m-%d"
+            )  # Use isoformat?
         }
         return data
 
@@ -74,18 +76,13 @@ class RentalStateDateReportWizard(models.TransientModel):
         if not self.date:
             self.date = fields.Date.today()
         self.ensure_one()
-        self.lease_line_ids = (
-            self.env["hc.lease.line"]
-            .search([])
-            .filtered(
-                lambda lease_line_id: lease_line_id.start
-                <= self.date
-                <= lease_line_id.end
-            )
-            .filtered(
-                lambda lease_line_id: lease_line_id.building_id
-                in self.building_ids
-            )
+        self.lease_line_ids = self.env["hc.lease.line"].search(
+            [
+                ("start", "<=", self.date),
+                ("end", ">=", self.date),
+                ("building_id", "in", self.building_ids.ids),
+                ("lease_state", "not in", ["draft"]),
+            ]
         )
         return True
 
@@ -111,4 +108,6 @@ class RentalStateDateReportWizard(models.TransientModel):
                 }
             )
 
-        return self.rental_state_date_report_wizard_building_ids.create_report()
+        return (
+            self.rental_state_date_report_wizard_building_ids.create_report()
+        )

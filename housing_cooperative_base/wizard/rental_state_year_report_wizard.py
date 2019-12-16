@@ -50,15 +50,16 @@ class RentalStateYearReportWizard(models.TransientModel):
         self.ensure_one()
         self.lease_line_ids = (
             self.env["hc.lease.line"]
-            .search([])
+            .search(
+                [
+                    ("building_id", "in", self.building_ids.ids),
+                    ("lease_state", "not in", ["draft"]),
+                ]
+            )
             .filtered(
                 lambda lease_line_id: int(lease_line_id.start.strftime("%Y"))
                 <= int(self.year)
                 <= int(lease_line_id.end.strftime("%Y"))
-            )
-            .filtered(
-                lambda lease_line_id: lease_line_id.building_id
-                in self.building_ids
             )
         )
         return True
@@ -86,14 +87,18 @@ class RentalStateYearReportWizard(models.TransientModel):
         # and maybe adapted to manage multiple concurrent leases in the same premise
 
         for lease_line in self.lease_line_ids:
-            data_details.append({
-                lease_line.building_id.name+" / "+lease_line.premise_id.name: {
-                    "months": [month for month in range(1,12)],
-                    "total_rent": 0,
-                    "total_charges": 0,
-                    "total_rent_charges": 0,
-                },
-            })
+            data_details.append(
+                {
+                    lease_line.building_id.name
+                    + " / "
+                    + lease_line.premise_id.name: {
+                        "months": [month for month in range(1, 12)],
+                        "total_rent": 0,
+                        "total_charges": 0,
+                        "total_rent_charges": 0,
+                    }
+                }
+            )
 
         data = {"data_details": data_details}
         return data
