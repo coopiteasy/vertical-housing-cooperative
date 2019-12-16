@@ -15,9 +15,7 @@ class RentalStateYearReportWizard(models.TransientModel):
 
     name = fields.Char(compute="_compute_name", store=True)
     year = fields.Integer(
-        string="Year",
-        required=True,
-        default=fields.Date.today().strftime("%Y"),
+        string="Year", required=True, default=fields.Date.today().year
     )
     building_ids = fields.Many2many(
         comodel_name="hc.building",
@@ -45,9 +43,9 @@ class RentalStateYearReportWizard(models.TransientModel):
     @api.multi
     @api.depends("year", "building_ids")
     def _compute_lease_line_ids(self):
-        if not self.year:
-            self.year = fields.Date.today().strftime("%Y")
         self.ensure_one()
+        if not self.year:
+            self.year = fields.Date.today().year
         self.lease_line_ids = (
             self.env["hc.lease.line"]
             .search(
@@ -57,9 +55,9 @@ class RentalStateYearReportWizard(models.TransientModel):
                 ]
             )
             .filtered(
-                lambda lease_line_id: int(lease_line_id.start.strftime("%Y"))
-                <= int(self.year)
-                <= int(lease_line_id.end.strftime("%Y"))
+                lambda lease_line_id: lease_line_id.start.year
+                <= self.year
+                <= lease_line_id.end.year
             )
         )
         return True

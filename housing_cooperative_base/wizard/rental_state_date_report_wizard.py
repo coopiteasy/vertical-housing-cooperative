@@ -4,6 +4,7 @@
 
 
 from odoo import api, fields, models
+from odoo.tools.misc import DEFAULT_SERVER_DATE_FORMAT
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -27,8 +28,8 @@ class RentalStateDateReportWizardBuilding(models.TransientModel):
     def get_data(self):
         data = {
             "date": self.rental_state_date_report_wizard_id.date.strftime(
-                "%Y-%m-%d"
-            )  # Use isoformat?
+                DEFAULT_SERVER_DATE_FORMAT
+            )
         }
         return data
 
@@ -73,9 +74,9 @@ class RentalStateDateReportWizard(models.TransientModel):
     @api.multi
     @api.depends("date", "building_ids")
     def _compute_lease_line_ids(self):
+        self.ensure_one()
         if not self.date:
             self.date = fields.Date.today()
-        self.ensure_one()
         self.lease_line_ids = self.env["hc.lease.line"].search(
             [
                 ("start", "<=", self.date),
