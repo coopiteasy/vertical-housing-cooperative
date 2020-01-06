@@ -12,7 +12,7 @@
     "website": "https://coopiteasy.be",
     "license": "AGPL-3",
     "depends": ["base"],
-    "data": ["views/res_partner.xml", "demo/demo.xml"],  # fixme
-    "demo": [],
+    "data": ["views/res_partner.xml"],  # fixme
+    "demo": ["demo/demo.xml"],
     "installable": True,
 }
