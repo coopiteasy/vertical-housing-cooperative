@@ -3,7 +3,7 @@
 #   Robin Keunen <robin@coopiteasy.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
 
@@ -70,10 +70,15 @@ class Lease(models.Model):
     contract_id = fields.Many2one(
         comodel_name="contract.contract", string="Contract", required=False
     )
-    invoice_ids = fields.One2many(
+    invoice_ids = fields.One2many(  # This also includes the deposit invoice
         comodel_name="account.invoice",
         inverse_name="lease_id",
         string="Invoices",
+    )
+    deposit_invoice_id = fields.Many2one(
+        comodel_name="account.invoice",
+        inverse_name="lease_id",
+        string="Deposit invoice",
     )
 
     attachment_number = fields.Integer(
@@ -102,13 +107,12 @@ class Lease(models.Model):
     @api.depends("lease_line_ids")
     def _compute_suggested_rent(self):
         for lease in self:
-            rent = 0
-            charges = 0
-            for premise in lease.lease_line_ids:
-                rent += premise.rent
-                charges += premise.charges
-            lease.suggested_rent = rent
-            lease.suggested_charges = charges
+            lease.suggested_rent = sum(
+                line.rent for line in lease.lease_line_ids
+            )
+            lease.suggested_charges = sum(
+                line.charges for line in lease.lease_line_ids
+            )
 
     @api.multi
     @api.depends("expected_end", "effective_end")
@@ -122,18 +126,19 @@ class Lease(models.Model):
     @api.multi
     @api.depends("start", "end")
     def _compute_state(self):
-        today = fields.Date.today()
-        if self.start and self.end:
-            if today < self.start:
-                self.state = "draft"
-            elif self.start <= today <= self.end:
-                self.state = "ongoing"
-            elif self.end < today:
-                self.state = "done"
+        for lease in self:
+            today = fields.Date.today()
+            if lease.start and lease.end:
+                if today < lease.start:
+                    lease.state = "draft"
+                elif lease.start <= today <= lease.end:
+                    lease.state = "ongoing"
+                elif lease.end < today:
+                    lease.state = "done"
+                else:
+                    False
             else:
-                False
-        else:
-            self.state = "draft"
+                lease.state = "draft"
 
     @api.multi
     def _get_attachment_number(self):
@@ -167,11 +172,10 @@ class Lease(models.Model):
     def create_contract(self):
         self.ensure_one()
         if self.contract_id:
-            raise ValidationError("A contract already exists.")
+            raise ValidationError(_("A contract already exists."))
 
         contract = self.env["contract.contract"].create(
             {
-                # check fields
                 "name": self.name,
                 "partner_id": self.tenant_id.id,
                 "contract_type": "sale",
@@ -218,8 +222,64 @@ class Lease(models.Model):
     def create_invoice(self):
         self.ensure_one()
         if not self.contract_id:
-            raise ValidationError("Create a contract first.")
-        self.contract_id.recurring_create_invoice()
+            raise ValidationError(_("Create a contract first."))
+        invoice = self.contract_id.recurring_create_invoice()
+
+        return {
+            "type": "ir.actions.act_window",
+            "res_model": "account.invoice",
+            "view_id": self.env.ref(
+                "account.invoice_form"
+            ).id,  # prefered over account.invoice_supplier_form
+            "view_mode": "form",
+            "res_id": invoice.id,
+            "target": "current",
+        }
+
+    @api.multi
+    def create_deposit_invoice(self):
+        self.ensure_one()
+        if self.deposit_invoice_id:
+            raise ValidationError(_("A deposit invoice already exists."))
+
+        invoice = self.env["account.invoice"].create(
+            {
+                "name": "Deposit",
+                "partner_id": self.tenant_id.id,
+                "date_invoice": fields.Date.today(),
+                "lease_id": self.id,
+                "journal_id": self._default_journal().id,
+            }
+        )
+        deposit = self.env.ref(
+            "housing_cooperative_base.product_product_deposit"
+        )
+
+        self.env["account.invoice.line"].create(
+            {
+                "name": deposit.name,
+                "product_id": deposit.id,
+                "uom_id": deposit.uom_id.id,
+                "invoice_id": invoice.id,
+                "price_unit": self.deposit,
+                "account_id": self._default_journal().default_credit_account_id.id,
+                # Note: account can also be set by default function, if the journal is passed in the context:
+                # .with_context(journal_id=self._default_journal().id).create()
+            }
+        )
+
+        self.deposit_invoice_id = invoice
+
+        return {
+            "type": "ir.actions.act_window",
+            "res_model": "account.invoice",
+            "view_id": self.env.ref(
+                "account.invoice_form"
+            ).id,  # prefered over account.invoice_supplier_form
+            "view_mode": "form",
+            "res_id": invoice.id,
+            "target": "current",
+        }
 
     @api.model
     def _default_journal(self):

@@ -76,7 +76,7 @@ class Housing(models.Model):
                         building.social_share * housing.nb_rooms
                     )
                 else:
-                    raise ValidationError("Unknown building regime")
+                    raise ValidationError(_("Unknown building regime"))
             else:
                 housing.suggested_social_share = None
 
