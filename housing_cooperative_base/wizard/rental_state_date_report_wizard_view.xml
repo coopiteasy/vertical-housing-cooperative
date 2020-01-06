@@ -34,5 +34,6 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hc.rental.state.date.report.wizard</field>
         <field name="view_mode">form</field>
+        <field name="target">new</field>
     </record>
 </odoo>
