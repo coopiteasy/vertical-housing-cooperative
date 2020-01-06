@@ -22,7 +22,7 @@ class LeaseLine(models.Model):
     tenant_id = fields.Many2one(related="lease_id.tenant_id")
     start = fields.Date(related="lease_id.start")
     end = fields.Date(related="lease_id.end")
-    lease_state = fields.Selection(related="lease_id.state")
+    lease_state = fields.Selection(related="lease_id.state", string="Lease State")
 
     building_id = fields.Many2one(related="premise_id.building_id")
     state = fields.Selection(related="premise_id.state")
