@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2019 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_premise_form" model="ir.ui.view">
+        <field name="name">view_premise_form</field>
+        <field name="model">hc.premise</field>
+        <field name="arch" type="xml">
+            <form string="premise_form">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object"
+                            class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button"
+                                options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <group>
+                        <group name="name">
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="building_id" options="{'no_create': True}"/>
+                        </group>
+                        <group name="rent">
+                            <field name="rent"/>
+                            <field name="charges"/>
+                            <field name="charges_note"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="leases" string="Leases">
+                            <group>
+                                <field name="lease_line_ids" nolabel="1">
+                                    <tree editable="bottom">
+                                        <field name="lease_id"/>
+                                        <field name="tenant_id"/>
+                                        <field name="start"/>
+                                        <field name="end"/>
+                                        <field name="state"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_premise_tree" model="ir.ui.view">
+        <field name="name">view_premise_tree</field>
+        <field name="model">hc.premise</field>
+        <field name="arch" type="xml">
+            <tree string="premise_tree">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="building_id" options="{'no_create': True}"/>
+                <field name="state"/>
+                <field name="rent"/>
+                <field name="charges"/>
+        </tree>
+        </field>
+    </record>
+</odoo>

@@ -7,33 +7,44 @@ from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
+class LeaseLine(models.Model):
+    _name = "hc.lease.line"
+    _description = "Lease Line"
+
+    lease_id = fields.Many2one(
+        comodel_name="hc.lease", string="Lease", required=True
+    )
+    premise_id = fields.Many2one(
+        comodel_name="hc.premise", string="Premise", required=True
+    )
+
+    tenant_id = fields.Many2one(related="lease_id.tenant_id")
+    start = fields.Date(related="lease_id.start")
+    end = fields.Date(related="lease_id.end")
+
+    state = fields.Selection(related="premise_id.state")
+    rent = fields.Float(related="premise_id.rent")
+    charges = fields.Float(related="premise_id.charges")
+
+
 class Lease(models.Model):
     _name = "hc.lease"
     _description = "Lease"
     _order = "start desc"
 
     name = fields.Char(string="Name", compute="_compute_name", store=True)
+    lease_line_ids = fields.One2many(
+        comodel_name="hc.lease.line",
+        inverse_name="lease_id",
+        string="Premises",
+    )
     tenant_id = fields.Many2one(
         comodel_name="res.partner", string="Tenant", required=True
     )
-    housing_id = fields.Many2one(
-        comodel_name="hc.housing",
-        string="Housing",
-        domain=[("state", "=", "available")],
-        required=False,
-    )
-    room_ids = fields.Many2many(comodel_name="hc.room", string="Common Rooms")
-    cellar_ids = fields.Many2many(comodel_name="hc.cellar", string="Cellars")
     start = fields.Date(string="Start", required=True)
     expected_end = fields.Date(string="Expected End", required=True)
     effective_end = fields.Date(string="Effective End", required=False)
     end = fields.Date(string="End", compute="_compute_lease_end", store=True)
-    housing_rent = fields.Float(
-        string="Housing Rent", related="housing_id.rent"
-    )
-    housing_charges = fields.Float(
-        string="Housing Charges", related="housing_id.charges"
-    )
     rent = fields.Float(string="Rent", required=False)
     charges = fields.Float(string="Charges", required=False)
     deposit = fields.Float(string="Deposit", required=False)
@@ -43,10 +54,9 @@ class Lease(models.Model):
             ("draft", "Draft"),
             ("ongoing", "Ongoing"),
             ("done", "Done"),
-            ("canceled", "Canceled"),
         ],
-        default="draft",
-        required=False,
+        compute="_compute_state",
+        store=True,
     )
     suggested_rent = fields.Float(
         string="Suggested Rent", compute="_compute_suggested_rent"
@@ -55,9 +65,7 @@ class Lease(models.Model):
         string="Suggested Charges", compute="_compute_suggested_rent"
     )
     contract_id = fields.Many2one(
-        comodel_name="account.analytic.account",
-        string="Contract",
-        required=False,
+        comodel_name="contract.contract", string="Contract", required=False
     )
     invoice_ids = fields.One2many(
         comodel_name="account.invoice",
@@ -75,6 +83,10 @@ class Lease(models.Model):
         domain=[("res_model", "=", "hc.lease")],
     )
 
+    contains_arcade = fields.Boolean(
+        compute="_compute_contains_arcade", store=True
+    )
+
     @api.multi
     @api.depends("tenant_id", "start")
     def _compute_name(self):
@@ -84,16 +96,14 @@ class Lease(models.Model):
             lease.name = "%s/%s" % (tenant, date)
 
     @api.multi
-    @api.depends("housing_id", "room_ids", "cellar_ids")
+    @api.depends("lease_line_ids")
     def _compute_suggested_rent(self):
         for lease in self:
-            rent = lease.housing_rent or 0
-            rent += sum(lease.room_ids.mapped("rent"))
-            rent += sum(lease.cellar_ids.mapped("rent"))
-            charges = lease.housing_charges or 0
-            charges += sum(lease.room_ids.mapped("charges"))
-            charges += sum(lease.cellar_ids.mapped("charges"))
-
+            rent = 0
+            charges = 0
+            for premise in lease.lease_line_ids:
+                rent += premise.rent
+                charges += premise.charges
             lease.suggested_rent = rent
             lease.suggested_charges = charges
 
@@ -105,6 +115,22 @@ class Lease(models.Model):
                 lease.end = lease.effective_end
             else:
                 lease.end = lease.expected_end
+
+    @api.multi
+    @api.depends("start", "end")
+    def _compute_state(self):
+        today = fields.Date.today()
+        if self.start and self.end:
+            if today < self.start:
+                self.state = "draft"
+            elif self.start <= today <= self.end:
+                self.state = "ongoing"
+            elif self.end < today:
+                self.state = "done"
+            else:
+                False
+        else:
+            self.state = "draft"
 
     @api.multi
     def _get_attachment_number(self):
@@ -140,16 +166,12 @@ class Lease(models.Model):
         if self.contract_id:
             raise ValidationError("A contract already exists.")
 
-        contract = self.env["account.analytic.account"].create(
+        contract = self.env["contract.contract"].create(
             {
+                # check fields
                 "name": self.name,
                 "partner_id": self.tenant_id.id,
                 "contract_type": "sale",
-                "recurring_rule_type": "monthly",
-                "recurring_invoicing_type": "post-paid",
-                "date_start": self.start,
-                "date_end": self.end,
-                "recurring_invoices": True,
                 "lease_id": self.id,
                 "journal_id": self._default_journal().id,
             }
@@ -157,28 +179,35 @@ class Lease(models.Model):
         rent = self.env.ref("housing_cooperative_base.product_product_rent")
         charges = self.env.ref(
             "housing_cooperative_base.product_product_charges"
-        )  # noqa
-        (
-            self.env["account.analytic.invoice.line"].create(
-                {
-                    "name": rent.name,
-                    "product_id": rent.id,
-                    "uom_id": rent.uom_id.id,
-                    "analytic_account_id": contract.id,
-                    "price_unit": self.rent,
-                }
-            )
         )
-        (
-            self.env["account.analytic.invoice.line"].create(
-                {
-                    "name": charges.name,
-                    "product_id": charges.id,
-                    "uom_id": charges.uom_id.id,
-                    "analytic_account_id": contract.id,
-                    "price_unit": self.charges,
-                }
-            )
+
+        self.env["contract.line"].create(
+            {
+                "name": rent.name,
+                "date_start": self.start,
+                "date_end": self.end,
+                "recurring_next_date": self.start,
+                "recurring_rule_type": "monthly",
+                "recurring_invoicing_type": "pre-paid",
+                "product_id": rent.id,
+                "uom_id": rent.uom_id.id,
+                "contract_id": contract.id,
+                "price_unit": self.rent,
+            }
+        )
+        self.env["contract.line"].create(
+            {
+                "name": charges.name,
+                "date_start": self.start,
+                "date_end": self.end,
+                "recurring_next_date": self.start,
+                "recurring_rule_type": "monthly",
+                "recurring_invoicing_type": "pre-paid",
+                "product_id": charges.id,
+                "uom_id": charges.uom_id.id,
+                "contract_id": contract.id,
+                "price_unit": self.charges,
+            }
         )
         self.contract_id = contract
 
@@ -187,8 +216,7 @@ class Lease(models.Model):
         self.ensure_one()
         if not self.contract_id:
             raise ValidationError("Create a contract first.")
-        self.contract_id.recurring_create_invoice()  # noqa
-        # self.contract_id._create_invoice()  # noqa
+        self.contract_id.recurring_create_invoice()
 
     @api.model
     def _default_journal(self):
@@ -197,3 +225,17 @@ class Lease(models.Model):
         )
         domain = [("type", "=", "sale"), ("company_id", "=", company_id)]
         return self.env["account.journal"].search(domain, limit=1)
+
+    @api.multi
+    @api.depends("lease_line_ids")
+    def _compute_contains_arcade(self):
+        for lease in self:
+            premise_ids = lease.lease_line_ids.mapped("premise_id").ids
+            lease.contains_arcade = bool(
+                self.env["hc.housing"].search(
+                    [
+                        ("is_arcade", "=", True),
+                        ("premise_id", "in", premise_ids),
+                    ]
+                )
+            )

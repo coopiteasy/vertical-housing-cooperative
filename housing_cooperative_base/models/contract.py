@@ -6,16 +6,15 @@
 from odoo import api, fields, models
 
 
-class AccountAnalyticAccount(models.Model):
-    _inherit = "account.analytic.account"
-    _description = "AccountAnalyticAccount"
+class Contract(models.Model):
+    _inherit = "contract.contract"
 
     lease_id = fields.Many2one(comodel_name="hc.lease", string="Lease")
 
     @api.multi
-    def _create_invoice(self, invoice=False):
-        res = super(AccountAnalyticAccount, self)._create_invoice(invoice)
-        res.lease_id = self.lease_id
+    def recurring_create_invoice(self):
+        res = super(Contract, self).recurring_create_invoice()
+        res.write({"lease_id": self.lease_id.id})
         return res
 
 

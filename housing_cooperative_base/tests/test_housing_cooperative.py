@@ -29,12 +29,13 @@ class HousingCooperativeCase(common.TransactionCase):
         self.assertEqual(self.lease2.suggested_rent, rent)
 
     def test_create_contract(self):
-        self.lease2.create_contract()
         self.assertFalse(self.lease2.contract_id)
+
+        self.lease2.create_contract()
 
         with self.assertRaises(ValidationError):
             self.lease2.create_contract()
 
-    def test_adding_room_of_cluster_to_housing_error(self):
-        with self.assertRaises(ValidationError):
-            self.room1.housing_id = self.housing1
+    # def test_adding_room_of_cluster_to_housing_error(self):
+    #     with self.assertRaises(ValidationError):
+    #         self.room1.housing_id = self.housing1

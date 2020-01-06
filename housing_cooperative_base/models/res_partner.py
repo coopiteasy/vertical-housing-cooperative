@@ -3,7 +3,8 @@
 #   Robin Keunen <robin@coopiteasy.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
 from datetime import date
 
 
@@ -79,18 +80,18 @@ class ResPartner(models.Model):
     )
     def _compute_lease_dates(self):
         for partner in self:
-            leases_approved = partner.lease_ids.filtered(
+            approved_leases = partner.lease_ids.filtered(
                 lambda l: l.state != "draft"
-            )
-            partner.first_lease_start = leases_approved.sorted(
-                lambda l: l.start
-            ).start
-            current_lease = leases_approved.filtered(
+            ).sorted(lambda l: l.start)
+            current_leases = approved_leases.filtered(
                 lambda l: l.state == "ongoing"
             )
-            partner.current_lease_id = current_lease
-            partner.current_lease_start = current_lease.start
-            partner.lease_end = current_lease.end
+            if approved_leases:
+                partner.first_lease_start = approved_leases[0].start
+            if current_leases:
+                partner.current_lease_id = current_leases[0]
+                partner.current_lease_start = current_leases[0].start
+                partner.lease_end = current_leases[0].end
 
     @api.multi
     @api.depends("birthdate_date")
@@ -134,15 +135,28 @@ class ResPartner(models.Model):
         return action
 
     @api.multi
-    def action_set_address_from_lease(self):
+    def action_set_address_from_current_lease(self):
         for partner in self:
             lease = partner.current_lease_id
             if lease:
-                building = lease.housing_id.building_id
+                premise_ids = lease.lease_line_ids.mapped("premise_id").ids
+                housings = self.env["hc.housing"].search(
+                    [("premise_id", "in", premise_ids)]
+                )
+                if not housings:
+                    raise ValidationError(_("This lease contains no housing."))
+                elif len(housings) == 1:
+                    housing = housings
+                else:
+                    raise ValidationError(
+                        _("This lease contains multiple housings.")
+                    )
+                building = housing.premise_id.building_id
                 if partner.residence == "secondary":
                     partner.has_secondary_address = True
                     partner.street_secondary = building.street
                     partner.street_number_secondary = building.street_number
+                    partner.city_secondary = building.municipality
                     partner.zip_code_secondary = building.zip_code
                     partner.state_id_secondary = building.state_id
                     partner.country_id_secondary = building.country_id
@@ -150,5 +164,10 @@ class ResPartner(models.Model):
                     partner.street = building.street
                     partner.street_number = building.street_number
                     partner.zip_code = building.zip_code
+                    partner.city = building.municipality
                     partner.state_id = building.state_id
                     partner.country_id = building.country_id
+            else:
+                raise ValidationError(
+                    _("This contact does not have a current lease.")
+                )

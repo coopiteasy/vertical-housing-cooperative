@@ -12,8 +12,8 @@
 
             <xpath expr="//sheet" position="before">
                 <header>
-                    <button name="action_set_address_from_lease"
-                            string="Set Address from Lease"
+                    <button name="action_set_address_from_current_lease"
+                            string="Set Address from Current Lease"
                             type="object"
                             class="oe_highlight"/>
                 </header>
@@ -48,7 +48,7 @@
                     <group>
                         <field name="lease_ids" nolabel="1" context="{'default_tenant_id': id}">
                             <tree>
-                                <field name="housing_id"/>
+                                <field name="name"/>
                                 <field name="start"/>
                                 <field name="end"/>
                                 <field name="state"/>

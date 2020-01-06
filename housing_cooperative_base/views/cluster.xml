@@ -23,7 +23,7 @@
                         <field name="building_id" options="{'no_create': True}"/>
                         <field name="keys"/>
                     </group>
-                    <notebook>
+                    <!-- <notebook>
                         <page name="housings" string="Housings">
                             <group>
                                 <field name="housing_ids" nolabel="1" context="{'default_cluster_id': id, 'default_building_id': building_id}" widget="many2many" domain="[('building_id', '=', building_id)]"/>
@@ -39,7 +39,7 @@
                                 <field name="cellar_ids" nolabel="1" context="{'default_cluster_id': id}" widget="many2many"/>
                             </group>
                         </page>
-                    </notebook>
+                    </notebook> -->
                 </sheet>
             </form>
         </field>
