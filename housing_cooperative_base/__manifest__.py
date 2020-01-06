@@ -45,12 +45,10 @@
         "wizard/rental_state_date_report_wizard_view.xml",
         "wizard/rental_state_year_report_wizard_view.xml",
         "views/menu.xml",
-        "demo/users.xml",
-        "demo/demo.xml",  # fixme
         "data/cron.xml",
         "data/data.xml",
     ],
-    "demo": [],
+    "demo": ["demo/users.xml", "demo/demo.xml"],  # fixme
     "installable": True,
     "application": True,
 }
