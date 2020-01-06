@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<odoo>
+    <report
+        id="rental_state_date_report"
+        model="hc.rental.state.date.report.wizard.building"
+        string="Rental state"
+        report_type="qweb-html"
+        name="housing_cooperative_base.report_rental_state_date_template"
+        file="housing_cooperative_base.rental_state_date_template"
+    />
+<!--    TODO: report_type="qweb_pdf"-->
+</odoo>

@@ -4,6 +4,7 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
+    <data noupdate="0">  <!-- fixme -->
 
     <record id="res_partner_cooperator_1_demo" model="res.partner">
         <field name="name">Virginie Leloup</field>
@@ -107,7 +108,5 @@
             <field name="partner_id" ref="res_partner_cooperator_6_demo"/>
     </record>
 
-    
-    
-    
+    </data>
 </odoo>
