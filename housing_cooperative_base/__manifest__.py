@@ -22,6 +22,7 @@
         "partner_household",
         # 'partner_secondary_address',
         "account_credit_control",
+        "web_timeline",
     ],
     "data": [
         "security/security.xml",
@@ -31,6 +32,7 @@
         "views/cluster.xml",
         "views/housing.xml",
         "views/lease.xml",
+        "views/lease_line.xml",
         "views/permit.xml",
         "views/plan.xml",
         "views/res_partner.xml",

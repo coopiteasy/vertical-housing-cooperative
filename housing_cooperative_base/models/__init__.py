@@ -1,6 +1,7 @@
 from . import building
 from . import cluster
 from . import lease
+from . import lease_line
 from . import premise
 from . import housing
 from . import res_partner
