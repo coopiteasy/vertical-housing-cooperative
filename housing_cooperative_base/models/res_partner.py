@@ -29,10 +29,10 @@ class ResPartner(models.Model):
     citizenship_id = fields.Many2one(
         comodel_name="res.country", string="Citizenship", ondelete="restrict"
     )
-    permit = fields.Many2one(
+    permit_id = fields.Many2one(
         comodel_name="hc.permit", string="Permit", ondelete="restrict"
     )
-    study = fields.Many2one(
+    study_id = fields.Many2one(
         comodel_name="hc.studies", string="Study", ondelete="restrict"
     )
     liability_insurance = fields.Boolean(string="Liability Insurance")

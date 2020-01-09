@@ -57,10 +57,10 @@ class Building(models.Model):
     residents_association = fields.Html(
         string="Residents Association", required=False
     )
-    concierge = fields.Many2one(
+    concierge_id = fields.Many2one(
         comodel_name="res.partner", string="Concierge", required=False
     )
-    architect = fields.Many2one(
+    architect_id = fields.Many2one(
         comodel_name="res.partner", string="Architect", required=False
     )
 
