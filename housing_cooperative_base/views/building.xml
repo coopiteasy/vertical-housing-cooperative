@@ -43,8 +43,8 @@
                         </group>
                         <group name="people">
                             <field name="residents_association"/>
-                            <field name="concierge"/>
-                            <field name="architect"/>    
+                            <field name="concierge_id"/>
+                            <field name="architect_id"/>
                         </group>
                     </group>
 

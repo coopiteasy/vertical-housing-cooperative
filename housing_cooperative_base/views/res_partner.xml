@@ -28,11 +28,11 @@
             <field name="birthdate_date" position="after">
                 <field name="age"/>
                 <field name="citizenship_id"/>
-                <field name="permit"/>
+                <field name="permit_id"/>
             </field>
 
             <field name="gender" position="after">
-                <field name="study"/>
+                <field name="study_id"/>
                 <field name="liability_insurance"/>
             </field>
 
