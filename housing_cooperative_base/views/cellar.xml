@@ -16,14 +16,6 @@
                     <field name="floor"/>
                     <field name="surface"/>
                 </group>
-                <group name="location">
-                    <field name="street"/>
-                    <field name="street_number"/>
-                    <field name="municipality"/>
-                    <field name="zip_code"/>
-                    <field name="country_id" options="{'no_create': True}"/>
-                    <field name="state_id" options="{'no_create': True}"/>
-                </group>
             </group>
         </field>
     </record>

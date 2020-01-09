@@ -22,17 +22,3 @@ class Cellar(models.Model):
 
     floor = fields.Integer(string="Floor number", required=False)
     surface = fields.Integer(string="Surface", required=False, help="m²")
-
-    street = fields.Char(string="Street", required=False)
-    street_number = fields.Char(string="Street Number", required=False)
-    municipality = fields.Char(string="Municipality", required=False)
-    zip_code = fields.Char(string="Zip Code", required=False)
-    country_id = fields.Many2one(
-        comodel_name="res.country", string="Country", required=False
-    )
-    state_id = fields.Many2one(
-        domain="[('country_id', '=', country_id)]",
-        comodel_name="res.country.state",
-        string="Country State",
-        required=False,
-    )

@@ -26,17 +26,11 @@
                             <field name="zip_code"/>
                             <field name="country_id" options="{'no_create': True}"/>
                             <field name="state_id" options="{'no_create': True}"/>
-                            <field name="is_rented"/>
                         </group>
-                        <group  name="lease" attrs="{'invisible': [('is_rented', '=', False)]}">
+                        <group name="lease">
                             <field name="landlord_id"/>
                             <field name="social_share"/>
                             <field name="regime"/>
-                            <field name="lease_start"/>
-                            <field name="expected_lease_end"/>
-                            <field name="effective_lease_end"/>
-                            <field name="rent"/>
-                            <field name="charges"/>
                         </group>
                     </group>
                     <group>
@@ -56,19 +50,24 @@
 
                     <notebook>
 
-                        <page name="housings" string="Housings">
-                            <group>
-                                <field name="housing_ids" nolabel="1" context="{'default_building_id': id}"/>
-                            </group>
-                        </page>
                         <page name="clusters" string="Clusters">
                             <group>
                                 <field name="cluster_ids" nolabel="1" context="{'default_building_id': id}"/>
                             </group>
                         </page>
+                        <page name="housings" string="Housings">
+                            <group>
+                                <field name="housing_ids" nolabel="1" context="{'default_building_id': id}"/>
+                            </group>
+                        </page>
                         <page name="rooms" string="Rooms">
                             <group>
                                 <field name="room_ids" nolabel="1" context="{'default_building_id': id}"/>
+                            </group>
+                        </page>
+                        <page name="cellars" string="Cellars">
+                            <group>
+                                <field name="cellar_ids" nolabel="1" context="{'default_building_id': id}"/>
                             </group>
                         </page>
                     </notebook>
@@ -86,8 +85,6 @@
                 <field name="street"/>
                 <field name="zip_code"/>
                 <field name="state_id"/>
-                <field name="lease_start"/>
-                <field name="lease_end"/>
             </tree>
         </field>
     </record>

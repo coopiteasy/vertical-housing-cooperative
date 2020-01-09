@@ -26,21 +26,8 @@ class Building(models.Model):
         required=False,
     )
 
-    is_rented = fields.Boolean(string="Is Rented", default=False)
     landlord_id = fields.Many2one(
         comodel_name="res.partner", string="Landlord", required=False
-    )
-    lease_start = fields.Date(string="Lease Start", required=False)
-    expected_lease_end = fields.Date(
-        string="Expected Lease End", required=False
-    )
-    effective_lease_end = fields.Date(
-        string="Effective Lease End", required=False
-    )
-    lease_end = fields.Date(string="Lease End", compute="_compute_lease_end")
-    rent = fields.Float(string="Rent", required=False)
-    charges = fields.Float(
-        string="Charges", required=False, help="Monthly charges"
     )
 
     social_share = fields.Float(string="Social Share", required=False)
@@ -89,18 +76,15 @@ class Building(models.Model):
         string="Rooms",
         required=False,
     )
+    cellar_ids = fields.One2many(
+        comodel_name="hc.cellar",
+        inverse_name="building_id",
+        string="Cellars",
+        required=False,
+    )
     cluster_ids = fields.One2many(
         comodel_name="hc.cluster",
         inverse_name="building_id",
         string="Clusters",
         required=False,
     )
-
-    @api.multi
-    @api.depends("expected_lease_end", "effective_lease_end")
-    def _compute_lease_end(self):
-        for building in self:
-            if building.effective_lease_end:
-                building.lease_end = building.effective_lease_end
-            else:
-                building.lease_end = building.expected_lease_end

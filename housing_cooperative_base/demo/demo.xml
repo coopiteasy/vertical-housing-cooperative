@@ -15,12 +15,7 @@
             <field name="municipality">Le village</field>
             <field name="state_id" ref="base.state_it_ge"/>
             <field name="country_id" ref="base.ch"/>
-            <field name="is_rented" eval="True"/>
             <field name="landlord_id" ref=""/>
-            <field name="lease_start" eval="(DateTime.today() - timedelta(days=100)).strftime('%Y-%m-%d')"/>
-            <field name="expected_lease_end" eval="(DateTime.today() + timedelta(days=465)).strftime('%Y-%m-%d')"/>
-            <field name="rent">10000</field>
-            <field name="charges">1200</field>
         </record>
 
         <record id="demo_cluster_1" model="hc.cluster">
