@@ -21,4 +21,4 @@ class Cellar(models.Model):
     )
 
     floor = fields.Integer(string="Floor number", required=False)
-    surface = fields.Integer(string="Surface", required=False, help="m²")
+    surface = fields.Float(string="Surface", required=False, help="m²")

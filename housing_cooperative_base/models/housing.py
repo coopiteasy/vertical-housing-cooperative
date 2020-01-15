@@ -41,7 +41,7 @@ class Housing(models.Model):
         required=False,
         help="Counting all rooms in this housing",
     )
-    surface = fields.Integer(string="Surface", required=False, help="m²")
+    surface = fields.Float(string="Surface", required=False, help="m²")
     suggested_social_share = fields.Float(
         string="Suggested Social Share",
         compute="_compute_suggested_social_share",
