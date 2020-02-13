@@ -22,7 +22,9 @@ class LeaseLine(models.Model):
     tenant_id = fields.Many2one(related="lease_id.tenant_id")
     start = fields.Date(related="lease_id.start")
     end = fields.Date(related="lease_id.end")
-    lease_state = fields.Selection(related="lease_id.state", string="Lease State")
+    lease_state = fields.Selection(
+        related="lease_id.state", string="Lease State"
+    )
 
     building_id = fields.Many2one(related="premise_id.building_id")
     state = fields.Selection(related="premise_id.state")
@@ -42,7 +44,15 @@ class Lease(models.Model):
         string="Premises",
     )
     tenant_id = fields.Many2one(
-        comodel_name="res.partner", string="Tenant", required=True
+        comodel_name="res.partner",
+        string="Tenant",
+        default=lambda self: self.signatory_ids[0],
+    )
+    signatory_ids = fields.Many2many(
+        comodel_name="res.partner", string="Signatories", required=True
+    )
+    inhabitant_ids = fields.Many2many(
+        comodel_name="res.partner", string="Inhabitants"
     )
     start = fields.Date(string="Start", required=True)
     expected_end = fields.Date(string="Expected End", required=True)
@@ -139,6 +149,28 @@ class Lease(models.Model):
                     False
             else:
                 lease.state = "draft"
+
+    @api.multi
+    @api.depends("lease_line_ids")
+    def _compute_contains_arcade(self):
+        for lease in self:
+            premise_ids = lease.lease_line_ids.mapped("premise_id").ids
+            lease.contains_arcade = bool(
+                self.env["hc.housing"].search(
+                    [
+                        ("is_arcade", "=", True),
+                        ("premise_id", "in", premise_ids),
+                    ]
+                )
+            )
+
+    @api.onchange("signatory_ids")
+    def onchange_signatory_ids(self):
+        self.inhabitant_ids |= self.signatory_ids
+
+    @api.onchange("inhabitant_ids")
+    def onchange_inhabitant_ids(self):
+        self.inhabitant_ids |= self.signatory_ids
 
     @api.multi
     def _get_attachment_number(self):
@@ -288,17 +320,3 @@ class Lease(models.Model):
         )
         domain = [("type", "=", "sale"), ("company_id", "=", company_id)]
         return self.env["account.journal"].search(domain, limit=1)
-
-    @api.multi
-    @api.depends("lease_line_ids")
-    def _compute_contains_arcade(self):
-        for lease in self:
-            premise_ids = lease.lease_line_ids.mapped("premise_id").ids
-            lease.contains_arcade = bool(
-                self.env["hc.housing"].search(
-                    [
-                        ("is_arcade", "=", True),
-                        ("premise_id", "in", premise_ids),
-                    ]
-                )
-            )

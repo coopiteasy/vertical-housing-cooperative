@@ -36,7 +36,9 @@
                     </div>
                     <group>
                         <group>
-                            <field name="tenant_id"/>
+                            <field name="tenant_id" domain="[('id','in', signatory_ids)]" options="{'no_create': True}" readonly="[('contract_id', '!=', False)]"/>
+                            <field name="signatory_ids" widget="many2many_tags"/>
+                            <field name="inhabitant_ids" widget="many2many_tags"/>
                             <field name="start"/>
                             <field name="expected_end"/>
                             <field name="effective_end"/>
