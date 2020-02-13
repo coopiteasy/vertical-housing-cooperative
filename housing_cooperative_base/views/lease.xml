@@ -117,7 +117,9 @@
         <field name="model">hc.lease</field>
         <field name="arch" type="xml">
             <search>
-                <field name="contains_arcade"/>
+                <field name="tenant_id"/>
+                <field name="signatory_ids"/>
+                <field name="inhabitant_ids"/>
                 <filter name="filter_contains_arcade"
                     string="Contains Archade"
                     domain="[('contains_arcade','=',True)]"/>
