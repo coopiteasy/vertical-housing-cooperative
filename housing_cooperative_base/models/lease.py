@@ -13,10 +13,16 @@ class LeaseLine(models.Model):
     _order = "building_id, premise_id, start desc"
 
     lease_id = fields.Many2one(
-        comodel_name="hc.lease", string="Lease", required=True
+        comodel_name="hc.lease",
+        string="Lease",
+        ondelete="cascade",
+        required=True,
     )
     premise_id = fields.Many2one(
-        comodel_name="hc.premise", string="Premise", required=True
+        comodel_name="hc.premise",
+        string="Premise",
+        ondelete="restrict",
+        required=True,
     )
 
     tenant_id = fields.Many2one(related="lease_id.tenant_id")
