@@ -8,7 +8,7 @@
 
     <menuitem id="menu_housing_cooperative_hc" name="Housing Cooperative" parent="menu_housing_cooperative_root" groups="group_hc_user" sequence="10"/>
     <menuitem id="menu_hc_building_view" name="Buildings" parent="menu_housing_cooperative_hc" action="building_view_action" sequence="1010"/>
-    <menuitem id="menu_hc_cluster_view" name="Clusters" parent="menu_housing_cooperative_hc" action="cluster_view_action" sequence="1020"/>
+<!--    <menuitem id="menu_hc_cluster_view" name="Clusters" parent="menu_housing_cooperative_hc" action="cluster_view_action" sequence="1020"/>-->
     <menuitem id="menu_hc_housing_view" name="Housings" parent="menu_housing_cooperative_hc" action="housing_view_action" sequence="1030"/>
     <menuitem id="menu_hc_room_view" name="Rooms" parent="menu_housing_cooperative_hc" action="room_view_action" sequence="1040"/>
     <menuitem id="menu_hc_cellar_view" name="Cellars" parent="menu_housing_cooperative_hc" action="cellar_view_action" sequence="1050"/>
