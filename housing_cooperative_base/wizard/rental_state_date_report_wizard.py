@@ -82,7 +82,7 @@ class RentalStateDateReportWizard(models.TransientModel):
                 ("start", "<=", self.date),
                 ("end", ">=", self.date),
                 ("building_id", "in", self.building_ids.ids),
-                ("lease_state", "not in", ["draft"]),
+                ("lease_state", "not in", ["new"]),
             ]
         )
         return True

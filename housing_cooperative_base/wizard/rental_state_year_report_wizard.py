@@ -51,7 +51,7 @@ class RentalStateYearReportWizard(models.TransientModel):
             .search(
                 [
                     ("building_id", "in", self.building_ids.ids),
-                    ("lease_state", "not in", ["draft"]),
+                    ("lease_state", "not in", ["new"]),
                 ]
             )
             .filtered(
