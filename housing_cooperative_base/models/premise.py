@@ -26,6 +26,7 @@ class Premise(models.Model):
         inverse_name="premise_id",
         string="Lease Lines",
     )
+    is_shared = fields.Boolean(string="Shared within Cluster", required=False)
     rent = fields.Float(string="Rent", required=False)
     charges = fields.Float(string="Charges", required=False)
     charges_note = fields.Char(string="Note on Charges", required=False)

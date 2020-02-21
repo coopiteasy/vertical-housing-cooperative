@@ -36,7 +36,9 @@
                     </div>
                     <group>
                         <group>
-                            <field name="tenant_id"/>
+                            <field name="tenant_id" options="{'no_quick_create': True}"/>
+                            <field name="signatory_ids" widget="many2many_tags" options="{'no_quick_create': True}"/>
+                            <field name="inhabitant_ids" widget="many2many_tags" options="{'no_quick_create': True}"/>
                             <field name="start"/>
                             <field name="expected_end"/>
                             <field name="effective_end"/>
@@ -115,7 +117,9 @@
         <field name="model">hc.lease</field>
         <field name="arch" type="xml">
             <search>
-                <field name="contains_arcade"/>
+                <field name="tenant_id"/>
+                <field name="signatory_ids"/>
+                <field name="inhabitant_ids"/>
                 <filter name="filter_contains_arcade"
                     string="Contains Archade"
                     domain="[('contains_arcade','=',True)]"/>

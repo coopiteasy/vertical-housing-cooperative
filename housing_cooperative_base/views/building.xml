@@ -50,11 +50,11 @@
 
                     <notebook>
 
-                        <page name="clusters" string="Clusters">
-                            <group>
-                                <field name="cluster_ids" nolabel="1" context="{'default_building_id': id}"/>
-                            </group>
-                        </page>
+<!--                        <page name="clusters" string="Clusters">-->
+<!--                            <group>-->
+<!--                                <field name="cluster_ids" nolabel="1" context="{'default_building_id': id}"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
                         <page name="housings" string="Housings">
                             <group>
                                 <field name="housing_ids" nolabel="1" context="{'default_building_id': id}"/>

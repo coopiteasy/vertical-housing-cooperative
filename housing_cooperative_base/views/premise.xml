@@ -25,6 +25,7 @@
                             <field name="name"/>
                             <field name="code"/>
                             <field name="building_id" options="{'no_create': True}"/>
+                            <field name="is_shared"/>
                         </group>
                         <group name="rent">
                             <field name="rent"/>

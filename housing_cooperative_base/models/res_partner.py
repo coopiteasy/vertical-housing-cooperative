@@ -81,7 +81,7 @@ class ResPartner(models.Model):
     def _compute_lease_dates(self):
         for partner in self:
             approved_leases = partner.lease_ids.filtered(
-                lambda l: l.state != "draft"
+                lambda l: l.state != "new"
             ).sorted(lambda l: l.start)
             current_leases = approved_leases.filtered(
                 lambda l: l.state == "ongoing"

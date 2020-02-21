@@ -133,7 +133,7 @@
             <field name="premise_id" model="hc.housing" eval="obj(ref('demo_housing_1')).premise_id.id"/>
         </record>
         <record id="demo_lease_2" model="hc.lease">
-            <field name="tenant_id" ref="res_partner_cooperator_5_demo"/>
+             <field name="tenant_id" ref="res_partner_cooperator_5_demo"/>
             <field name="start">2018-09-20</field>
             <field name="expected_end">2021-09-20</field>
             <field name="rent">500</field>
