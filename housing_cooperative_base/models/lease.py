@@ -32,6 +32,7 @@ class LeaseLine(models.Model):
         related="lease_id.state", string="Lease State"
     )
 
+    code = fields.Char(related="premise_id.code")
     building_id = fields.Many2one(related="premise_id.building_id")
     state = fields.Selection(related="premise_id.state")
     rent = fields.Float(related="premise_id.rent")
@@ -47,7 +48,7 @@ class Lease(models.Model):
     lease_line_ids = fields.One2many(
         comodel_name="hc.lease.line",
         inverse_name="lease_id",
-        string="Premises",
+        string="Lease Lines",
     )
     tenant_id = fields.Many2one(
         comodel_name="res.partner", string="Tenant", required=True

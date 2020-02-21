@@ -60,6 +60,7 @@
                                 <field name="lease_line_ids" nolabel="1">
                                     <tree editable="bottom">
                                         <field name="premise_id"/>
+                                        <field name="code"/>
                                         <field name="state"/>
                                         <field name="rent"/>
                                         <field name="charges"/>
@@ -105,15 +106,9 @@
         </field>
     </record>
 
-    <record id="lease_view_action" model="ir.actions.act_window">
-        <field name="name">Leases</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">hc.lease</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
-    <record id="lease_view_search" model="ir.ui.view">
-        <field name="name">Lease Filters</field>
+    <record id="
+    lease_view_search" model="ir.ui.view">
+        <field name="name">lease_view_search</field>
         <field name="model">hc.lease</field>
         <field name="arch" type="xml">
             <search>
@@ -125,6 +120,13 @@
                     domain="[('contains_arcade','=',True)]"/>
             </search>
         </field>
+    </record>
+
+    <record id="lease_view_action" model="ir.actions.act_window">
+        <field name="name">Leases</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hc.lease</field>
+        <field name="view_mode">tree,form</field>
     </record>
 
     <record id="lease_line_view_tree" model="ir.ui.view">

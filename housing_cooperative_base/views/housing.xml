@@ -42,6 +42,18 @@
         </field>
     </record>
 
+    <record id="view_housing_search" model="ir.ui.view">
+        <field name="name">view_housing_search</field>
+        <field name="model">hc.housing</field>
+        <field name="inherit_id" ref="housing_cooperative_base.premise_view_search"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="premise_id" class="oe_inline" readonly="1" invisible="1" attrs="{'required': [('id', '!=', False)]}"/>
+            </search>
+        </field>
+    </record>
+
     <record id="housing_view_action" model="ir.actions.act_window">
         <field name="name">Housings</field>
         <field name="type">ir.actions.act_window</field>

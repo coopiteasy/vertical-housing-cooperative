@@ -67,4 +67,15 @@
         </tree>
         </field>
     </record>
+
+    <record id="premise_view_search" model="ir.ui.view">
+        <field name="name">premise_view_search</field>
+        <field name="model">hc.premise</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+            </search>
+        </field>
+    </record>
 </odoo>

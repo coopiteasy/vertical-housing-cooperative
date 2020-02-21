@@ -27,7 +27,6 @@ class Housing(models.Model):
         ondelete="cascade",
     )
 
-    code = fields.Char(string="Code", required=True)
     floor = fields.Integer(string="Floor number", required=False)
     keys = fields.Char(string="Keys", required=False)
     nb_keys = fields.Integer(string="Number of Keys", required=False)
