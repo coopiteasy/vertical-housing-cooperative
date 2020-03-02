@@ -120,6 +120,19 @@
             <field name="charges">10</field>
         </record>
 
+        <record id="demo_parking_1" model="hc.parking">
+            <field name="name">Parking 1</field>
+            <field name="building_id" ref="demo_building_1"/>
+            <field name="rent">20</field>
+            <field name="charges">10</field>
+        </record>
+        <record id="demo_parking_2" model="hc.parking">
+            <field name="name">Parking 2</field>
+            <field name="building_id" ref="demo_building_1"/>
+            <field name="rent">20</field>
+            <field name="charges">10</field>
+        </record>
+
         <record id="demo_lease_1" model="hc.lease">
             <field name="tenant_id" ref="res_partner_cooperator_1_demo"/>
             <field name="start">2017-09-21</field>
@@ -156,7 +169,11 @@
             <field name="lease_id" ref="demo_lease_2"/>
             <field name="premise_id" model="hc.cellar" eval="obj(ref('demo_cellar_2')).premise_id.id"/>
         </record>
-        
+        <record id="demo_lease_line_6" model="hc.lease.line">
+            <field name="lease_id" ref="demo_lease_2"/>
+            <field name="premise_id" model="hc.parking" eval="obj(ref('demo_parking_2')).premise_id.id"/>
+        </record>
+
         <record id="demo_lease_3" model="hc.lease">
             <field name="tenant_id" ref="res_partner_cooperator_6_demo"/>
             <field name="start">2014-10-20</field>
@@ -166,7 +183,7 @@
             <field name="charges">210</field>
             <field name="deposit">2500</field>
         </record>
-        <record id="demo_lease_line_6" model="hc.lease.line">
+        <record id="demo_lease_line_7" model="hc.lease.line">
             <field name="lease_id" ref="demo_lease_3"/>
             <field name="premise_id" model="hc.housing" eval="obj(ref('demo_housing_1')).premise_id.id"/>
         </record>

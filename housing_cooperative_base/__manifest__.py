@@ -36,6 +36,7 @@
         "views/res_partner.xml",
         "views/room.xml",
         "views/cellar.xml",
+        "views/parking.xml",
         "views/studies.xml",
         "views/contract.xml",
         "reports/rental_state_date_template.xml",

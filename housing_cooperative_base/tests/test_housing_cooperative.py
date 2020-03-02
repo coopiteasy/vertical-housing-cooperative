@@ -17,6 +17,7 @@ class HousingCooperativeCase(common.TransactionCase):
         self.room2 = self.env.ref("housing_cooperative_base.demo_room_2")
         self.room6 = self.env.ref("housing_cooperative_base.demo_room_6")
         self.cellar2 = self.env.ref("housing_cooperative_base.demo_cellar_2")
+        self.parking2 = self.env.ref("housing_cooperative_base.demo_parking_2")
         self.lease2 = self.env.ref("housing_cooperative_base.demo_lease_2")
 
     def test_suggested_rent(self):
@@ -25,6 +26,7 @@ class HousingCooperativeCase(common.TransactionCase):
             + self.room2.rent
             + self.room6.rent
             + self.cellar2.rent
+            + self.parking2.rent
         )
         self.assertEqual(self.lease2.suggested_rent, rent)
 
