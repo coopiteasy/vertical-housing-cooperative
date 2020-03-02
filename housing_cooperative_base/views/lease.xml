@@ -42,6 +42,7 @@
                             <field name="start"/>
                             <field name="expected_end"/>
                             <field name="effective_end"/>
+                            <field name="note"/>
                         </group>
                         <group>
                             <field name="suggested_rent"/>
@@ -59,7 +60,7 @@
                             <group>
                                 <field name="lease_line_ids" nolabel="1">
                                     <tree editable="bottom">
-                                        <field name="premise_id"/>
+                                        <field name="premise_id" options="{'no_create': True}"/>
                                         <field name="code"/>
                                         <field name="state"/>
                                         <field name="rent"/>

@@ -26,6 +26,7 @@ class Premise(models.Model):
         string="Lease Lines",
     )
     is_shared = fields.Boolean(string="Shared within Cluster", required=False)
+    note = fields.Text(string="Note", required=False)
     rent = fields.Float(string="Rent", required=False)
     charges = fields.Float(string="Charges", required=False)
     charges_note = fields.Char(string="Note on Charges", required=False)

@@ -66,6 +66,7 @@ class Lease(models.Model):
     start = fields.Date(string="Start", required=True)
     expected_end = fields.Date(string="Expected End", required=True)
     effective_end = fields.Date(string="Effective End", required=False)
+    note = fields.Text(string="Note", required=False)
     end = fields.Date(string="End", compute="_compute_lease_end", store=True)
     rent = fields.Float(string="Rent", required=False)
     charges = fields.Float(string="Charges", required=False)
