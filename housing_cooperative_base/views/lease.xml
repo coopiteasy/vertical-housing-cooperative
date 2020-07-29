@@ -102,6 +102,8 @@
                 <field name="start"/>
                 <field name="end"/>
                 <field name="tenant_id"/>
+                <field name="rent"/>
+                <field name="charges"/>
                 <field name="state"/>
             </tree>
         </field>
