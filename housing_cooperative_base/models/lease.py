@@ -5,6 +5,11 @@
 
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
+from dateutil.relativedelta import relativedelta
+import logging
+
+
+_logger = logging.getLogger(__name__)
 
 
 class LeaseLine(models.Model):
@@ -43,6 +48,7 @@ class Lease(models.Model):
     _name = "hc.lease"
     _description = "Lease"
     _order = "start desc"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
 
     name = fields.Char(string="Name", compute="_compute_name", store=True)
     lease_line_ids = fields.One2many(
@@ -63,11 +69,23 @@ class Lease(models.Model):
         string="Inhabitants",
         relation="hc_lease_inhabitant_ids_rel",
     )
-    start = fields.Date(string="Start", required=True)
-    expected_end = fields.Date(string="Expected End", required=True)
-    effective_end = fields.Date(string="Effective End", required=False)
-    note = fields.Text(string="Note", required=False)
+    start = fields.Date(
+        string="Start", required=True, track_visibility="onchange"
+    )
+    expected_end = fields.Date(
+        string="Expected End", required=True, track_visibility="onchange"
+    )
+    effective_end = fields.Date(
+        string="Effective End", required=False, track_visibility="onchange"
+    )
     end = fields.Date(string="End", compute="_compute_lease_end", store=True)
+    automatic_renewal = fields.Boolean(
+        string="Automatic Renewal", default=True
+    )
+    automatic_renewal_months = fields.Integer(
+        string="Months Added Each Renewal", default=12, required=True
+    )
+    note = fields.Text(string="Note", required=False)
     rent = fields.Float(string="Rent", required=False)
     charges = fields.Float(string="Charges", required=False)
     deposit = fields.Float(string="Deposit", required=False)
@@ -114,6 +132,18 @@ class Lease(models.Model):
     contains_arcade = fields.Boolean(
         compute="_compute_contains_arcade", store=True
     )
+
+    @api.multi
+    def write(self, vals):
+        res = super(Lease, self).write(vals)
+        for rec in self:
+            if (
+                "start" in vals
+                or "expected_end" in vals
+                or "effective_end" in vals
+            ):
+                rec._update_contract_dates()
+        return res
 
     @api.model
     def create(self, vals):
@@ -188,6 +218,17 @@ class Lease(models.Model):
     @api.onchange("signatory_ids")
     def onchange_signatory_ids(self):
         self.inhabitant_ids |= self.signatory_ids
+
+    @api.multi
+    def _update_contract_dates(self):
+        for line in self.contract_id.contract_line_ids:
+            line.date_start = self.start
+            line.date_end = self.end
+            # In case the contract already reached it end, reset a next dateg
+            if not line.recurring_next_date:
+                line.recurring_next_date = (
+                    line.last_date_invoiced + relativedelta(days=1)
+                )
 
     @api.multi
     def _get_attachment_number(self):
@@ -337,3 +378,30 @@ class Lease(models.Model):
         )
         domain = [("type", "=", "sale"), ("company_id", "=", company_id)]
         return self.env["account.journal"].search(domain, limit=1)
+
+    @api.multi
+    def _automatic_renewal(self):
+        for lease in self:
+            if (
+                lease.state == "ongoing"
+                and lease.automatic_renewal
+                and fields.Date.today() + relativedelta(days=1)
+                >= lease.expected_end
+            ):
+                # If the end date was the last day of the month, keep it as such
+                if lease.expected_end == lease.expected_end + relativedelta(
+                    day=31
+                ):
+                    lease.expected_end += relativedelta(
+                        months=lease.automatic_renewal_months, day=31
+                    )
+                else:
+                    lease.expected_end += relativedelta(
+                        months=lease.automatic_renewal_months
+                    )
+
+    @api.model
+    def cron_automatic_renewal(self):
+        _logger.info("Executing: automatic renewal of leases")
+        leases = self.search([])
+        leases._automatic_renewal()
