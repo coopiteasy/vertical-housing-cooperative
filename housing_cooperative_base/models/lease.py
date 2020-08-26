@@ -380,7 +380,7 @@ class Lease(models.Model):
         return self.env["account.journal"].search(domain, limit=1)
 
     @api.multi
-    def _automatic_renewal(self):
+    def _do_automatic_renewal(self):
         for lease in self:
             if (
                 lease.state == "ongoing"
@@ -401,7 +401,7 @@ class Lease(models.Model):
                     )
 
     @api.model
-    def cron_automatic_renewal(self):
+    def cron_do_automatic_renewal(self):
         _logger.info("Executing: automatic renewal of leases")
         leases = self.search([])
-        leases._automatic_renewal()
+        leases._do_automatic_renewal()

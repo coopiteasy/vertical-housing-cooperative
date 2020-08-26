@@ -17,7 +17,7 @@
             <field name="name">Automatic Lease Renewal</field>
             <field name="model_id" ref="model_hc_lease"/>
             <field name="state">code</field>
-            <field name="code">model.cron_automatic_renewal()</field>
+            <field name="code">model.cron_do_automatic_renewal()</field>
             <field name="interval_number">1</field>
             <field name="interval_type">days</field>
             <field name="nextcall" eval="(datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d 03:00:00')"/>
