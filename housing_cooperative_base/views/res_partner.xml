@@ -46,14 +46,23 @@
             <xpath expr="//field[@name='child_ids']/.." position="before">
                 <page name="leases" string="Leases" autofocus="autofocus">
                     <group>
-                        <field name="lease_ids" nolabel="1" context="{'default_tenant_id': id}">
+                        <field name="lease_inhabitant_ids" nolabel="1" context="{'default_tenant_id': id}">
                             <tree>
                                 <field name="name"/>
+                                <field name="tenant_id"/>
+                                <field name="signatory_ids" widget="many2many_tags"/>
+                                <field name="inhabitant_ids" widget="many2many_tags"/>
                                 <field name="start"/>
                                 <field name="end"/>
                                 <field name="state"/>
                             </tree>
                         </field>
+                    </group>
+                    <h4>Co-Inhabitants</h4>
+                    <group>
+                        <group>
+                            <field name="co_inhabitant_ids" mode="kanban" no_create="1" nolabel="1"/>
+                        </group>
                     </group>
                 </page>
             </xpath>

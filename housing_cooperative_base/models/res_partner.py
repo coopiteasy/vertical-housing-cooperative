@@ -61,7 +61,24 @@ class ResPartner(models.Model):
         comodel_name="hc.lease", compute="_compute_lease_dates"
     )
     lease_ids = fields.One2many(
-        comodel_name="hc.lease", inverse_name="tenant_id", string="Leases"
+        comodel_name="hc.lease",
+        inverse_name="tenant_id",
+        string="Leases as Tenant",
+    )
+    lease_signatory_ids = fields.Many2many(
+        comodel_name="hc.lease",
+        string="Leases as Signatory",
+        relation="hc_lease_signatory_ids_rel",
+    )
+    lease_inhabitant_ids = fields.Many2many(
+        comodel_name="hc.lease",
+        string="Leases as Inhabitant",
+        relation="hc_lease_inhabitant_ids_rel",
+    )
+    co_inhabitant_ids = fields.Many2many(
+        comodel_name="res.partner",
+        string="Co-Inhabitants",
+        compute="_compute_co_inhabitant_ids",
     )
 
     attachment_number = fields.Integer(
@@ -109,6 +126,16 @@ class ResPartner(models.Model):
                 )
             else:
                 partner.age = False
+
+    @api.multi
+    @api.depends("lease_inhabitant_ids.inhabitant_ids")
+    def _compute_co_inhabitant_ids(self):
+        for partner in self:
+            co_inhabitant_ids = partner.lease_inhabitant_ids.mapped(
+                "inhabitant_ids"
+            )
+            co_inhabitant_ids -= partner
+            partner.co_inhabitant_ids = co_inhabitant_ids
 
     @api.multi
     def _get_attachment_number(self):
