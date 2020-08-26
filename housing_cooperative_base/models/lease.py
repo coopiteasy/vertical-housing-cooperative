@@ -111,6 +111,13 @@ class Lease(models.Model):
         domain=[("res_model", "=", "hc.lease")],
     )
 
+    premise_ids = fields.Many2many(
+        comodel_name="hc.premise",
+        string="Premise",
+        relation="hc_lease_premise_ids_rel",
+        compute="_compute_premise_ids",
+        store=True,
+    )
     contains_arcade = fields.Boolean(
         compute="_compute_contains_arcade", store=True
     )
@@ -166,6 +173,12 @@ class Lease(models.Model):
                     False
             else:
                 lease.state = "new"
+
+    @api.multi
+    @api.depends("lease_line_ids")
+    def _compute_premise_ids(self):
+        for lease in self:
+            lease.premise_ids = lease.lease_line_ids.mapped("premise_id")
 
     @api.multi
     @api.depends("lease_line_ids")
