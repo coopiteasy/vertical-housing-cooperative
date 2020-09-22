@@ -13,6 +13,7 @@
     "license": "AGPL-3",
     "depends": [
         "base",
+        "mail",
         "contacts",
         "contract",
         "contract_sale",
