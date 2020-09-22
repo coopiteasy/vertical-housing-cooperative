@@ -154,7 +154,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_premise__code
 #: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__code
 msgid "Code"
-msgstr ""
+msgstr "Numéro d'objet"
 
 #. module: housing_cooperative_base
 #: model:ir.actions.server,name:housing_cooperative_base.ir_cron_compute_state_ir_actions_server
@@ -269,7 +269,7 @@ msgstr "Créer rapport"
 #: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__create_uid
 #: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_studies__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Créé par"
 
 #. module: housing_cooperative_base
 #: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__create_date
@@ -288,7 +288,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__create_date
 #: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_studies__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Créé le"
 
 #. module: housing_cooperative_base
 #: model:ir.model.fields,field_description:housing_cooperative_base.field_res_partner__current_lease_id
@@ -305,7 +305,7 @@ msgstr "Date de début du bail actuel"
 #. module: housing_cooperative_base
 #: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_date_report_wizard__date
 msgid "Date"
-msgstr "Date "
+msgstr "Date"
 
 #. module: housing_cooperative_base
 #: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__deposit
@@ -338,7 +338,7 @@ msgstr "Facture de garantie"
 #: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__display_name
 #: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_studies__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nom affiché"
 
 #. module: housing_cooperative_base
 #: model_terms:ir.ui.view,arch_db:housing_cooperative_base.report_rental_state_year_template
@@ -523,7 +523,7 @@ msgstr "Dernière modification le"
 #: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__write_uid
 #: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_studies__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Dernière mise à jour par"
 
 #. module: housing_cooperative_base
 #: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__write_date
@@ -542,7 +542,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__write_date
 #: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_studies__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Dernière mise à jour le"
 
 #. module: housing_cooperative_base
 #: model:ir.model,name:housing_cooperative_base.model_hc_lease
@@ -652,7 +652,7 @@ msgstr "Commune"
 #: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__name
 #: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_studies__name
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #. module: housing_cooperative_base
 #: selection:hc.lease,state:0
@@ -925,7 +925,7 @@ msgstr "Début"
 #: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_premise__state
 #: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__state
 msgid "State"
-msgstr ""
+msgstr "État"
 
 #. module: housing_cooperative_base
 #: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__street
@@ -1013,7 +1013,7 @@ msgstr "Type de chauffage"
 #: model:product.template,uom_name:housing_cooperative_base.product_product_deposit_product_template
 #: model:product.template,uom_name:housing_cooperative_base.product_product_rent_product_template
 msgid "Unit(s)"
-msgstr ""
+msgstr "Unité(s)"
 
 #. module: housing_cooperative_base
 #: code:addons/housing_cooperative_base/models/housing.py:78
