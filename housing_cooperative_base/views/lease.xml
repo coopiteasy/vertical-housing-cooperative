@@ -109,15 +109,17 @@
         </field>
     </record>
 
-    <record id="
-    lease_view_search" model="ir.ui.view">
+    <record id="lease_view_search" model="ir.ui.view">
         <field name="name">lease_view_search</field>
         <field name="model">hc.lease</field>
         <field name="arch" type="xml">
             <search>
+                <field name="name"/>
                 <field name="tenant_id"/>
                 <field name="signatory_ids"/>
                 <field name="inhabitant_ids"/>
+                <field name="premise_ids" string="Premise or Code"
+                       filter_domain="['|', ('premise_ids.name','ilike',self), ('premise_ids.code','ilike',self)]"/>
                 <filter name="filter_contains_arcade"
                     string="Contains Archade"
                     domain="[('contains_arcade','=',True)]"/>

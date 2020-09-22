@@ -1,0 +1,1125 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* housing_cooperative_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-22 14:47+0000\n"
+"PO-Revision-Date: 2020-09-22 14:47+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.report_rental_state_date_template
+msgid "<span>CHF</span>"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: code:addons/housing_cooperative_base/models/lease.py:224
+#, python-format
+msgid "A contract already exists."
+msgstr "Un contrat existe déjà."
+
+#. module: housing_cooperative_base
+#: code:addons/housing_cooperative_base/models/lease.py:292
+#, python-format
+msgid "A deposit invoice already exists."
+msgstr "Une facture pour la garantie existe déjà."
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__active
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cellar__active
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cluster__active
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__active
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_parking__active
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_premise__active
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__active
+msgid "Active?"
+msgstr "Actif ?"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_partner__age
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_users__age
+msgid "Age"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.report_rental_state_date_template
+msgid "Annual rent"
+msgstr "Loyer annuel"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__architect_id
+msgid "Architect"
+msgstr "Architecte"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__attachment_ids
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_partner__attachment_ids
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_users__attachment_ids
+msgid "Attachments"
+msgstr "Pièces jointes"
+
+#. module: housing_cooperative_base
+#: selection:hc.premise,state:0
+msgid "Available"
+msgstr "Disponible"
+
+#. module: housing_cooperative_base
+#: model:ir.model,name:housing_cooperative_base.model_hc_building
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cellar__building_id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cluster__building_id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__building_id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease_line__building_id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_parking__building_id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_premise__building_id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_date_report_wizard_building__building_id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__building_id
+msgid "Building"
+msgstr "Bâtiment"
+
+#. module: housing_cooperative_base
+#: model:ir.actions.act_window,name:housing_cooperative_base.building_view_action
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_date_report_wizard__building_ids
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_year_report_wizard__building_ids
+#: model:ir.ui.menu,name:housing_cooperative_base.menu_hc_building_view
+msgid "Buildings"
+msgstr "Bâtiments"
+
+#. module: housing_cooperative_base
+#: selection:hc.premise,state:0
+msgid "Busy"
+msgstr "Occupé"
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.rental_state_date_wizard_view
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.rental_state_year_wizard_view
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: housing_cooperative_base
+#: model:ir.model,name:housing_cooperative_base.model_hc_cellar
+msgid "Cellar"
+msgstr "Caves"
+
+#. module: housing_cooperative_base
+#: model:ir.actions.act_window,name:housing_cooperative_base.cellar_view_action
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__cellar_ids
+#: model:ir.ui.menu,name:housing_cooperative_base.menu_hc_cellar_view
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.view_hc_building_form
+msgid "Cellars"
+msgstr "Caves"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cellar__charges
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__charges
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__charges
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease_line__charges
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_parking__charges
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_premise__charges
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__charges
+#: model:product.product,name:housing_cooperative_base.product_product_charges
+#: model:product.template,name:housing_cooperative_base.product_product_charges_product_template
+msgid "Charges"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_partner__citizenship_id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_users__citizenship_id
+msgid "Citizenship"
+msgstr "Pays d'origine"
+
+#. module: housing_cooperative_base
+#: model:ir.model,name:housing_cooperative_base.model_hc_cluster
+msgid "Cluster"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.actions.act_window,name:housing_cooperative_base.cluster_view_action
+msgid "Clusters"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cellar__code
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cluster__code
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__code
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease_line__code
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_parking__code
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_premise__code
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__code
+msgid "Code"
+msgstr "Numéro d'objet"
+
+#. module: housing_cooperative_base
+#: model:ir.actions.server,name:housing_cooperative_base.ir_cron_compute_state_ir_actions_server
+#: model:ir.cron,cron_name:housing_cooperative_base.ir_cron_compute_state
+#: model:ir.cron,name:housing_cooperative_base.ir_cron_compute_state
+msgid "Compute premise states"
+msgstr "Calculer l'état de location"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__concierge_id
+msgid "Concierge"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.ui.menu,name:housing_cooperative_base.menu_housing_cooperative_configuration
+msgid "Configuration"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.ui.menu,name:housing_cooperative_base.menu_housing_cooperative_contacts
+msgid "Contacts"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.model,name:housing_cooperative_base.model_hc_rental_state_date_report_wizard_building
+msgid "Contain Rental State Report Building Data"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__contains_arcade
+msgid "Contains Arcade"
+msgstr "Contient une arcade"
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.     lease_view_search
+msgid "Contains Archade"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.model,name:housing_cooperative_base.model_contract_contract
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__contract_id
+msgid "Contract"
+msgstr "Contrat"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,help:housing_cooperative_base.field_hc_building__nb_rooms
+#: model:ir.model.fields,help:housing_cooperative_base.field_hc_housing__nb_rooms
+msgid "Counting all rooms in this housing"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__country_id
+msgid "Country"
+msgstr "Pays"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__state_id
+msgid "Country State"
+msgstr "Canton"
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.view_hc_lease_form
+msgid "Create Deposit Invoice"
+msgstr "Créer la facture de garantie"
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.view_hc_lease_form
+msgid "Create Next Invoice"
+msgstr "Créer la prochaine facture de loyer"
+
+#. module: housing_cooperative_base
+#: model:ir.model,name:housing_cooperative_base.model_hc_rental_state_date_report_wizard
+msgid "Create Rental State Date Report"
+msgstr "Créer le rapport locatif à une date"
+
+#. module: housing_cooperative_base
+#: model:ir.model,name:housing_cooperative_base.model_hc_rental_state_year_report_wizard
+msgid "Create Rental State Year Report"
+msgstr "Créer le rapport locatif annuel"
+
+#. module: housing_cooperative_base
+#: code:addons/housing_cooperative_base/models/lease.py:274
+#, python-format
+msgid "Create a contract first."
+msgstr "Créez d'abord un contact."
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.view_hc_lease_form
+msgid "Create contract"
+msgstr "Créer contrat"
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.rental_state_date_wizard_view
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.rental_state_year_wizard_view
+msgid "Create report"
+msgstr "Créer rapport"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__create_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cellar__create_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cluster__create_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__create_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__create_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease_line__create_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_parking__create_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_permit__create_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_plan__create_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_premise__create_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_date_report_wizard__create_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_date_report_wizard_building__create_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_year_report_wizard__create_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__create_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_studies__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__create_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cellar__create_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cluster__create_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__create_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__create_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease_line__create_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_parking__create_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_permit__create_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_plan__create_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_premise__create_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_date_report_wizard__create_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_date_report_wizard_building__create_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_year_report_wizard__create_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__create_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_studies__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_partner__current_lease_id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_users__current_lease_id
+msgid "Current Lease"
+msgstr "Bail actuel"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_partner__current_lease_start
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_users__current_lease_start
+msgid "Current Lease Start"
+msgstr "Date de début du bail actuel"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_date_report_wizard__date
+msgid "Date"
+msgstr "Date"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__deposit
+#: model:product.product,description_sale:housing_cooperative_base.product_product_deposit
+#: model:product.product,name:housing_cooperative_base.product_product_deposit
+#: model:product.template,description_sale:housing_cooperative_base.product_product_deposit_product_template
+#: model:product.template,name:housing_cooperative_base.product_product_deposit_product_template
+msgid "Deposit"
+msgstr "Garantie"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__deposit_invoice_id
+msgid "Deposit invoice"
+msgstr "Facture de garantie"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__display_name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cellar__display_name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cluster__display_name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__display_name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__display_name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease_line__display_name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_parking__display_name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_permit__display_name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_plan__display_name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_premise__display_name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_date_report_wizard__display_name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_date_report_wizard_building__display_name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_year_report_wizard__display_name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__display_name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_studies__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.report_rental_state_year_template
+msgid "Document created on"
+msgstr "Document créé le "
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.res_partner_view_form
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.view_hc_lease_form
+msgid "Documents"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: selection:hc.lease,state:0
+msgid "Done"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__effective_end
+msgid "Effective End"
+msgstr "Fin effective"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__end
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease_line__end
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.report_rental_state_date_template
+msgid "End"
+msgstr "Fin"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__expected_end
+msgid "Expected End"
+msgstr "Fin attendue"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_partner__first_lease_start
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_users__first_lease_start
+msgid "First Lease Start"
+msgstr "Date de début du premier bail"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cellar__floor
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__floor
+msgid "Floor number"
+msgstr "Etage"
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.report_rental_state_date_template
+msgid "Generated on"
+msgstr "Généré le "
+
+#. module: housing_cooperative_base
+#: model:ir.model,name:housing_cooperative_base.model_hc_housing
+msgid "Housing"
+msgstr "Logement"
+
+#. module: housing_cooperative_base
+#: model:ir.module.category,name:housing_cooperative_base.module_category_housing_cooperative
+#: model:ir.ui.menu,name:housing_cooperative_base.menu_housing_cooperative_hc
+#: model:ir.ui.menu,name:housing_cooperative_base.menu_housing_cooperative_root
+msgid "Housing Cooperative"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:res.groups,name:housing_cooperative_base.group_hc_manager
+msgid "Housing Cooperative Managers"
+msgstr "Managers de la coop de logements"
+
+#. module: housing_cooperative_base
+#: model:res.groups,name:housing_cooperative_base.group_hc_user
+msgid "Housing Cooperative Users"
+msgstr "Utilisateurs de la coop de logements"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__housing_plan_id
+msgid "Housing Plan"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.model,name:housing_cooperative_base.model_hc_plan
+msgid "HousingPlan"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.actions.act_window,name:housing_cooperative_base.housing_view_action
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__housing_ids
+#: model:ir.ui.menu,name:housing_cooperative_base.menu_hc_housing_view
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.view_hc_building_form
+msgid "Housings"
+msgstr "Logements"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cellar__id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cluster__id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease_line__id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_parking__id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_permit__id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_plan__id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_premise__id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_date_report_wizard__id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_date_report_wizard_building__id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_year_report_wizard__id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_studies__id
+msgid "ID"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__industrial_services
+msgid "Industrial Services"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__inhabitant_ids
+msgid "Inhabitants"
+msgstr "Habitants"
+
+#. module: housing_cooperative_base
+#: model:ir.model,name:housing_cooperative_base.model_account_invoice
+msgid "Invoice"
+msgstr "Facture"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__invoice_ids
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.view_hc_lease_form
+msgid "Invoices"
+msgstr "Factures"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__is_arcade
+msgid "Is Arcade"
+msgstr "Est une arcade"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cluster__keys
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__keys
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_parking__keys
+msgid "Keys"
+msgstr "Clés"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__landlord_id
+msgid "Landlord"
+msgstr "Propriétaire"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building____last_update
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cellar____last_update
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cluster____last_update
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing____last_update
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease____last_update
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease_line____last_update
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_parking____last_update
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_permit____last_update
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_plan____last_update
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_premise____last_update
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_date_report_wizard____last_update
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_date_report_wizard_building____last_update
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_year_report_wizard____last_update
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room____last_update
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_studies____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__write_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cellar__write_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cluster__write_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__write_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__write_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease_line__write_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_parking__write_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_permit__write_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_plan__write_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_premise__write_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_date_report_wizard__write_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_date_report_wizard_building__write_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_year_report_wizard__write_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__write_uid
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_studies__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__write_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cellar__write_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cluster__write_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__write_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__write_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease_line__write_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_parking__write_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_permit__write_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_plan__write_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_premise__write_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_date_report_wizard__write_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_date_report_wizard_building__write_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_year_report_wizard__write_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__write_date
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_studies__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: housing_cooperative_base
+#: model:ir.model,name:housing_cooperative_base.model_hc_lease
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_account_invoice__lease_id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_contract_contract__lease_id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease_line__lease_id
+msgid "Lease"
+msgstr "Bail"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_partner__lease_end
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_users__lease_end
+msgid "Lease End"
+msgstr "Fin du bail"
+
+#. module: housing_cooperative_base
+#: model:ir.model,name:housing_cooperative_base.model_hc_lease_line
+msgid "Lease Line"
+msgstr "Ligne du bail"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cellar__lease_line_ids
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__lease_line_ids
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__lease_line_ids
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_parking__lease_line_ids
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_premise__lease_line_ids
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__lease_line_ids
+msgid "Lease Lines"
+msgstr "Lignes du bail"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease_line__lease_state
+msgid "Lease State"
+msgstr "Etat du bail"
+
+#. module: housing_cooperative_base
+#: model:ir.actions.act_window,name:housing_cooperative_base.lease_view_action
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_date_report_wizard_building__lease_line_ids
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_partner__lease_ids
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_users__lease_ids
+#: model:ir.ui.menu,name:housing_cooperative_base.menu_housing_cooperative_leases
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.res_partner_view_form
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.view_premise_form
+msgid "Leases"
+msgstr "Baux"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_partner__liability_insurance
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_users__liability_insurance
+msgid "Liability Insurance"
+msgstr "Assurance RC"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_parking__location
+msgid "Location"
+msgstr "Localisation"
+
+#. module: housing_cooperative_base
+#: selection:res.partner,residence:0
+msgid "Main Residence"
+msgstr "Résidence principale"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__maintenance_contract
+msgid "Maintenance Contract"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.module.category,description:housing_cooperative_base.module_category_housing_cooperative
+msgid "Manage your housing cooperative."
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:product.product,description_sale:housing_cooperative_base.product_product_charges
+#: model:product.template,description_sale:housing_cooperative_base.product_product_charges_product_template
+msgid "Monthly charges #START# to #END#"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.report_rental_state_date_template
+msgid "Monthly rent"
+msgstr "Loyer mensuel"
+
+#. module: housing_cooperative_base
+#: model:product.product,description_sale:housing_cooperative_base.product_product_rent
+#: model:product.template,description_sale:housing_cooperative_base.product_product_rent_product_template
+msgid "Monthly rent #START# to #END#"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__municipality
+msgid "Municipality"
+msgstr "Commune"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cellar__name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cluster__name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_parking__name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_permit__name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_plan__name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_premise__name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_date_report_wizard__name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_year_report_wizard__name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__name
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_studies__name
+msgid "Name"
+msgstr "Nom"
+
+#. module: housing_cooperative_base
+#: selection:hc.lease,state:0
+msgid "New"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cellar__note
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__note
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__note
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_parking__note
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_premise__note
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__note
+msgid "Note"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cellar__charges_note
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__charges_note
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_parking__charges_note
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_premise__charges_note
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__charges_note
+msgid "Note on Charges"
+msgstr "Note pour les charges"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__attachment_number
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_partner__attachment_number
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_users__attachment_number
+msgid "Number of Attachments"
+msgstr "Nombre de pièces jointes"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__nb_keys
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_parking__nb_keys
+msgid "Number of Keys"
+msgstr "Nombre de clés"
+
+#. module: housing_cooperative_base
+#: selection:hc.building,regime:0
+msgid "Number of Room"
+msgstr "Nombre de pièces"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__nb_rooms
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__nb_rooms
+msgid "Number of Rooms"
+msgstr "Nombre de pièces"
+
+#. module: housing_cooperative_base
+#: selection:hc.lease,state:0
+msgid "Ongoing"
+msgstr "En cours"
+
+#. module: housing_cooperative_base
+#: model:ir.model,name:housing_cooperative_base.model_hc_parking
+msgid "Parking"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__parking_spaces
+msgid "Parking Spaces"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.actions.act_window,name:housing_cooperative_base.parking_view_action
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__parking_ids
+#: model:ir.ui.menu,name:housing_cooperative_base.menu_hc_parking_view
+msgid "Parkings"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.model,name:housing_cooperative_base.model_hc_permit
+msgid "Partner Permits"
+msgstr "Permis"
+
+#. module: housing_cooperative_base
+#: model:ir.model,name:housing_cooperative_base.model_hc_studies
+msgid "Partner Studies"
+msgstr "Etudes"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_partner__permit_id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_users__permit_id
+msgid "Permit"
+msgstr "Permis"
+
+#. module: housing_cooperative_base
+#: model:ir.actions.act_window,name:housing_cooperative_base.permit_view_action
+#: model:ir.ui.menu,name:housing_cooperative_base.menu_hc_permit_view
+msgid "Permits"
+msgstr "Permis"
+
+#. module: housing_cooperative_base
+#: model:ir.actions.act_window,name:housing_cooperative_base.plan_view_action
+#: model:ir.ui.menu,name:housing_cooperative_base.menu_hc_plan_view
+msgid "Plans"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.model,name:housing_cooperative_base.model_hc_premise
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cellar__premise_id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__premise_id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease_line__premise_id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_parking__premise_id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__premise_id
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.report_rental_state_date_template
+msgid "Premise"
+msgstr "Bien loué"
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.view_hc_lease_form
+msgid "Premises"
+msgstr "Biens loués"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cellar__rent
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__rent
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__rent
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease_line__rent
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_parking__rent
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_premise__rent
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__rent
+#: model:product.product,name:housing_cooperative_base.product_product_rent
+#: model:product.template,name:housing_cooperative_base.product_product_rent_product_template
+msgid "Rent"
+msgstr "Loyer"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_date_report_wizard_building__rental_state_date_report_wizard_id
+msgid "Rental State Date Report Wizard"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_date_report_wizard__rental_state_date_report_wizard_building_ids
+msgid "Rental State Date Report Wizard Building"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.actions.act_window,name:housing_cooperative_base.rental_state_date_wizard_view_action
+msgid "Rental State Date Wizard"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.actions.act_window,name:housing_cooperative_base.rental_state_year_wizard_view_action
+msgid "Rental State Year Wizard"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.ui.menu,name:housing_cooperative_base.menu_hc_rental_state_date_wizard
+msgid "Rental State at Date"
+msgstr "Etat locatif à une date"
+
+#. module: housing_cooperative_base
+#: model:ir.actions.report,name:housing_cooperative_base.rental_state_date_report
+#: model:ir.actions.report,name:housing_cooperative_base.rental_state_year_report
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.report_rental_state_date_template
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.report_rental_state_year_template
+msgid "Rental state"
+msgstr "Etat locatif"
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.report_rental_state_year_template
+msgid "Rental state in"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.report_rental_state_date_template
+msgid "Rental state on"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.ui.menu,name:housing_cooperative_base.menu_housing_cooperative_reports
+msgid "Reports"
+msgstr "Rapports"
+
+#. module: housing_cooperative_base
+#: model:ir.model,name:housing_cooperative_base.model_res_partner
+msgid "ResPartner"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_partner__residence
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_users__residence
+msgid "Residence"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__residents_association
+msgid "Residents Association"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.model,name:housing_cooperative_base.model_hc_room
+msgid "Room"
+msgstr "Pièce"
+
+#. module: housing_cooperative_base
+#: model:ir.actions.act_window,name:housing_cooperative_base.room_view_action
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__room_ids
+#: model:ir.ui.menu,name:housing_cooperative_base.menu_hc_room_view
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.view_hc_building_form
+msgid "Rooms"
+msgstr "Pièces"
+
+#. module: housing_cooperative_base
+#: selection:res.partner,residence:0
+msgid "Secondary Residence"
+msgstr "Résidence secondaire"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_date_report_wizard__lease_line_ids
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_year_report_wizard__lease_line_ids
+msgid "Selected Leases"
+msgstr "Baux sélectionnés"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_year_report_wizard__premise_ids
+msgid "Selected Premises"
+msgstr "Biens sélectionnés"
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.res_partner_view_form
+msgid "Set Address from Current Lease"
+msgstr "Mettre l'adresse sur base du bail actuel"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__regime
+msgid "Share Regime"
+msgstr "Régime de partage"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cellar__is_shared
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__is_shared
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_parking__is_shared
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_premise__is_shared
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__is_shared
+msgid "Shared within Cluster"
+msgstr "Partagé dans un cluster"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__signatory_ids
+msgid "Signatories"
+msgstr "Signataires"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__social_share
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__social_share
+msgid "Social Share"
+msgstr "Part sociale"
+
+#. module: housing_cooperative_base
+#: selection:hc.building,regime:0
+msgid "Square Meters"
+msgstr "Mètres carrés"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__start
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease_line__start
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.report_rental_state_date_template
+msgid "Start"
+msgstr "Début"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cellar__state
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__state
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__state
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease_line__state
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_parking__state
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_premise__state
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_room__state
+msgid "State"
+msgstr "État"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__street
+msgid "Street"
+msgstr "Rue"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__street_number
+msgid "Street Number"
+msgstr "Numéro de rue"
+
+#. module: housing_cooperative_base
+#: model:ir.actions.act_window,name:housing_cooperative_base.studies_view_action
+#: model:ir.ui.menu,name:housing_cooperative_base.menu_hc_studies_view
+msgid "Studies"
+msgstr "Etudes"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_partner__study_id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_res_users__study_id
+msgid "Study"
+msgstr "Etudes"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__suggested_charges
+msgid "Suggested Charges"
+msgstr "Charges suggérées"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__suggested_rent
+msgid "Suggested Rent"
+msgstr "Loyer suggéré"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__suggested_social_share
+msgid "Suggested Social Share"
+msgstr "Parts sociales suggérées"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_cellar__surface
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_housing__surface
+msgid "Surface"
+msgstr "Superficie"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__surface_activities
+msgid "Surface Activities"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease__tenant_id
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_lease_line__tenant_id
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.report_rental_state_date_template
+msgid "Tenant"
+msgstr "Locataire"
+
+#. module: housing_cooperative_base
+#: code:addons/housing_cooperative_base/models/res_partner.py:174
+#, python-format
+msgid "This contact does not have a current lease."
+msgstr "Ce contact n'a pas de bail actuellement."
+
+#. module: housing_cooperative_base
+#: code:addons/housing_cooperative_base/models/res_partner.py:154
+#, python-format
+msgid "This lease contains multiple housings."
+msgstr "Ce bail contient plusieurs logements."
+
+#. module: housing_cooperative_base
+#: code:addons/housing_cooperative_base/models/res_partner.py:149
+#, python-format
+msgid "This lease contains no housing."
+msgstr "Ce bail ne contient pas de logements."
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__heating_type
+msgid "Type of Heating"
+msgstr "Type de chauffage"
+
+#. module: housing_cooperative_base
+#: model:product.product,uom_name:housing_cooperative_base.product_product_charges
+#: model:product.product,uom_name:housing_cooperative_base.product_product_deposit
+#: model:product.product,uom_name:housing_cooperative_base.product_product_rent
+#: model:product.template,uom_name:housing_cooperative_base.product_product_charges_product_template
+#: model:product.template,uom_name:housing_cooperative_base.product_product_deposit_product_template
+#: model:product.template,uom_name:housing_cooperative_base.product_product_rent_product_template
+msgid "Unit(s)"
+msgstr "Unité(s)"
+
+#. module: housing_cooperative_base
+#: code:addons/housing_cooperative_base/models/housing.py:78
+#, python-format
+msgid "Unknown building regime"
+msgstr "Régime de bâtiment inconnu."
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_rental_state_year_report_wizard__year
+msgid "Year"
+msgstr "Année"
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,field_description:housing_cooperative_base.field_hc_building__zip_code
+msgid "Zip Code"
+msgstr "Code postal"
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.view_hc_building_tree
+msgid "building_tree"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.view_hc_building_form
+msgid "builging_form"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.view_cluster_form
+msgid "cluster_form"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.view_cluster_tree
+msgid "cluster_tree"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:product.product,weight_uom_name:housing_cooperative_base.product_product_charges
+#: model:product.product,weight_uom_name:housing_cooperative_base.product_product_deposit
+#: model:product.product,weight_uom_name:housing_cooperative_base.product_product_rent
+#: model:product.template,weight_uom_name:housing_cooperative_base.product_product_charges_product_template
+#: model:product.template,weight_uom_name:housing_cooperative_base.product_product_deposit_product_template
+#: model:product.template,weight_uom_name:housing_cooperative_base.product_product_rent_product_template
+msgid "kg"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.view_hc_lease_form
+msgid "lease_form"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.lease_line_view_tree
+msgid "lease_line_tree"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.lease_view_tree
+msgid "lease_tree"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model:ir.model.fields,help:housing_cooperative_base.field_hc_building__surface_activities
+#: model:ir.model.fields,help:housing_cooperative_base.field_hc_cellar__surface
+#: model:ir.model.fields,help:housing_cooperative_base.field_hc_housing__surface
+msgid "m²"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.view_permit_form
+msgid "permit_form"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.view_permit_tree
+msgid "permit_tree"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.view_plan_form
+msgid "plan_form"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.view_plan_tree
+msgid "plan_tree"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.view_premise_form
+msgid "premise_form"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.view_premise_tree
+msgid "premise_tree"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.view_studies_form
+msgid "studies_form"
+msgstr ""
+
+#. module: housing_cooperative_base
+#: model_terms:ir.ui.view,arch_db:housing_cooperative_base.view_studies_tree
+msgid "studies_tree"
+msgstr ""
+
