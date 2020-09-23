@@ -20,7 +20,6 @@
         "partner_contact_birthdate",
         "partner_contact_gender",
         "partner_firstname",
-        "partner_household",
         # 'partner_secondary_address',
         "account_credit_control",
     ],
