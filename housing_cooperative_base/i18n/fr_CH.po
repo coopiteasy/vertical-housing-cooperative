@@ -400,7 +400,7 @@ msgstr "Logement"
 #: model:ir.ui.menu,name:housing_cooperative_base.menu_housing_cooperative_hc
 #: model:ir.ui.menu,name:housing_cooperative_base.menu_housing_cooperative_root
 msgid "Housing Cooperative"
-msgstr ""
+msgstr "Coopérative d'habitation"
 
 #. module: housing_cooperative_base
 #: model:res.groups,name:housing_cooperative_base.group_hc_manager
