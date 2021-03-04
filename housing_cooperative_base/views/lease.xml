@@ -47,11 +47,9 @@
                             <field name="note"/>
                         </group>
                         <group>
-                            <field name="suggested_rent"/>
-                            <field name="suggested_charges"/>
-                            <field name="rent"/>
-                            <field name="charges"/>
-                            <field name="deposit"/>
+                            <field name="total_rent"/>
+                            <field name="total_charges"/>
+                            <field name="total_deposit"/>
                         </group>
                         <group>
                             <field name="contains_arcade"/>
@@ -65,8 +63,11 @@
                                         <field name="premise_id" options="{'no_create': True}"/>
                                         <field name="code"/>
                                         <field name="state"/>
+                                        <field name="suggested_rent"/>
+                                        <field name="suggested_charges"/>
                                         <field name="rent"/>
                                         <field name="charges"/>
+                                        <field name="deposit"/>
                                     </tree>
                                 </field>
                             </group>
@@ -109,8 +110,6 @@
                 <field name="start"/>
                 <field name="end"/>
                 <field name="tenant_id"/>
-                <field name="rent"/>
-                <field name="charges"/>
                 <field name="state"/>
             </tree>
         </field>
@@ -149,6 +148,9 @@
                 <field name="building_id"/>
                 <field name="premise_id"/>
                 <field name="tenant_id"/>
+                <field name="rent"/>
+                <field name="charges"/>
+                <field name="deposit"/>
                 <field name="lease_id"/>
                 <field name="start"/>
                 <field name="end"/>

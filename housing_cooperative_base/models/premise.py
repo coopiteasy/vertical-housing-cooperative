@@ -32,9 +32,19 @@ class Premise(models.Model):
     charges_note = fields.Char(string="Note on Charges", required=False)
     state = fields.Selection(
         string="State",
-        selection=[("available", "Available"), ("busy", "Busy")],
+        selection=[("available", "Available"), ("busy", "Occupied")],
         compute="_compute_state",
         store=True,
+    )
+
+    rent_product_id = fields.Many2one(
+        comodel_name="product.product", string="Rent product",
+    )
+    charges_product_id = fields.Many2one(
+        comodel_name="product.product", string="Charges product",
+    )
+    deposit_product_id = fields.Many2one(
+        comodel_name="product.product", string="Deposit product",
     )
 
     @api.multi

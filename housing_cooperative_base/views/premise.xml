@@ -29,6 +29,9 @@
                             <field name="note"/>
                         </group>
                         <group name="rent">
+                            <field name="rent_product_id"/>
+                            <field name="charges_product_id"/>
+                            <field name="deposit_product_id"/>
                             <field name="rent"/>
                             <field name="charges"/>
                             <field name="charges_note"/>
