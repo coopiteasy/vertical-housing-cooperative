@@ -392,24 +392,34 @@ class Lease(models.Model):
 
         self.deposit_invoice_id = invoice
 
-        deposit = self.env.ref(  # fixme
-            "housing_cooperative_base.product_product_deposit"
-        )
-
         for line in self.lease_line_ids:
+
             if line.premise_id.deposit_product_id:
-                deposit = line.premise_id.deposit_product_id
+                deposit_product_id = line.premise_id.deposit_product_id
+            elif line.premise_id.building_id.deposit_product_id:
+                deposit_product_id = (
+                    line.premise_id.building_id.deposit_product_id
+                )
+            else:
+                deposit_product_id = self.env.ref(
+                    "housing_cooperative_base.product_product_deposit"
+                )
+
+            product_account = deposit_product_id.property_account_income_id
+            if not product_account:
+                raise ValidationError(
+                    _("Please set an account on product %s")
+                    % deposit_product_id
+                )
 
             self.env["account.invoice.line"].create(
                 {
-                    "name": deposit.name,
-                    "product_id": deposit.id,
-                    "uom_id": deposit.uom_id.id,
+                    "name": "%s - deposit" % line.premise_id.name,
+                    "product_id": deposit_product_id.id,
+                    "uom_id": deposit_product_id.uom_id.id,
                     "invoice_id": invoice.id,
                     "price_unit": line.deposit,
-                    "account_id": self._default_journal().default_credit_account_id.id,
-                    # Note: account can also be set by default function, if the journal is passed in the context:
-                    # .with_context(journal_id=self._default_journal().id).create()
+                    "account_id": product_account.id,
                 }
             )
 

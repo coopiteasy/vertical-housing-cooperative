@@ -75,3 +75,19 @@ class HousingCooperativeCase(common.TransactionCase):
         self.lease2.create_contract()
         with self.assertRaises(ValidationError):
             self.lease2.create_contract()
+
+    def test_create_deposit_invoice(self):
+        deposit_account = self.env["account.account"].search(
+            [("name", "=", "Account Receivable")]
+        )
+        self.housing1.deposit_product_id.property_account_income_id = (
+            deposit_account
+        )
+
+        self.lease1.create_deposit_invoice()
+
+        invoice = self.lease1.deposit_invoice_id
+        line_account = (
+            invoice.invoice_line_ids.product_id.property_account_income_id
+        )
+        self.assertEqual(line_account, deposit_account)
