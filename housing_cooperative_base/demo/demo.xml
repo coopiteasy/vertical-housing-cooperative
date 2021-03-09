@@ -5,7 +5,7 @@
 -->
 
 <odoo>
-    <data noupdate="0">  <!-- fixme -->
+    <data noupdate="0">
 
         <record id="demo_building_1" model="hc.building">
             <field name="name">Building 1</field>
@@ -28,7 +28,17 @@
         <record id="demo_plan_1" model="hc.plan">
             <field name="name">Low Income</field>
         </record>
-        
+
+        <record id="demo_rent_product_product_housing_1" model="product.product">
+            <field name="name">Demo Rent HOU1</field>
+        </record>
+        <record id="demo_charges_product_product_housing_1" model="product.product">
+            <field name="name">Demo Charges HOU1</field>
+        </record>
+        <record id="demo_deposit_product_product_housing_1" model="product.product">
+            <field name="name">Demo Deposit HOU1</field>
+        </record>
+
         <record id="demo_housing_1" model="hc.housing">
             <field name="code">HOU1</field>
             <field name="name">Housing 1 - Arcade</field>
@@ -40,8 +50,11 @@
             <field name="social_share">2000</field>
             <field name="rent">450</field>
             <field name="charges">80</field>
+            <field name="rent_product_id" ref="demo_rent_product_product_housing_1"/>
+            <field name="charges_product_id" ref="demo_charges_product_product_housing_1"/>
+            <field name="deposit_product_id" ref="demo_deposit_product_product_housing_1"/>
         </record>
-        
+
         <record id="demo_housing_2" model="hc.housing">
             <field name="code">HOU2</field>
             <field name="name">Housing 2</field>
@@ -53,7 +66,7 @@
             <field name="rent">350</field>
             <field name="charges">70</field>
         </record>
-        
+
         <record id="demo_housing_3" model="hc.housing">
             <field name="code">HOU3</field>
             <field name="name">Housing 3</field>
@@ -67,7 +80,7 @@
             <field name="charges">180</field>
             <field name="housing_plan_id" ref="demo_plan_1"/>
         </record>
-        
+
         <record id="demo_room_1" model="hc.room">
             <field name="name">Room 1</field>
             <field name="building_id" ref="demo_building_1"/>
@@ -137,41 +150,52 @@
             <field name="tenant_id" ref="res_partner_cooperator_1_demo"/>
             <field name="start">2017-09-01</field>
             <field name="expected_end">2020-08-31</field>
-            <field name="rent">2000</field>
-            <field name="charges">200</field>
-            <field name="deposit">4000</field>
         </record>
         <record id="demo_lease_line_1" model="hc.lease.line">
             <field name="lease_id" ref="demo_lease_1"/>
             <field name="premise_id" model="hc.housing" eval="obj(ref('demo_housing_1')).premise_id.id"/>
+            <field name="rent">2000</field>
+            <field name="charges">200</field>
+            <field name="deposit">4000</field>
         </record>
+
         <record id="demo_lease_2" model="hc.lease">
-             <field name="tenant_id" ref="res_partner_cooperator_5_demo"/>
+            <field name="tenant_id" ref="res_partner_cooperator_5_demo"/>
             <field name="start">2018-09-01</field>
             <field name="expected_end">2021-08-31</field>
-            <field name="rent">500</field>
-            <field name="charges">100</field>
-            <field name="deposit">1000</field>
         </record>
         <record id="demo_lease_line_2" model="hc.lease.line">
             <field name="lease_id" ref="demo_lease_2"/>
             <field name="premise_id" model="hc.housing" eval="obj(ref('demo_housing_2')).premise_id.id"/>
+            <field name="rent">300</field>
+            <field name="charges">30</field>
+            <field name="deposit">600</field>
         </record>
         <record id="demo_lease_line_3" model="hc.lease.line">
             <field name="lease_id" ref="demo_lease_2"/>
             <field name="premise_id" model="hc.room" eval="obj(ref('demo_room_2')).premise_id.id"/>
+            <field name="rent">100</field>
+            <field name="charges">10</field>
+            <field name="deposit">200</field>
         </record>
         <record id="demo_lease_line_4" model="hc.lease.line">
             <field name="lease_id" ref="demo_lease_2"/>
             <field name="premise_id" model="hc.room" eval="obj(ref('demo_room_6')).premise_id.id"/>
+            <field name="rent">100</field>
+            <field name="charges">10</field>
+            <field name="deposit">200</field>
         </record>
         <record id="demo_lease_line_5" model="hc.lease.line">
             <field name="lease_id" ref="demo_lease_2"/>
             <field name="premise_id" model="hc.cellar" eval="obj(ref('demo_cellar_2')).premise_id.id"/>
+            <field name="rent">50</field>
+            <field name="deposit">100</field>
         </record>
         <record id="demo_lease_line_6" model="hc.lease.line">
             <field name="lease_id" ref="demo_lease_2"/>
             <field name="premise_id" model="hc.parking" eval="obj(ref('demo_parking_2')).premise_id.id"/>
+            <field name="rent">120</field>
+            <field name="deposit">200</field>
         </record>
 
         <record id="demo_lease_3" model="hc.lease">
@@ -179,16 +203,16 @@
             <field name="start">2014-10-31</field>
             <field name="expected_end">2018-12-31</field>
             <field name="effective_end">2018-09-30</field>
-            <field name="rent">1800</field>
-            <field name="charges">210</field>
-            <field name="deposit">2500</field>
         </record>
         <record id="demo_lease_line_7" model="hc.lease.line">
             <field name="lease_id" ref="demo_lease_3"/>
             <field name="premise_id" model="hc.housing" eval="obj(ref('demo_housing_1')).premise_id.id"/>
+            <field name="rent">1800</field>
+            <field name="charges">210</field>
+            <field name="deposit">2500</field>
         </record>
 
-         <record id="demo_sequence" model="ir.sequence">
+        <record id="demo_sequence" model="ir.sequence">
             <field name="name">Invoice Sequences - Demo</field>
             <field name="implementation">no_gap</field>
             <field name="padding" eval="4"/>
@@ -200,7 +224,6 @@
             <field name="sequence_id" ref="demo_sequence"/>
             <field name="company_id" model="res.company" eval="1"/>
         </record>
-        
-        
+
     </data>
 </odoo>
