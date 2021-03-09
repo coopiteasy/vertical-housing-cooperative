@@ -303,12 +303,16 @@ class Lease(models.Model):
         )
         self.contract_id = contract
 
-        rent = self.env.ref("housing_cooperative_base.product_product_rent")
-        charges = self.env.ref("housing_cooperative_base.product_product_charges")
-
         for line in self.lease_line_ids:
+
             if line.premise_id.rent_product_id:
-                rent = line.premise_id.rent_product_id
+                rent_product_id = line.premise_id.rent_product_id
+            elif line.premise_id.building_id.rent_product_id:
+                rent_product_id = line.premise_id.building_id.rent_product_id
+            else:
+                rent_product_id = self.env.ref(
+                    "housing_cooperative_base.product_product_rent"
+                )
 
             self.env["contract.line"].create(
                 # todo link lease lines and contract lines
@@ -319,15 +323,23 @@ class Lease(models.Model):
                     "recurring_next_date": self.start,
                     "recurring_rule_type": "monthly",
                     "recurring_invoicing_type": "pre-paid",
-                    "product_id": rent.id,
-                    "uom_id": rent.uom_id.id,
+                    "product_id": rent_product_id.id,
+                    "uom_id": rent_product_id.uom_id.id,
                     "contract_id": contract.id,
                     "price_unit": line.rent,
                 }
             )
 
             if line.premise_id.charges_product_id:
-                charges = line.premise_id.charges_product_id
+                charges_product_id = line.premise_id.charges_product_id
+            elif line.premise_id.building_id.charges_product_id:
+                charges_product_id = (
+                    line.premise_id.building_id.charges_product_id
+                )
+            else:
+                charges_product_id = self.env.ref(
+                    "housing_cooperative_base.product_product_charges"
+                )
 
             self.env["contract.line"].create(
                 {
@@ -337,8 +349,8 @@ class Lease(models.Model):
                     "recurring_next_date": self.start,
                     "recurring_rule_type": "monthly",
                     "recurring_invoicing_type": "pre-paid",
-                    "product_id": charges.id,
-                    "uom_id": charges.uom_id.id,
+                    "product_id": charges_product_id.id,
+                    "uom_id": charges_product_id.uom_id.id,
                     "contract_id": contract.id,
                     "price_unit": line.charges,
                 }
@@ -377,10 +389,12 @@ class Lease(models.Model):
                 "journal_id": self._default_journal().id,
             }
         )
-        
+
         self.deposit_invoice_id = invoice
 
-        deposit = self.env.ref("housing_cooperative_base.product_product_deposit")
+        deposit = self.env.ref(  # fixme
+            "housing_cooperative_base.product_product_deposit"
+        )
 
         for line in self.lease_line_ids:
             if line.premise_id.deposit_product_id:

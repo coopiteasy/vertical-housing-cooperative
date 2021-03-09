@@ -13,9 +13,19 @@
             <field name="street_number">21</field>
             <field name="zip_code">1030</field>
             <field name="municipality">Le village</field>
-            <field name="state_id" ref="base.state_it_ge"/>
             <field name="country_id" ref="base.ch"/>
-            <field name="landlord_id" ref=""/>
+        </record>
+
+        <record id="demo_building_2" model="hc.building">
+            <field name="name">Building 2</field>
+            <field name="street">Rue de la Régence</field>
+            <field name="street_number">2</field>
+            <field name="zip_code">4030</field>
+            <field name="municipality">Le village</field>
+            <field name="country_id" ref="base.ch"/>
+            <field name="rent_product_id" ref="demo_rent_product_product_building_2"/>
+            <field name="charges_product_id" ref="demo_charges_product_product_building_2"/>
+            <field name="deposit_product_id" ref="demo_deposit_product_product_building_2"/>
         </record>
 
         <record id="demo_cluster_1" model="hc.cluster">
@@ -29,20 +39,10 @@
             <field name="name">Low Income</field>
         </record>
 
-        <record id="demo_rent_product_product_housing_1" model="product.product">
-            <field name="name">Demo Rent HOU1</field>
-        </record>
-        <record id="demo_charges_product_product_housing_1" model="product.product">
-            <field name="name">Demo Charges HOU1</field>
-        </record>
-        <record id="demo_deposit_product_product_housing_1" model="product.product">
-            <field name="name">Demo Deposit HOU1</field>
-        </record>
-
         <record id="demo_housing_1" model="hc.housing">
             <field name="code">HOU1</field>
             <field name="name">Housing 1 - Arcade</field>
-            <field name="building_id" ref="demo_building_1"/>
+            <field name="building_id" ref="demo_building_2"/>
             <field name="keys">KEYHOU1</field>
             <field name="is_arcade" eval="True"/>
             <field name="nb_rooms">4</field>
@@ -70,7 +70,7 @@
         <record id="demo_housing_3" model="hc.housing">
             <field name="code">HOU3</field>
             <field name="name">Housing 3</field>
-            <field name="building_id" ref="demo_building_1"/>
+            <field name="building_id" ref="demo_building_2"/>
             <field name="keys">KEYHOU3</field>
             <field name="nb_rooms">5</field>
             <field name="surface">100</field>
@@ -206,7 +206,7 @@
         </record>
         <record id="demo_lease_line_7" model="hc.lease.line">
             <field name="lease_id" ref="demo_lease_3"/>
-            <field name="premise_id" model="hc.housing" eval="obj(ref('demo_housing_1')).premise_id.id"/>
+            <field name="premise_id" model="hc.housing" eval="obj(ref('demo_housing_3')).premise_id.id"/>
             <field name="rent">1800</field>
             <field name="charges">210</field>
             <field name="deposit">2500</field>

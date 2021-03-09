@@ -49,7 +49,7 @@
         "data/cron.xml",
         "data/data.xml",
     ],
-    "demo": ["demo/users.xml", "demo/demo.xml"],  # fixme
+    "demo": ["demo/users.xml", "demo/demo_products.xml", "demo/demo.xml"],
     "installable": True,
     "application": True,
 }

@@ -38,13 +38,16 @@ class Premise(models.Model):
     )
 
     rent_product_id = fields.Many2one(
-        comodel_name="product.product", string="Rent product",
+        comodel_name="product.product",
+        string="Rent product",
     )
     charges_product_id = fields.Many2one(
-        comodel_name="product.product", string="Charges product",
+        comodel_name="product.product",
+        string="Charges product",
     )
     deposit_product_id = fields.Many2one(
-        comodel_name="product.product", string="Deposit product",
+        comodel_name="product.product",
+        string="Deposit product",
     )
 
     @api.multi
