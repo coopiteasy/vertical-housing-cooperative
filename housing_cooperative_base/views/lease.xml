@@ -139,22 +139,4 @@
         <field name="res_model">hc.lease</field>
         <field name="view_mode">tree,form</field>
     </record>
-
-    <record id="lease_line_view_tree" model="ir.ui.view">
-        <field name="name">lease_line_view_tree</field>
-        <field name="model">hc.lease.line</field>
-        <field name="arch" type="xml">
-            <tree string="lease_line_tree">
-                <field name="building_id"/>
-                <field name="premise_id"/>
-                <field name="tenant_id"/>
-                <field name="rent"/>
-                <field name="charges"/>
-                <field name="deposit"/>
-                <field name="lease_id"/>
-                <field name="start"/>
-                <field name="end"/>
-            </tree>
-        </field>
-    </record>
 </odoo>

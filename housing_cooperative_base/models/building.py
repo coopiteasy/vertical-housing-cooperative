@@ -88,9 +88,4 @@ class Building(models.Model):
         string="Parkings",
         required=False,
     )
-    # cluster_ids = fields.One2many(
-    #     comodel_name="hc.cluster",
-    #     inverse_name="building_id",
-    #     string="Clusters",
-    #     required=False,
-    # )
+
