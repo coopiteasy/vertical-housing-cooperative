@@ -1,13 +1,13 @@
-# -*- coding: utf-8 -*-
 # Copyright 2019 Coop IT Easy SCRL fs
 #   Robin Keunen <robin@coopiteasy.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models, _
-from odoo.exceptions import ValidationError
-from dateutil.relativedelta import relativedelta
 import logging
 
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
+
+from dateutil.relativedelta import relativedelta
 
 _logger = logging.getLogger(__name__)
 
@@ -134,7 +134,7 @@ class Lease(models.Model):
     )
 
     attachment_number = fields.Integer(
-        compute="_get_attachment_number", string="Number of Attachments"
+        compute="_compute_attachment_number", string="Number of Attachments"
     )
     attachment_ids = fields.One2many(
         comodel_name="ir.attachment",
@@ -179,7 +179,7 @@ class Lease(models.Model):
         for lease in self:
             tenant = lease.tenant_id.name
             date = str(lease.start)[:7]
-            lease.name = "%s/%s" % (tenant, date)
+            lease.name = "{}/{}".format(tenant, date)
 
     @api.multi
     @api.depends("lease_line_ids")
@@ -207,15 +207,13 @@ class Lease(models.Model):
     def _compute_state(self):
         for lease in self:
             today = fields.Date.today()
-            if lease.start and lease.end:
+            if lease.start and lease.end and lease.start <= lease.end:
                 if today < lease.start:
                     lease.state = "new"
                 elif lease.start <= today <= lease.end:
                     lease.state = "ongoing"
-                elif lease.end < today:
+                else:  # lease.end < today:
                     lease.state = "done"
-                else:
-                    False
             else:
                 lease.state = "new"
 
@@ -259,15 +257,15 @@ class Lease(models.Model):
                 )
 
     @api.multi
-    def _get_attachment_number(self):
+    def _compute_attachment_number(self):
         read_group_res = self.env["ir.attachment"].read_group(
             [("res_model", "=", "hc.lease"), ("res_id", "in", self.ids)],
             ["res_id"],
             ["res_id"],
         )
-        attach_data = dict(
-            (res["res_id"], res["res_id_count"]) for res in read_group_res
-        )
+        attach_data = {
+            res["res_id"]: res["res_id_count"] for res in read_group_res
+        }
         for lease in self:
             lease.attachment_number = attach_data.get(lease.id, 0)
             lease.contract_number = 1 if lease.contract_id else 0

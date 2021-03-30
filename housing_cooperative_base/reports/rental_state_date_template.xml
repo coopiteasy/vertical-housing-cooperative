@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
      Copyright 2019 Coop IT Easy
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -9,14 +9,18 @@
             <t t-call="web.external_layout">
                 <div class="page">
                     <h2>Rental state</h2>
-                    <t t-set="doc" t-value="docs[0]"/>
-                    <t t-set="doc_data" t-value="doc.get_data()"/>
-                    <t t-set="date" t-value="doc_data['date']"/>
-                    <p>Rental state on <strong><span t-esc="date"/></strong>.</p>
-                    <p><small>Generated on <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>.</small></p>
-                    <t t-set="sum_rent" t-value="0"/>
+                    <t t-set="doc" t-value="docs[0]" />
+                    <t t-set="doc_data" t-value="doc.get_data()" />
+                    <t t-set="date" t-value="doc_data['date']" />
+                    <p>Rental state on <strong><span
+                                t-esc="date"
+                            /></strong>.</p>
+                    <p><small>Generated on <span
+                                t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"
+                            />.</small></p>
+                    <t t-set="sum_rent" t-value="0" />
                     <t t-foreach="docs" t-as="o">
-                    <h3><span t-field="o.building_id"/></h3>
+                    <h3><span t-field="o.building_id" /></h3>
                         <table class="table table-condensed">
                             <thead>
                                 <tr>
@@ -30,39 +34,56 @@
                             </thead>
                             <tbody>
                                 <tr t-foreach="o.lease_line_ids" t-as="l">
-                                    <td class="text-left"> <span t-field="l.premise_id"/> </td>
-                                    <td class="text-left"> <span t-field="l.tenant_id"/> </td>
-                                    <td class="text-right"> <span t-field="l.start"/> </td>
-                                    <td class="text-right"> <span t-field="l.end"/> </td>
+                                    <td class="text-left"> <span
+                                            t-field="l.premise_id"
+                                        /> </td>
+                                    <td class="text-left"> <span
+                                            t-field="l.tenant_id"
+                                        /> </td>
+                                    <td class="text-right"> <span
+                                            t-field="l.start"
+                                        /> </td>
+                                    <td class="text-right"> <span
+                                            t-field="l.end"
+                                        /> </td>
                                     <td class="text-right">
-                                        <span t-field="l.rent"/> <span>CHF</span>
+                                        <span t-field="l.rent" /> <span
+                                        >CHF</span>
 <!--                                        <span t-field="l.rent" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>-->
                                     </td>
                                     <td class="text-right">
-                                        <span t-esc="l.rent * 12"/> <span>CHF</span>
+                                        <span t-esc="l.rent * 12" /> <span
+                                        >CHF</span>
 <!--                                        <span t-esc="l.rent * 12" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>-->
                                     </td>
-                                    <t t-set="sum_rent" t-value="sum_rent + l.rent"/>
+                                    <t
+                                        t-set="sum_rent"
+                                        t-value="sum_rent + l.rent"
+                                    />
                                 </tr>
                                 <t t-if="o_last">
                                     <tr>
-                                        <td/>
-                                        <td/>
-                                        <td/>
-                                        <td/>
+                                        <td />
+                                        <td />
+                                        <td />
+                                        <td />
                                         <td class="text-right">
-                                            <strong><span t-esc="sum_rent"/> <span>CHF</span></strong>
+                                            <strong><span
+                                                    t-esc="sum_rent"
+                                                /> <span>CHF</span></strong>
 <!--                                                        <span t-esc="sum_rent" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>-->
                                         </td>
                                         <td class="text-right">
-                                            <strong><span t-esc="sum_rent * 12"/> <span>CHF</span></strong>
+                                            <strong><span
+                                                    t-esc="sum_rent * 12"
+                                                /> <span>CHF</span></strong>
 <!--                                                        <span t-esc="sum_rent * 12" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>-->
                                         </td>
                                     </tr>
                                 </t>
                             </tbody>
                         </table>
-                        <div style="page-break-after:auto;"/>
+                        <div style="page-break-after:auto;" />
                     </t>
                 </div>
             </t>

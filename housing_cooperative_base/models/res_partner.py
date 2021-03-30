@@ -1,11 +1,11 @@
-# -*- coding: utf-8 -*-
 # Copyright 2019 Coop IT Easy SCRL fs
 #   Robin Keunen <robin@coopiteasy.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models, _
-from odoo.exceptions import ValidationError
 from datetime import date
+
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class PartnerStudies(models.Model):
@@ -82,7 +82,7 @@ class ResPartner(models.Model):
     )
 
     attachment_number = fields.Integer(
-        compute="_get_attachment_number", string="Number of Attachments"
+        compute="_compute_attachment_number", string="Number of Attachments"
     )
     attachment_ids = fields.One2many(
         comodel_name="ir.attachment",
@@ -138,15 +138,15 @@ class ResPartner(models.Model):
             partner.co_inhabitant_ids = co_inhabitant_ids
 
     @api.multi
-    def _get_attachment_number(self):
+    def _compute_attachment_number(self):
         read_group_res = self.env["ir.attachment"].read_group(
             [("res_model", "=", "res.partner"), ("res_id", "in", self.ids)],
             ["res_id"],
             ["res_id"],
         )
-        attach_data = dict(
-            (res["res_id"], res["res_id_count"]) for res in read_group_res
-        )
+        attach_data = {
+            res["res_id"]: res["res_id_count"] for res in read_group_res
+        }
         for record in self:
             record.attachment_number = attach_data.get(record.id, 0)
 

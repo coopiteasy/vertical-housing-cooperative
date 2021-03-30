@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
      Copyright 2019 Coop IT Easy
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -7,24 +7,36 @@
     <record id="view_housing_form" model="ir.ui.view">
         <field name="name">view_housing_form</field>
         <field name="model">hc.housing</field>
-        <field name="inherit_id" ref="housing_cooperative_base.view_premise_form"/>
+        <field
+            name="inherit_id"
+            ref="housing_cooperative_base.view_premise_form"
+        />
         <field name="mode">primary</field>
         <field name="arch" type="xml">
             <group name="rent" position="after">
-                <field name="premise_id" class="oe_inline" readonly="1" invisible="1" attrs="{'required': [('id', '!=', False)]}"/>
+                <field
+                    name="premise_id"
+                    class="oe_inline"
+                    readonly="1"
+                    invisible="1"
+                    attrs="{'required': [('id', '!=', False)]}"
+                />
                 <group>
-                    <field name="floor"/>
-                    <field name="keys"/>
-                    <field name="nb_keys"/>
-                    <field name="industrial_services"/>
-                    <field name="is_arcade"/>
+                    <field name="floor" />
+                    <field name="keys" />
+                    <field name="nb_keys" />
+                    <field name="industrial_services" />
+                    <field name="is_arcade" />
                 </group>
                 <group>
-                    <field name="housing_plan_id" options="{'no_create': True}"/>
-                    <field name="nb_rooms"/>
-                    <field name="surface"/>
-                    <field name="suggested_social_share"/>
-                    <field name="social_share"/>
+                    <field
+                        name="housing_plan_id"
+                        options="{'no_create': True}"
+                    />
+                    <field name="nb_rooms" />
+                    <field name="surface" />
+                    <field name="suggested_social_share" />
+                    <field name="social_share" />
                 </group>
             </group>
         </field>
@@ -33,11 +45,20 @@
     <record id="view_housing_tree" model="ir.ui.view">
         <field name="name">view_housing_tree</field>
         <field name="model">hc.housing</field>
-        <field name="inherit_id" ref="housing_cooperative_base.view_premise_tree"/>
+        <field
+            name="inherit_id"
+            ref="housing_cooperative_base.view_premise_tree"
+        />
         <field name="mode">primary</field>
         <field name="arch" type="xml">
             <field name="name" position="after">
-                <field name="premise_id" class="oe_inline" readonly="1" invisible="1" attrs="{'required': [('id', '!=', False)]}"/>
+                <field
+                    name="premise_id"
+                    class="oe_inline"
+                    readonly="1"
+                    invisible="1"
+                    attrs="{'required': [('id', '!=', False)]}"
+                />
             </field>
         </field>
     </record>
@@ -45,11 +66,20 @@
     <record id="view_housing_search" model="ir.ui.view">
         <field name="name">view_housing_search</field>
         <field name="model">hc.housing</field>
-        <field name="inherit_id" ref="housing_cooperative_base.premise_view_search"/>
+        <field
+            name="inherit_id"
+            ref="housing_cooperative_base.premise_view_search"
+        />
         <field name="mode">primary</field>
         <field name="arch" type="xml">
             <search>
-                <field name="premise_id" class="oe_inline" readonly="1" invisible="1" attrs="{'required': [('id', '!=', False)]}"/>
+                <field
+                    name="premise_id"
+                    class="oe_inline"
+                    readonly="1"
+                    invisible="1"
+                    attrs="{'required': [('id', '!=', False)]}"
+                />
             </search>
         </field>
     </record>

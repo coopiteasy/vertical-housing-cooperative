@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
      Copyright 2019 Coop IT Easy
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -7,27 +7,45 @@
     <record id="view_cellar_form" model="ir.ui.view">
         <field name="name">view_cellar_form</field>
         <field name="model">hc.cellar</field>
-        <field name="inherit_id" ref="housing_cooperative_base.view_premise_form"/>
+        <field
+            name="inherit_id"
+            ref="housing_cooperative_base.view_premise_form"
+        />
         <field name="mode">primary</field>
         <field name="arch" type="xml">
             <group name="rent" position="after">
-                <field name="premise_id" class="oe_inline" readonly="1" invisible="1" attrs="{'required': [('id', '!=', False)]}"/>
+                <field
+                    name="premise_id"
+                    class="oe_inline"
+                    readonly="1"
+                    invisible="1"
+                    attrs="{'required': [('id', '!=', False)]}"
+                />
                 <group name="spatial">
-                    <field name="floor"/>
-                    <field name="surface"/>
+                    <field name="floor" />
+                    <field name="surface" />
                 </group>
             </group>
         </field>
     </record>
-    
+
     <record id="view_cellar_tree" model="ir.ui.view">
         <field name="name">view_cellar_tree</field>
         <field name="model">hc.cellar</field>
-        <field name="inherit_id" ref="housing_cooperative_base.view_premise_tree"/>
+        <field
+            name="inherit_id"
+            ref="housing_cooperative_base.view_premise_tree"
+        />
         <field name="mode">primary</field>
         <field name="arch" type="xml">
             <field name="name" position="after">
-                <field name="premise_id" class="oe_inline" readonly="1" invisible="1" attrs="{'required': [('id', '!=', False)]}"/>
+                <field
+                    name="premise_id"
+                    class="oe_inline"
+                    readonly="1"
+                    invisible="1"
+                    attrs="{'required': [('id', '!=', False)]}"
+                />
             </field>
         </field>
     </record>

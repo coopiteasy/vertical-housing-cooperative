@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
      Copyright 2019 Coop IT Easy
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -11,17 +11,27 @@
             <form string="cluster_form">
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="toggle_active" type="object"
-                            class="oe_stat_button" icon="fa-archive">
-                            <field name="active" widget="boolean_button"
-                                options='{"terminology": "archive"}'/>
+                        <button
+                            name="toggle_active"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-archive"
+                        >
+                            <field
+                                name="active"
+                                widget="boolean_button"
+                                options='{"terminology": "archive"}'
+                            />
                         </button>
                     </div>
                     <group>
-                        <field name="code"/>
-                        <field name="name"/>
-                        <field name="building_id" options="{'no_create': True}"/>
-                        <field name="keys"/>
+                        <field name="code" />
+                        <field name="name" />
+                        <field
+                            name="building_id"
+                            options="{'no_create': True}"
+                        />
+                        <field name="keys" />
                     </group>
                     <!-- <notebook>
                         <page name="housings" string="Housings">
@@ -51,9 +61,9 @@
         <field name="model">hc.cluster</field>
         <field name="arch" type="xml">
             <tree string="cluster_tree">
-                <field name="code"/>
-                <field name="name"/>
-                <field name="building_id"/>
+                <field name="code" />
+                <field name="name" />
+                <field name="building_id" />
             </tree>
         </field>
     </record>

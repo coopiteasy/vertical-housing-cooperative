@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
      Copyright 2019 Coop IT Easy
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -10,49 +10,75 @@
         <field name="arch" type="xml">
             <form string="lease_form">
                 <header>
-                    <button name="create_contract"
-                            string="Create contract"
-                            type="object"
-                            attrs="{'invisible': [('contract_id', '!=', False)]}"
-                            class="oe_highlight"/>
-                    <button name="create_invoice"
-                            string="Create Next Invoice"
-                            type="object"
-                            attrs="{'invisible': [('contract_id', '=', False)]}"
-                            class="oe_highlight"/>
-                    <button name="create_deposit_invoice"
-                            string="Create Deposit Invoice"
-                            type="object"
-                            attrs="{'invisible': [('deposit_invoice_id', '!=', False)]}"
-                            class="oe_highlight"/>
+                    <button
+                        name="create_contract"
+                        string="Create contract"
+                        type="object"
+                        attrs="{'invisible': [('contract_id', '!=', False)]}"
+                        class="oe_highlight"
+                    />
+                    <button
+                        name="create_invoice"
+                        string="Create Next Invoice"
+                        type="object"
+                        attrs="{'invisible': [('contract_id', '=', False)]}"
+                        class="oe_highlight"
+                    />
+                    <button
+                        name="create_deposit_invoice"
+                        string="Create Deposit Invoice"
+                        type="object"
+                        attrs="{'invisible': [('deposit_invoice_id', '!=', False)]}"
+                        class="oe_highlight"
+                    />
 
-                    <field name="state" widget="statusbar"/>
+                    <field name="state" widget="statusbar" />
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="action_get_attachment_tree_view" class="oe_stat_button" icon="fa-book" type="object">
-                            <field name="attachment_number" widget="statinfo" string="Documents"/>
+                        <button
+                            name="action_get_attachment_tree_view"
+                            class="oe_stat_button"
+                            icon="fa-book"
+                            type="object"
+                        >
+                            <field
+                                name="attachment_number"
+                                widget="statinfo"
+                                string="Documents"
+                            />
                         </button>
                     </div>
                     <group>
                         <group>
-                            <field name="tenant_id" options="{'no_quick_create': True}"/>
-                            <field name="signatory_ids" widget="many2many_tags" options="{'no_quick_create': True}"/>
-                            <field name="inhabitant_ids" widget="many2many_tags" options="{'no_quick_create': True}"/>
-                            <field name="start"/>
-                            <field name="expected_end"/>
-                            <field name="effective_end"/>
-                            <field name="automatic_renewal"/>
-                            <field name="automatic_renewal_months"/>
-                            <field name="note"/>
+                            <field
+                                name="tenant_id"
+                                options="{'no_quick_create': True}"
+                            />
+                            <field
+                                name="signatory_ids"
+                                widget="many2many_tags"
+                                options="{'no_quick_create': True}"
+                            />
+                            <field
+                                name="inhabitant_ids"
+                                widget="many2many_tags"
+                                options="{'no_quick_create': True}"
+                            />
+                            <field name="start" />
+                            <field name="expected_end" />
+                            <field name="effective_end" />
+                            <field name="automatic_renewal" />
+                            <field name="automatic_renewal_months" />
+                            <field name="note" />
                         </group>
                         <group>
-                            <field name="total_rent"/>
-                            <field name="total_charges"/>
-                            <field name="total_deposit"/>
+                            <field name="total_rent" />
+                            <field name="total_charges" />
+                            <field name="total_deposit" />
                         </group>
                         <group>
-                            <field name="contains_arcade"/>
+                            <field name="contains_arcade" />
                         </group>
                     </group>
                     <notebook>
@@ -60,32 +86,46 @@
                             <group>
                                 <field name="lease_line_ids" nolabel="1">
                                     <tree editable="bottom">
-                                        <field name="premise_id" options="{'no_create': True}"/>
-                                        <field name="code"/>
-                                        <field name="state"/>
-                                        <field name="suggested_rent"/>
-                                        <field name="suggested_charges"/>
-                                        <field name="rent"/>
-                                        <field name="charges"/>
-                                        <field name="deposit"/>
+                                        <field
+                                            name="premise_id"
+                                            options="{'no_create': True}"
+                                        />
+                                        <field name="code" />
+                                        <field name="state" />
+                                        <field name="suggested_rent" />
+                                        <field name="suggested_charges" />
+                                        <field name="rent" />
+                                        <field name="charges" />
+                                        <field name="deposit" />
                                     </tree>
                                 </field>
                             </group>
                         </page>
                         <page name="invoices" string="Invoices">
                             <group>
-                                <field name="contract_id" context="{'form_view_ref': 'contract.contract_contract_form_view'}"/>
-                                <field name="deposit_invoice_id" invisible="1"/>
-                                <field name="invoice_ids" context="{'form_view_ref': 'account.invoice_form'}">
+                                <field
+                                    name="contract_id"
+                                    context="{'form_view_ref': 'contract.contract_contract_form_view'}"
+                                />
+                                <field
+                                    name="deposit_invoice_id"
+                                    invisible="1"
+                                />
+                                <field
+                                    name="invoice_ids"
+                                    context="{'form_view_ref': 'account.invoice_form'}"
+                                >
                                     <tree>
-                                        <field name="reference"/>
-                                        <field name="name"/>
-                                        <field name="date_invoice"/>
-                                        <field name="amount_untaxed_invoice_signed"/>
-                                        <field name="amount_tax_signed"/>
-                                        <field name="amount_total_signed"/>
-                                        <field name="residual_signed"/>
-                                        <field name="state"/>
+                                        <field name="reference" />
+                                        <field name="name" />
+                                        <field name="date_invoice" />
+                                        <field
+                                            name="amount_untaxed_invoice_signed"
+                                        />
+                                        <field name="amount_tax_signed" />
+                                        <field name="amount_total_signed" />
+                                        <field name="residual_signed" />
+                                        <field name="state" />
                                     </tree>
                                 </field>
                             </group>
@@ -93,9 +133,12 @@
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers"/>
-                    <field name="activity_ids" widget="mail_activity"/>
-                    <field name="message_ids" widget="mail_thread"/>
+                    <field
+                        name="message_follower_ids"
+                        widget="mail_followers"
+                    />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
                 </div>
             </form>
         </field>
@@ -106,11 +149,11 @@
         <field name="model">hc.lease</field>
         <field name="arch" type="xml">
             <tree string="lease_tree">
-                <field name="name"/>
-                <field name="start"/>
-                <field name="end"/>
-                <field name="tenant_id"/>
-                <field name="state"/>
+                <field name="name" />
+                <field name="start" />
+                <field name="end" />
+                <field name="tenant_id" />
+                <field name="state" />
             </tree>
         </field>
     </record>
@@ -120,15 +163,20 @@
         <field name="model">hc.lease</field>
         <field name="arch" type="xml">
             <search>
-                <field name="name"/>
-                <field name="tenant_id"/>
-                <field name="signatory_ids"/>
-                <field name="inhabitant_ids"/>
-                <field name="premise_ids" string="Premise or Code"
-                       filter_domain="['|', ('premise_ids.name','ilike',self), ('premise_ids.code','ilike',self)]"/>
-                <filter name="filter_contains_arcade"
+                <field name="name" />
+                <field name="tenant_id" />
+                <field name="signatory_ids" />
+                <field name="inhabitant_ids" />
+                <field
+                    name="premise_ids"
+                    string="Premise or Code"
+                    filter_domain="['|', ('premise_ids.name','ilike',self), ('premise_ids.code','ilike',self)]"
+                />
+                <filter
+                    name="filter_contains_arcade"
                     string="Contains Archade"
-                    domain="[('contains_arcade','=',True)]"/>
+                    domain="[('contains_arcade','=',True)]"
+                />
             </search>
         </field>
     </record>

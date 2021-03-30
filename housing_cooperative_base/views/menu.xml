@@ -1,28 +1,118 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
      Copyright 2019 Coop IT Easy
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
-    <menuitem id="menu_housing_cooperative_root" name="Housing Cooperative" groups="group_hc_user"/>
+    <menuitem
+        id="menu_housing_cooperative_root"
+        name="Housing Cooperative"
+        groups="group_hc_user"
+    />
 
-    <menuitem id="menu_housing_cooperative_hc" name="Housing Cooperative" parent="menu_housing_cooperative_root" groups="group_hc_user" sequence="10"/>
-    <menuitem id="menu_hc_building_view" name="Buildings" parent="menu_housing_cooperative_hc" action="building_view_action" sequence="1010"/>
+    <menuitem
+        id="menu_housing_cooperative_hc"
+        name="Housing Cooperative"
+        parent="menu_housing_cooperative_root"
+        groups="group_hc_user"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_hc_building_view"
+        name="Buildings"
+        parent="menu_housing_cooperative_hc"
+        action="building_view_action"
+        sequence="1010"
+    />
 <!--    <menuitem id="menu_hc_cluster_view" name="Clusters" parent="menu_housing_cooperative_hc" action="cluster_view_action" sequence="1020"/>-->
-    <menuitem id="menu_hc_housing_view" name="Housings" parent="menu_housing_cooperative_hc" action="housing_view_action" sequence="1030"/>
-    <menuitem id="menu_hc_room_view" name="Rooms" parent="menu_housing_cooperative_hc" action="room_view_action" sequence="1040"/>
-    <menuitem id="menu_hc_cellar_view" name="Cellars" parent="menu_housing_cooperative_hc" action="cellar_view_action" sequence="1050"/>
-    <menuitem id="menu_hc_parking_view" name="Parkings" parent="menu_housing_cooperative_hc" action="parking_view_action" sequence="1050"/>
+    <menuitem
+        id="menu_hc_housing_view"
+        name="Housings"
+        parent="menu_housing_cooperative_hc"
+        action="housing_view_action"
+        sequence="1030"
+    />
+    <menuitem
+        id="menu_hc_room_view"
+        name="Rooms"
+        parent="menu_housing_cooperative_hc"
+        action="room_view_action"
+        sequence="1040"
+    />
+    <menuitem
+        id="menu_hc_cellar_view"
+        name="Cellars"
+        parent="menu_housing_cooperative_hc"
+        action="cellar_view_action"
+        sequence="1050"
+    />
+    <menuitem
+        id="menu_hc_parking_view"
+        name="Parkings"
+        parent="menu_housing_cooperative_hc"
+        action="parking_view_action"
+        sequence="1050"
+    />
 
-    <menuitem id="menu_housing_cooperative_leases" name="Leases" parent="menu_housing_cooperative_root" groups="group_hc_user" action="lease_view_action" sequence="20"/>
-    <menuitem id="menu_housing_cooperative_contacts" name="Contacts" parent="menu_housing_cooperative_root" groups="group_hc_user" action="contacts.action_contacts" sequence="30"/>
+    <menuitem
+        id="menu_housing_cooperative_leases"
+        name="Leases"
+        parent="menu_housing_cooperative_root"
+        groups="group_hc_user"
+        action="lease_view_action"
+        sequence="20"
+    />
+    <menuitem
+        id="menu_housing_cooperative_contacts"
+        name="Contacts"
+        parent="menu_housing_cooperative_root"
+        groups="group_hc_user"
+        action="contacts.action_contacts"
+        sequence="30"
+    />
 
-    <menuitem id="menu_housing_cooperative_reports" name="Reports" parent="menu_housing_cooperative_root" groups="group_hc_user" sequence="40"/>
-    <menuitem id="menu_hc_rental_state_date_wizard" name="Rental State at Date" parent="menu_housing_cooperative_reports" action="rental_state_date_wizard_view_action" sequence="4010"/>
+    <menuitem
+        id="menu_housing_cooperative_reports"
+        name="Reports"
+        parent="menu_housing_cooperative_root"
+        groups="group_hc_user"
+        sequence="40"
+    />
+    <menuitem
+        id="menu_hc_rental_state_date_wizard"
+        name="Rental State at Date"
+        parent="menu_housing_cooperative_reports"
+        action="rental_state_date_wizard_view_action"
+        sequence="4010"
+    />
 <!--    <menuitem id="menu_hc_rental_state_year_wizard" name="Rental State Year Overview" parent="menu_housing_cooperative_reports" action="rental_state_year_wizard_view_action" sequence="4020"/>-->
 
-    <menuitem id="menu_housing_cooperative_configuration" name="Configuration" parent="menu_housing_cooperative_root" groups="group_hc_manager" sequence="50"/>
-    <menuitem id="menu_hc_plan_view" name="Plans" parent="menu_housing_cooperative_configuration" action="plan_view_action" sequence="5010"/>
-    <menuitem id="menu_hc_permit_view" name="Permits" parent="menu_housing_cooperative_configuration" action="permit_view_action" sequence="5020"/>
-    <menuitem id="menu_hc_studies_view" name="Studies" parent="menu_housing_cooperative_configuration" action="studies_view_action" sequence="5030"/>
+    <menuitem
+        id="menu_housing_cooperative_configuration"
+        name="Configuration"
+        parent="menu_housing_cooperative_root"
+        groups="group_hc_manager"
+        sequence="50"
+    />
+    <menuitem
+        id="menu_hc_plan_view"
+        name="Plans"
+        parent="menu_housing_cooperative_configuration"
+        action="plan_view_action"
+        sequence="5010"
+    />
+    <menuitem
+        id="menu_hc_permit_view"
+        name="Permits"
+        parent="menu_housing_cooperative_configuration"
+        action="permit_view_action"
+        sequence="5020"
+    />
+    <menuitem
+        id="menu_hc_studies_view"
+        name="Studies"
+        parent="menu_housing_cooperative_configuration"
+        action="studies_view_action"
+        sequence="5030"
+    />
 </odoo>
