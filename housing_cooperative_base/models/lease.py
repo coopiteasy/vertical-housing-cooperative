@@ -319,12 +319,13 @@ class Lease(models.Model):
                     "date_start": self.start,
                     "date_end": self.end,
                     "recurring_next_date": self.start,
-                    "recurring_rule_type": "monthly",
+                    "recurring_rule_type": "monthlylastday",
                     "recurring_invoicing_type": "pre-paid",
                     "product_id": rent_product_id.id,
                     "uom_id": rent_product_id.uom_id.id,
                     "contract_id": contract.id,
                     "price_unit": line.rent,
+                    "lease_line_id": line.id,
                 }
             )
 
@@ -345,12 +346,13 @@ class Lease(models.Model):
                     "date_start": self.start,
                     "date_end": self.end,
                     "recurring_next_date": self.start,
-                    "recurring_rule_type": "monthly",
+                    "recurring_rule_type": "monthlylastday",
                     "recurring_invoicing_type": "pre-paid",
                     "product_id": charges_product_id.id,
                     "uom_id": charges_product_id.uom_id.id,
                     "contract_id": contract.id,
                     "price_unit": line.charges,
+                    "lease_line_id": line.id,
                 }
             )
 
@@ -442,6 +444,7 @@ class Lease(models.Model):
 
     @api.multi
     def _do_automatic_renewal(self):
+        # todo could it be dealt directly w/ contract module?
         for lease in self:
             if (
                 lease.state == "ongoing"
