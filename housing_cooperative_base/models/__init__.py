@@ -8,3 +8,4 @@ from . import room
 from . import cellar
 from . import parking
 from . import contract
+from . import invoice

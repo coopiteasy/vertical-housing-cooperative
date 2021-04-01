@@ -4,6 +4,8 @@
 
 from odoo import api, fields, models
 
+from dateutil.relativedelta import relativedelta
+
 
 class Contract(models.Model):
     _inherit = "contract.contract"
@@ -17,7 +19,23 @@ class Contract(models.Model):
         return res
 
 
-class AccountInvoice(models.Model):
-    _inherit = "account.invoice"
+class ContractLine(models.Model):
+    _inherit = "contract.line"
 
-    lease_id = fields.Many2one(comodel_name="hc.lease", string="Lease")
+    lease_line_id = fields.Many2one(
+        comodel_name="hc.lease.line", string="Lease Line", required=False,
+    )
+
+    @api.multi
+    def _get_quantity_to_invoice(
+        self, period_first_date, period_last_date, invoice_date
+    ):
+        if self.lease_line_id:
+            days_in_month = (period_first_date + relativedelta(day=31)).day
+            days_to_invoice = (period_last_date - period_first_date).days + 1
+            quantity = self.quantity * (days_to_invoice / days_in_month)
+        else:
+            quantity = super()._get_quantity_to_invoice(
+                period_first_date, period_last_date, invoice_date
+            )
+        return quantity
