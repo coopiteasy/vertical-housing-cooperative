@@ -363,6 +363,12 @@ class Lease(models.Model):
             raise ValidationError(_("Create a contract first."))
         invoice = self.contract_id.recurring_create_invoice()
 
+        if not invoice:
+            raise ValidationError(_("The lease reached its end date."))
+
+        if not self.contract_id.recurring_next_date:
+            invoice.date_invoice = self.end
+
         return {
             "type": "ir.actions.act_window",
             "res_model": "account.invoice",

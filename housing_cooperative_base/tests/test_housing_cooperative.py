@@ -130,10 +130,9 @@ class HousingCooperativeCase(common.TransactionCase):
         self.assertEqual(contract_line.next_period_date_end, lease_end)
         res = lease.create_invoice()
         invoice = self.env["account.invoice"].browse(res["res_id"])
-        self.assertEqual(invoice.date_invoice, date(2030, 5, 1))
+        self.assertEqual(invoice.date_invoice, lease_end)
         invoiced_line_quantity = invoice.invoice_line_ids[0].quantity
         self.assertEqual(invoiced_line_quantity, round(14 / 31, 3))
 
-        res = lease.create_invoice()
-        invoice = self.env["account.invoice"].browse(res["res_id"])
-        self.assertFalse(invoice.invoice_line_ids)
+        with self.assertRaises(ValidationError):
+            lease.create_invoice()
