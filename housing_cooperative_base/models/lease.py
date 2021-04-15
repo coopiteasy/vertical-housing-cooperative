@@ -1,13 +1,13 @@
-# -*- coding: utf-8 -*-
 # Copyright 2019 Coop IT Easy SCRL fs
 #   Robin Keunen <robin@coopiteasy.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models, _
-from odoo.exceptions import ValidationError
-from dateutil.relativedelta import relativedelta
 import logging
 
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
+
+from dateutil.relativedelta import relativedelta
 
 _logger = logging.getLogger(__name__)
 
@@ -40,8 +40,20 @@ class LeaseLine(models.Model):
     code = fields.Char(related="premise_id.code")
     building_id = fields.Many2one(related="premise_id.building_id")
     state = fields.Selection(related="premise_id.state")
-    rent = fields.Float(related="premise_id.rent")
-    charges = fields.Float(related="premise_id.charges")
+    suggested_rent = fields.Float(
+        related="premise_id.rent", string="Suggested Rent"
+    )
+    suggested_charges = fields.Float(
+        related="premise_id.charges", string="Suggested Charges"
+    )
+    rent = fields.Float()
+    charges = fields.Float()
+    deposit = fields.Float()
+
+    @api.onchange("premise_id")
+    def onchange_premise_id(self):
+        self.rent = self.suggested_rent
+        self.charges = self.suggested_charges
 
 
 class Lease(models.Model):
@@ -86,21 +98,23 @@ class Lease(models.Model):
         string="Months Added Each Renewal", default=12, required=True
     )
     note = fields.Text(string="Note", required=False)
-    rent = fields.Float(string="Rent", required=False)
-    charges = fields.Float(string="Charges", required=False)
-    deposit = fields.Float(string="Deposit", required=False)
+    total_rent = fields.Float(
+        string="Rent Total", readonly=True, compute="_compute_total_rent"
+    )
+    total_charges = fields.Float(
+        string="Charges Total", readonly=True, compute="_compute_total_rent"
+    )
+    total_deposit = fields.Float(
+        string="Deposit Total", readonly=True, compute="_compute_total_rent"
+    )
     state = fields.Selection(
         string="State",
         selection=[("new", "New"), ("ongoing", "Ongoing"), ("done", "Done")],
         compute="_compute_state",
         store=True,
     )
-    suggested_rent = fields.Float(
-        string="Suggested Rent", compute="_compute_suggested_rent"
-    )
-    suggested_charges = fields.Float(
-        string="Suggested Charges", compute="_compute_suggested_rent"
-    )
+    # fixme this should be computed from a One2Many relation to
+    #       contract.contract.lease_id
     contract_id = fields.Many2one(
         comodel_name="contract.contract",
         string="Contract",
@@ -120,7 +134,7 @@ class Lease(models.Model):
     )
 
     attachment_number = fields.Integer(
-        compute="_get_attachment_number", string="Number of Attachments"
+        compute="_compute_attachment_number", string="Number of Attachments"
     )
     attachment_ids = fields.One2many(
         comodel_name="ir.attachment",
@@ -165,17 +179,18 @@ class Lease(models.Model):
         for lease in self:
             tenant = lease.tenant_id.name
             date = str(lease.start)[:7]
-            lease.name = "%s/%s" % (tenant, date)
+            lease.name = "{}/{}".format(tenant, date)
 
     @api.multi
     @api.depends("lease_line_ids")
-    def _compute_suggested_rent(self):
+    def _compute_total_rent(self):
         for lease in self:
-            lease.suggested_rent = sum(
-                line.rent for line in lease.lease_line_ids
-            )
-            lease.suggested_charges = sum(
+            lease.total_rent = sum(line.rent for line in lease.lease_line_ids)
+            lease.total_charges = sum(
                 line.charges for line in lease.lease_line_ids
+            )
+            lease.total_deposit = sum(
+                line.deposit for line in lease.lease_line_ids
             )
 
     @api.multi
@@ -192,15 +207,13 @@ class Lease(models.Model):
     def _compute_state(self):
         for lease in self:
             today = fields.Date.today()
-            if lease.start and lease.end:
+            if lease.start and lease.end and lease.start <= lease.end:
                 if today < lease.start:
                     lease.state = "new"
                 elif lease.start <= today <= lease.end:
                     lease.state = "ongoing"
-                elif lease.end < today:
+                else:  # lease.end < today:
                     lease.state = "done"
-                else:
-                    False
             else:
                 lease.state = "new"
 
@@ -244,15 +257,15 @@ class Lease(models.Model):
                 )
 
     @api.multi
-    def _get_attachment_number(self):
+    def _compute_attachment_number(self):
         read_group_res = self.env["ir.attachment"].read_group(
             [("res_model", "=", "hc.lease"), ("res_id", "in", self.ids)],
             ["res_id"],
             ["res_id"],
         )
-        attach_data = dict(
-            (res["res_id"], res["res_id_count"]) for res in read_group_res
-        )
+        attach_data = {
+            res["res_id"]: res["res_id_count"] for res in read_group_res
+        }
         for lease in self:
             lease.attachment_number = attach_data.get(lease.id, 0)
             lease.contract_number = 1 if lease.contract_id else 0
@@ -286,40 +299,60 @@ class Lease(models.Model):
                 "journal_id": self._default_journal().id,
             }
         )
-        rent = self.env.ref("housing_cooperative_base.product_product_rent")
-        charges = self.env.ref(
-            "housing_cooperative_base.product_product_charges"
-        )
-
-        self.env["contract.line"].create(
-            {
-                "name": rent.name,
-                "date_start": self.start,
-                "date_end": self.end,
-                "recurring_next_date": self.start,
-                "recurring_rule_type": "monthly",
-                "recurring_invoicing_type": "pre-paid",
-                "product_id": rent.id,
-                "uom_id": rent.uom_id.id,
-                "contract_id": contract.id,
-                "price_unit": self.rent,
-            }
-        )
-        self.env["contract.line"].create(
-            {
-                "name": charges.name,
-                "date_start": self.start,
-                "date_end": self.end,
-                "recurring_next_date": self.start,
-                "recurring_rule_type": "monthly",
-                "recurring_invoicing_type": "pre-paid",
-                "product_id": charges.id,
-                "uom_id": charges.uom_id.id,
-                "contract_id": contract.id,
-                "price_unit": self.charges,
-            }
-        )
         self.contract_id = contract
+
+        for line in self.lease_line_ids:
+
+            if line.premise_id.rent_product_id:
+                rent_product_id = line.premise_id.rent_product_id
+            elif line.premise_id.building_id.rent_product_id:
+                rent_product_id = line.premise_id.building_id.rent_product_id
+            else:
+                rent_product_id = self.env.ref(
+                    "housing_cooperative_base.product_product_rent"
+                )
+
+            self.env["contract.line"].create(
+                # todo link lease lines and contract lines
+                {
+                    "name": "%s - rent" % line.premise_id.name,
+                    "date_start": self.start,
+                    "date_end": self.end,
+                    "recurring_next_date": self.start,
+                    "recurring_rule_type": "monthly",
+                    "recurring_invoicing_type": "pre-paid",
+                    "product_id": rent_product_id.id,
+                    "uom_id": rent_product_id.uom_id.id,
+                    "contract_id": contract.id,
+                    "price_unit": line.rent,
+                }
+            )
+
+            if line.premise_id.charges_product_id:
+                charges_product_id = line.premise_id.charges_product_id
+            elif line.premise_id.building_id.charges_product_id:
+                charges_product_id = (
+                    line.premise_id.building_id.charges_product_id
+                )
+            else:
+                charges_product_id = self.env.ref(
+                    "housing_cooperative_base.product_product_charges"
+                )
+
+            self.env["contract.line"].create(
+                {
+                    "name": "%s - charges" % line.premise_id.name,
+                    "date_start": self.start,
+                    "date_end": self.end,
+                    "recurring_next_date": self.start,
+                    "recurring_rule_type": "monthly",
+                    "recurring_invoicing_type": "pre-paid",
+                    "product_id": charges_product_id.id,
+                    "uom_id": charges_product_id.uom_id.id,
+                    "contract_id": contract.id,
+                    "price_unit": line.charges,
+                }
+            )
 
     @api.multi
     def create_invoice(self):
@@ -354,24 +387,39 @@ class Lease(models.Model):
                 "journal_id": self._default_journal().id,
             }
         )
-        deposit = self.env.ref(
-            "housing_cooperative_base.product_product_deposit"
-        )
-
-        self.env["account.invoice.line"].create(
-            {
-                "name": deposit.name,
-                "product_id": deposit.id,
-                "uom_id": deposit.uom_id.id,
-                "invoice_id": invoice.id,
-                "price_unit": self.deposit,
-                "account_id": self._default_journal().default_credit_account_id.id,
-                # Note: account can also be set by default function, if the journal is passed in the context:
-                # .with_context(journal_id=self._default_journal().id).create()
-            }
-        )
 
         self.deposit_invoice_id = invoice
+
+        for line in self.lease_line_ids:
+
+            if line.premise_id.deposit_product_id:
+                deposit_product_id = line.premise_id.deposit_product_id
+            elif line.premise_id.building_id.deposit_product_id:
+                deposit_product_id = (
+                    line.premise_id.building_id.deposit_product_id
+                )
+            else:
+                deposit_product_id = self.env.ref(
+                    "housing_cooperative_base.product_product_deposit"
+                )
+
+            product_account = deposit_product_id.property_account_income_id
+            if not product_account:
+                raise ValidationError(
+                    _("Please set an account on product %s")
+                    % deposit_product_id
+                )
+
+            self.env["account.invoice.line"].create(
+                {
+                    "name": "%s - deposit" % line.premise_id.name,
+                    "product_id": deposit_product_id.id,
+                    "uom_id": deposit_product_id.uom_id.id,
+                    "invoice_id": invoice.id,
+                    "price_unit": line.deposit,
+                    "account_id": product_account.id,
+                }
+            )
 
         return {
             "type": "ir.actions.act_window",

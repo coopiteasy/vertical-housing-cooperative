@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 # Copyright 2019 Coop IT Easy SCRL fs
 #   Robin Keunen <robin@coopiteasy.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
 import logging
 
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -32,9 +31,19 @@ class Premise(models.Model):
     charges_note = fields.Char(string="Note on Charges", required=False)
     state = fields.Selection(
         string="State",
-        selection=[("available", "Available"), ("busy", "Busy")],
+        selection=[("available", "Available"), ("busy", "Occupied")],
         compute="_compute_state",
         store=True,
+    )
+
+    rent_product_id = fields.Many2one(
+        comodel_name="product.product", string="Rent product",
+    )
+    charges_product_id = fields.Many2one(
+        comodel_name="product.product", string="Charges product",
+    )
+    deposit_product_id = fields.Many2one(
+        comodel_name="product.product", string="Deposit product",
     )
 
     @api.multi

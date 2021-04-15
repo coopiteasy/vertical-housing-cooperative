@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 # Copyright 2019 Coop IT Easy SCRL fs
 #   Robin Keunen <robin@coopiteasy.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
     "name": "Housing Cooperative",
-    "summary": "Manage your housing cooperative",
+    "summary": "Manage your housing cooperative.",
     "author": "Coop IT Easy SCRL",
     "website": "https://coopiteasy.be",
     "category": "Uncategorized",
@@ -49,7 +48,7 @@
         "data/cron.xml",
         "data/data.xml",
     ],
-    "demo": ["demo/users.xml", "demo/demo.xml"],  # fixme
+    "demo": ["demo/users.xml", "demo/demo_products.xml", "demo/demo.xml"],
     "installable": True,
     "application": True,
 }

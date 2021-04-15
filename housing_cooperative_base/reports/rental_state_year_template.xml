@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
      Copyright 2019 Coop IT Easy
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -10,13 +10,20 @@
                 <t t-call="web.external_layout">
                     <div class="page">
                         <h2>Rental state</h2>
-                        <p>Rental state in <strong><span t-field="o.year"/></strong>.</p>
-                        <p>Document created on <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"/>.</p>
+                        <p>Rental state in <strong><span
+                                    t-field="o.year"
+                                /></strong>.</p>
+                        <p>Document created on <span
+                                t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"
+                            />.</p>
                         <table class="table table-condensed">
                             <tr t-foreach="o.lease_line_ids" t-as="l">
-                                <t t-set="o_data" t-value="o.get_data()"/>
-                                <t t-set="data_details" t-value="o_data['data_details']"/>
-                                <t t-esc="data_details"/>
+                                <t t-set="o_data" t-value="o.get_data()" />
+                                <t
+                                    t-set="data_details"
+                                    t-value="o_data['data_details']"
+                                />
+                                <t t-esc="data_details" />
                             </tr>
                         </table>
                     </div>

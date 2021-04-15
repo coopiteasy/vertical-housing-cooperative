@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+     Copyright 2021 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="demo_rent_product_product_housing_1" model="product.product">
+        <field name="name">Demo Rent HOU1</field>
+    </record>
+    <record id="demo_charges_product_product_housing_1" model="product.product">
+        <field name="name">Demo Charges HOU1</field>
+    </record>
+    <record id="demo_deposit_product_product_housing_1" model="product.product">
+        <field name="name">Demo Deposit HOU1</field>
+    </record>
+    <record id="demo_rent_product_product_building_2" model="product.product">
+        <field name="name">Demo Rent Building 2</field>
+    </record>
+    <record
+        id="demo_charges_product_product_building_2"
+        model="product.product"
+    >
+        <field name="name">Demo Charges Building 2</field>
+    </record>
+    <record
+        id="demo_deposit_product_product_building_2"
+        model="product.product"
+    >
+        <field name="name">Demo Deposit Building 2</field>
+    </record>
+</odoo>

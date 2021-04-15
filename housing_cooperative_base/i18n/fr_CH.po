@@ -94,7 +94,7 @@ msgstr "Bâtiments"
 
 #. module: housing_cooperative_base
 #: selection:hc.premise,state:0
-msgid "Busy"
+msgid "Occupied"
 msgstr "Occupé"
 
 #. module: housing_cooperative_base

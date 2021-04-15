@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
      Copyright 2019 Coop IT Easy
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -7,21 +7,21 @@
     <data>
         <record id="demo_household_1" model="res.partner">
             <field name="name">Collier-Manock Family</field>
-            <field name="is_household" eval="True"/>
+            <field name="is_household" eval="True" />
             <field name="email">kim.snyder96@example.com</field>
             <field name="phone">(215)-379-4865</field>
         </record>
 
         <record id="demo_res_partner_address_1" model="res.partner">
             <field name="name">James Manock</field>
-            <field name="parent_id" eval="ref('demo_household_1')"/>
+            <field name="parent_id" eval="ref('demo_household_1')" />
             <field name="email">james.manock@example.com</field>
             <field name="phone">(560)-233-1744</field>
         </record>
 
         <record id="demo_res_partner_address_2" model="res.partner">
             <field name="name">John Collier</field>
-            <field name="parent_id" eval="ref('demo_household_1')"/>
+            <field name="parent_id" eval="ref('demo_household_1')" />
             <field name="email">john.collier@example.com</field>
             <field name="phone">(561)-211-1744</field>
         </record>
