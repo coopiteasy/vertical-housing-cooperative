@@ -165,8 +165,14 @@
 
         <record id="demo_lease_1" model="hc.lease">
             <field name="tenant_id" ref="res_partner_cooperator_1_demo" />
-            <field name="start">2017-09-01</field>
-            <field name="expected_end">2020-08-31</field>
+            <field
+                name="start"
+                eval="datetime.today() + relativedelta(day=15, years=-1)"
+            />
+            <field
+                name="expected_end"
+                eval="datetime.today() + relativedelta(day=15, years=1)"
+            />
         </record>
         <record id="demo_lease_line_1" model="hc.lease.line">
             <field name="lease_id" ref="demo_lease_1" />
@@ -182,8 +188,14 @@
 
         <record id="demo_lease_2" model="hc.lease">
             <field name="tenant_id" ref="res_partner_cooperator_5_demo" />
-            <field name="start">2018-09-01</field>
-            <field name="expected_end">2021-08-31</field>
+            <field
+                name="start"
+                eval="datetime.today() + relativedelta(day=10, month=1, years=-2)"
+            />
+            <field
+                name="expected_end"
+                eval="datetime.today() + relativedelta(day=10, month=1, years=1)"
+            />
         </record>
         <record id="demo_lease_line_2" model="hc.lease.line">
             <field name="lease_id" ref="demo_lease_2" />
@@ -241,9 +253,18 @@
 
         <record id="demo_lease_3" model="hc.lease">
             <field name="tenant_id" ref="res_partner_cooperator_6_demo" />
-            <field name="start">2014-10-31</field>
-            <field name="expected_end">2018-12-31</field>
-            <field name="effective_end">2018-09-30</field>
+            <field
+                name="start"
+                eval="datetime.today() + relativedelta(day=10, month=2, years=-2)"
+            />
+            <field
+                name="expected_end"
+                eval="datetime.today() + relativedelta(day=10, month=2, years=1)"
+            />
+            <field
+                name="effective_end"
+                eval="datetime.today() + relativedelta(day=1, month=1, years=1)"
+            />
         </record>
         <record id="demo_lease_line_7" model="hc.lease.line">
             <field name="lease_id" ref="demo_lease_3" />

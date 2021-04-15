@@ -55,6 +55,57 @@ class LeaseLine(models.Model):
         self.rent = self.suggested_rent
         self.charges = self.suggested_charges
 
+    def get_rent_product(self):
+        if self.premise_id.rent_product_id:
+            rent_product = self.premise_id.rent_product_id
+        elif self.premise_id.building_id.rent_product_id:
+            rent_product = self.premise_id.building_id.rent_product_id
+        else:
+            # todo use configurable default product
+            rent_product = self.env.ref(
+                "housing_cooperative_base.product_product_rent"
+            )
+            if not rent_product:
+                raise _(
+                    "Default rent product was deleted."
+                    " Please reach support."
+                )
+        return rent_product
+
+    def get_charges_product(self):
+        if self.premise_id.charges_product_id:
+            charges_product = self.premise_id.charges_product_id
+        elif self.premise_id.building_id.charges_product_id:
+            charges_product = self.premise_id.building_id.charges_product_id
+        else:
+            # todo use configurable default product
+            charges_product = self.env.ref(
+                "housing_cooperative_base.product_product_charges"
+            )
+            if not charges_product:
+                raise _(
+                    "Default charges product was deleted."
+                    " Please reach support."
+                )
+        return charges_product
+
+    def get_deposit_product(self):
+        if self.premise_id.deposit_product_id:
+            deposit_product = self.premise_id.deposit_product_id
+        elif self.premise_id.building_id.deposit_product_id:
+            deposit_product = self.premise_id.building_id.deposit_product_id
+        else:
+            # todo use configurable default product
+            deposit_product = self.env.ref(
+                "housing_cooperative_base.product_product_deposit"
+            )
+            if not deposit_product:
+                raise _(
+                    "Default deposit product was deleted."
+                    " Please reach support."
+                )
+        return deposit_product
+
 
 class Lease(models.Model):
     _name = "hc.lease"
@@ -303,15 +354,7 @@ class Lease(models.Model):
 
         for line in self.lease_line_ids:
 
-            if line.premise_id.rent_product_id:
-                rent_product_id = line.premise_id.rent_product_id
-            elif line.premise_id.building_id.rent_product_id:
-                rent_product_id = line.premise_id.building_id.rent_product_id
-            else:
-                rent_product_id = self.env.ref(
-                    "housing_cooperative_base.product_product_rent"
-                )
-
+            rent_product = line.get_rent_product()
             self.env["contract.line"].create(
                 # todo link lease lines and contract lines
                 {
@@ -319,38 +362,30 @@ class Lease(models.Model):
                     "date_start": self.start,
                     "date_end": self.end,
                     "recurring_next_date": self.start,
-                    "recurring_rule_type": "monthly",
+                    "recurring_rule_type": "monthlylastday",
                     "recurring_invoicing_type": "pre-paid",
-                    "product_id": rent_product_id.id,
-                    "uom_id": rent_product_id.uom_id.id,
+                    "product_id": rent_product.id,
+                    "uom_id": rent_product.uom_id.id,
                     "contract_id": contract.id,
                     "price_unit": line.rent,
+                    "lease_line_id": line.id,
                 }
             )
 
-            if line.premise_id.charges_product_id:
-                charges_product_id = line.premise_id.charges_product_id
-            elif line.premise_id.building_id.charges_product_id:
-                charges_product_id = (
-                    line.premise_id.building_id.charges_product_id
-                )
-            else:
-                charges_product_id = self.env.ref(
-                    "housing_cooperative_base.product_product_charges"
-                )
-
+            charges_product = line.get_charges_product()
             self.env["contract.line"].create(
                 {
                     "name": "%s - charges" % line.premise_id.name,
                     "date_start": self.start,
                     "date_end": self.end,
                     "recurring_next_date": self.start,
-                    "recurring_rule_type": "monthly",
+                    "recurring_rule_type": "monthlylastday",
                     "recurring_invoicing_type": "pre-paid",
-                    "product_id": charges_product_id.id,
-                    "uom_id": charges_product_id.uom_id.id,
+                    "product_id": charges_product.id,
+                    "uom_id": charges_product.uom_id.id,
                     "contract_id": contract.id,
                     "price_unit": line.charges,
+                    "lease_line_id": line.id,
                 }
             )
 
@@ -360,6 +395,12 @@ class Lease(models.Model):
         if not self.contract_id:
             raise ValidationError(_("Create a contract first."))
         invoice = self.contract_id.recurring_create_invoice()
+
+        if not invoice:
+            raise ValidationError(_("The lease reached its end date."))
+
+        if not self.contract_id.recurring_next_date:
+            invoice.date_invoice = self.end
 
         return {
             "type": "ir.actions.act_window",
@@ -392,29 +433,18 @@ class Lease(models.Model):
 
         for line in self.lease_line_ids:
 
-            if line.premise_id.deposit_product_id:
-                deposit_product_id = line.premise_id.deposit_product_id
-            elif line.premise_id.building_id.deposit_product_id:
-                deposit_product_id = (
-                    line.premise_id.building_id.deposit_product_id
-                )
-            else:
-                deposit_product_id = self.env.ref(
-                    "housing_cooperative_base.product_product_deposit"
-                )
-
-            product_account = deposit_product_id.property_account_income_id
+            deposit_product = line.get_deposit_product()
+            product_account = deposit_product.property_account_income_id
             if not product_account:
                 raise ValidationError(
-                    _("Please set an account on product %s")
-                    % deposit_product_id
+                    _("Please set an account on product %s") % deposit_product
                 )
 
             self.env["account.invoice.line"].create(
                 {
                     "name": "%s - deposit" % line.premise_id.name,
-                    "product_id": deposit_product_id.id,
-                    "uom_id": deposit_product_id.uom_id.id,
+                    "product_id": deposit_product.id,
+                    "uom_id": deposit_product.uom_id.id,
                     "invoice_id": invoice.id,
                     "price_unit": line.deposit,
                     "account_id": product_account.id,
@@ -442,6 +472,7 @@ class Lease(models.Model):
 
     @api.multi
     def _do_automatic_renewal(self):
+        # todo could it be dealt directly w/ contract module?
         for lease in self:
             if (
                 lease.state == "ongoing"
